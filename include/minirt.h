@@ -1,65 +1,58 @@
-// include/minirt.h
-
 #ifndef MINIRT_H
-#define MINIRT_H
+    #define MINIRT_H
 
-#include <mlx.h>
-#include <stdlib.h>
-#include <math.h>
-#include <stdio.h>
-#include <string.h>
+// ......... LIBS ........
+# include <mlx.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <ctype.h>
+# include <string.h>
+# include "./macros.h"
+# include "./structs.h"
+# include "./vector3.h"
 
-#define WIDTH 800
-#define HEIGHT 600
-
-typedef struct s_vector {
-    float x;
-    float y;
-    float z;
-} t_vector;
-
-typedef struct s_ambient {
-    float ratio; // Ratio de luz ambiental
-    int color[3]; // Color de la luz ambiental
-} t_ambient;
-
-typedef struct s_light {
-    t_vector position; // Posición de la luz
-    float brightness; // Brillo de la luz
-    int color[3]; // Color de la luz
-} t_light;
-
-typedef struct s_camera {
-    t_vector position; // Posición de la cámara
-    t_vector direction; // Dirección de la cámara
-    float fov; // Campo de visión
-} t_camera;
-
-typedef struct s_sphere {
-    t_vector center; // Centro de la esfera
-    float diameter; // Diámetro de la esfera
-    int color[3]; // Color de la esfera
-} t_sphere;
+// ......... STRUCTS .......
 
 typedef struct s_data {
-    void *mlx_ptr;         // Puntero a la estructura de miniLibX
-    void *win_ptr;         // Puntero a la ventana de miniLibX
-    void *image_ptr;       // Puntero a la imagen de miniLibX
-    int *image_data;       // Puntero a los datos de la imagen
-    int bpp;               // Bits por pixel
-    int size_line;         // Tamaño de la línea
-    int endian;            // Endian
-    t_ambient ambient;     // Luz ambiental
-    t_light light;         // Luz
-    t_camera camera;       // Cámara
-    t_sphere sphere;       // Esfera (puedes agregar más elementos según lo necesites)
-} t_data;
+    void    *mlx_ptr;         // Puntero a la estructura de miniLibX
+    void    *win_ptr;         // Puntero a la ventana de miniLibX
+    void    *image_ptr;       // Puntero a la imagen de miniLibX
+    char    *image_data;       // Puntero a los datos de la imagen
+    int     bpp;               // Bits por pixel
+    int     size_line;         // Tamaño de la línea
+    int     endian;            // Endian
+}           t_data;
 
-// Prototipos de funciones
-int parse_ambient(char **tokens, t_data *data);
-int parse_camera(char **tokens, t_data *data);
-int parse_light(char **tokens, t_data *data);
-void parse_file(const char *filename, t_data *data);
+// WINDOWS MANAGEMENT
+int key_hook(int keycode, t_data *data);
+int close_window(t_data *data);
+int mouse_hook(int button);
+void free_mlx_resources(t_data *data);
 
-#endif // MINIRT_H
+int get_scene(int argc, char *filename, scene *scene);
+// PIXEL MANAGEMENT
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int is_float(const char *str);
+int is_int(const char *str);
+int three_floats(char **tokens);
+int three_ints(char **tokens);
+int is_valid_color(color rgb);
+int is_normalized_f_v3(vector3 v);
+int is_valid_angle(int  angle);
+char **ft_split(char const *s, char c);
+char **split_spaces(char const *s);
+void    ft_error(char *error);
+int is_rt_file(const char *filename);
 
+//CAMARA
+int process_camera(char **tokens, camera *camera);
+int process_ambient(char **tokens, ambient_light *ambient_light);
+int process_light(char **tokens, light *light);
+int process_sphere(char **tokens, sphere **sp);
+int process_plane(char **tokens, plane **pl);
+int process_cylinder(char **tokens, cylinder **cy);
+int array_len(char **array);
+void    free_array(char **array);
+
+int is_valid_ratio(float ratio);
+#endif

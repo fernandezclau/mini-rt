@@ -1,33 +1,53 @@
-
 NAME 	=	mini-rt
 
 CC 	=	gcc
+CFLAGS	=	-I./include -I./lib/minilibx -Wall -Wextra -Werror
 
-CFLAGS	=	-I./include -I./lib/minilibx #-Wall -Wextra -Werror
+SRC_DIR	=	./src
+OBJ_DIR	=	./.obj
 
+SRC 	=	$(SRC_DIR)/main.c\
+			$(SRC_DIR)/parser/parser.c\
+			$(SRC_DIR)/parser/conditions.c\
+			$(SRC_DIR)/parser/processor.c\
+			$(SRC_DIR)/parser/parser_struct.c\
+			$(SRC_DIR)/utils/utils.c\
+			$(SRC_DIR)/window_management.c\
+			$(SRC_DIR)/render.c
 
-SRC 	=	./src/circunferencia.c\
-	       	./src/parser.c
+OBJ 	=	$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-OBJ 	= 	$(SRC:.c=.o)
+MLX 	=	-L./lib/minilibx -lmlx -lXext -lX11 -lm
 
 
 all	:	$(NAME)
 
-$(NAME)	:	$(OBJ)
-		$(CC) $(OBJ) -o $(NAME) -L./lib/minilibx -lmlx -lXext -lX11 -lm
 
-%.o	:	%.c
+$(NAME)	:	$(OBJ)
+		$(CC) $(OBJ) -o $(NAME) $(MLX)
+
+
+$(OBJ_DIR):
+		mkdir -p $(OBJ_DIR)/parser
+		mkdir -p $(OBJ_DIR)/utils
+
+
+$(OBJ_DIR)/%.o	:	$(SRC_DIR)/%.c | $(OBJ_DIR)
 		$(CC) $(CFLAGS) -c $< -o $@
 
+
 clean	:
-		rm -f $(OBJ)
+		rm -rf $(OBJ_DIR)
+
 
 fclean	:	clean
-		rm -f $(NAME)
+			rm -f $(NAME)
 
-re	:
-		fclean all
 
-.PHONY	:	all clean fclean re
+re	:	fclean all
 
+
+valgrind	:	$(NAME)
+		valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) scenes/1.rt
+
+.PHONY	:	all clean fclean re valgrind
