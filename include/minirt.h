@@ -7,9 +7,11 @@
 # include <stdio.h>
 # include <ctype.h>
 # include <string.h>
+# include <math.h>
 # include "./macros.h"
 # include "./structs.h"
-# include "./vector3.h"
+# include "./vectors.h"
+#  include "./camera.h"
 
 // ......... STRUCTS .......
 
@@ -45,6 +47,7 @@ void    ft_error(char *error);
 int is_rt_file(const char *filename);
 
 //CAMARA
+int process_view(char   **tokens, view *view);
 int process_camera(char **tokens, camera *camera);
 int process_ambient(char **tokens, ambient_light *ambient_light);
 int process_light(char **tokens, light *light);

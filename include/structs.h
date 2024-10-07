@@ -1,22 +1,24 @@
 #ifndef STRUCTS_H
     #define STRUCTS_H
 
-typedef struct vector3 {
-    float   x;
-    float   y;
-    float   z;
-}           vector3;
+#include "./camera.h"
 
-typedef struct vector2 {
-    float   x;
-    float   y;
-}           vector2;
+// typedef struct vector3 {
+//     float   x;
+//     float   y;
+//     float   z;
+// }           vector3;
 
-typedef struct camera {
-    vector3 position;
-    vector3 direction;
-    int   fov;
-}           camera;
+// typedef struct vector2 {
+//     float   x;
+//     float   y;
+// }           vector2;
+
+// typedef struct camera {
+//     vector3 position;
+//     vector3 direction;
+//     int     fov;
+// }           camera;
 
 typedef struct color
 {
@@ -65,6 +67,7 @@ typedef struct cylinder
 
 typedef struct scene
 {
+    view            view;
     ambient_light   ambient;
     camera          camera;
     light           light;
@@ -82,7 +85,7 @@ void    init_scene(scene *scene);
 // INSERTION
 int insert_vector3(vector3 *v, char **tokens, int is_normalized);
 int insert_color(color *c, char **tokens);
-int insert_angle(int *fov, char *value);
+int insert_angle(float *fov, char *value);
 int insert_ratio(float *ratio, char *value);
 int insert_magnitude(float *magnitude, char *value);
 

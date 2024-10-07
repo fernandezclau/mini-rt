@@ -13,7 +13,9 @@ SRC 	=	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/parser/parser_struct.c\
 			$(SRC_DIR)/utils/utils.c\
 			$(SRC_DIR)/window_management.c\
-			$(SRC_DIR)/render.c
+			$(SRC_DIR)/render.c\
+			$(SRC_DIR)/vectors.c\
+			$(SRC_DIR)/camera.c\
 
 OBJ 	=	$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

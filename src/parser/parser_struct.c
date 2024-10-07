@@ -46,7 +46,7 @@ int insert_color(color *c, char **tokens)
     return 1;
 }
 
-int insert_angle(int *fov, char *value)
+int insert_angle(float *fov, char *value)
 {
     if (!is_int(value))
         return 0;
@@ -198,7 +198,7 @@ void    print_camera(camera c)
     print_vector3(c.direction);
     printf("\n");
     printf("%s > Fov %s", WH, RE);
-    printf("%s[%d]%s\n", CY, c.fov, RE);
+    printf("%s[%f]%s\n", CY, c.fov, RE);
     printf("\n");
 }
 

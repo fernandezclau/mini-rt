@@ -1,10 +1,23 @@
 #include "../../include/minirt.h"
 
+int process_view(char   **tokens, view *view)
+{
+    if (array_len(tokens) != 4)
+        return 0;
+
+    // FOV
+    if (!insert_angle(&view->fov, tokens[3]))
+         return 0;
+
+    *view = view_p_init(NEAR, FAR, 0, W_HEIGHT, W_WIDTH);
+    return 1;
+}
+
 int process_camera(char **tokens, camera *camera)
 {
     if (array_len(tokens) != 4)
         return 0;
-    
+
     // POSITION
     char    **position = ft_split(tokens[1], ',');
     if (!insert_vector3(&camera->position, position, NOT_NORMALIZED))
@@ -15,9 +28,15 @@ int process_camera(char **tokens, camera *camera)
     if (!insert_vector3(&camera->direction, direction, NORMALIZED))
         return 0;
     
+    //UP
+    vector3 up = {0.0f, 1.0f, 0.0f};
+    camera->up = up;
+
+    // VIEW MATRIX
+    calculate_view_matrix(camera);
     // FOV
-    if (!insert_angle(&camera->fov, tokens[3]))
-        return 0;
+    // if (!insert_angle(&camera->fov, tokens[3]))
+    //     return 0;
 
     return 1;
 }

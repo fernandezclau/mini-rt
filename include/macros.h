@@ -5,6 +5,8 @@
 // windows sizing
 # define W_WIDTH    800
 # define W_HEIGHT   600
+# define FAR        1000.0f
+# define NEAR       0.0f
 
 // PROJECT TITLE
 # define W_TITLE    "mini-rt .-."
@@ -52,6 +54,7 @@
 // ERRORS
 #define ERROR "\033[1;31mError\033[1;37m"
 #define E_USAGE "Usage: ./mini-rt <file.rt>"
+#define E_VIEW "[VIEW]"
 #define E_CAMERA "[CAMARA]"
 #define E_AMBIENT_LIGHT "[AMBIENT LIGHT]"
 #define E_LIGHT "[LIGHT]"

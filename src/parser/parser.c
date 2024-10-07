@@ -7,7 +7,10 @@ int parse_line(char *line, scene *scene)
     char **tokens = split_spaces(line);
     if (!tokens[0])
         return free_array(tokens), 1;
-
+    
+    if (tokens[0][0] == CAMERA && !process_view(tokens, &scene->view))
+        ft_error(E_VIEW), error = 0;
+        
     if (tokens[0][0] == CAMERA && !process_camera(tokens, &scene->camera))
         ft_error(E_CAMERA), error = 0;
     else if (tokens[0][0] == AMBIENT_LIGHT && !process_ambient(tokens, &scene->ambient))
@@ -20,6 +23,7 @@ int parse_line(char *line, scene *scene)
         ft_error(E_PLANE), error = 0;
     else if (!strcmp(tokens[0], CYLINDER) && !process_cylinder(tokens, &scene->cylinders))
         ft_error(E_CYLINDER), error = 0;
+    
 
     return free_array(tokens), error;
 }
