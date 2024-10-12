@@ -14,6 +14,7 @@ view    view_p_init(float near, float far, float fov, int height, int width)
     v.width = width;
 
     // formula matrix proyeccion 
+    init_r_mat(&v.projection_matrix);
     v.projection_matrix.a.x = 1.0f / aspect_ratio * tan_middle_fov;
     v.projection_matrix.b.y = tan_middle_fov;
     v.projection_matrix.c.z = -1.0f * (far + near) / (far - near);

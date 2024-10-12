@@ -49,6 +49,7 @@ vector4 init_v4();
 vector4 init_p_v4(float x, float y, float z, float k);
 vector4 multiple_v4_mat4(mat4 m, vector4 v);
 void print_v4(vector4 v);
+void    init_r_mat(mat4 *m);
 
 mat4 init_mac4();
 mat4 init_p_mac4(vector4 a, vector4 b, vector4 c, vector4 d);

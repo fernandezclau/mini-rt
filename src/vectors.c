@@ -125,6 +125,14 @@ vector4 init_p_v4(float x, float y, float z, float k)
     return v;
 }
 
+void    init_r_mat(mat4 *m)
+{
+    m->a = init_v4();
+    m->b = init_v4();
+    m->c = init_v4();
+    m->d = init_v4();
+}
+
 vector4 multiple_v4_mat4(mat4 m, vector4 v)
 {
     vector4 result;

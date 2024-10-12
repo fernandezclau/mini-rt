@@ -16,6 +16,7 @@ SRC 	=	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/render.c\
 			$(SRC_DIR)/vectors.c\
 			$(SRC_DIR)/camera.c\
+			$(SRC_DIR)/triangle.c
 
 OBJ 	=	$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

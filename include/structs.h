@@ -2,23 +2,7 @@
     #define STRUCTS_H
 
 #include "./camera.h"
-
-// typedef struct vector3 {
-//     float   x;
-//     float   y;
-//     float   z;
-// }           vector3;
-
-// typedef struct vector2 {
-//     float   x;
-//     float   y;
-// }           vector2;
-
-// typedef struct camera {
-//     vector3 position;
-//     vector3 direction;
-//     int     fov;
-// }           camera;
+#include "./plane.h"
 
 typedef struct color
 {
@@ -26,7 +10,13 @@ typedef struct color
     int g;
     int b;
 }       color;
-
+typedef struct plane
+{
+    vector3         point;
+    vector3         normal;
+    color           color;
+    struct plane    *next;
+}                   plane;
 typedef struct ambient_light {
     float   ratio;
     color color;
@@ -47,13 +37,7 @@ typedef struct sphere
     struct sphere   *next;
 }                   sphere;
 
-typedef struct plane
-{
-    vector3         point;
-    vector3         normal;
-    color           color;
-    struct plane    *next;
-}                   plane;
+
 
 typedef struct cylinder
 {

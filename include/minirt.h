@@ -11,7 +11,8 @@
 # include "./macros.h"
 # include "./structs.h"
 # include "./vectors.h"
-#  include "./camera.h"
+# include "./camera.h"
+# include "./plane.h"
 
 // ......... STRUCTS .......
 
@@ -23,6 +24,7 @@ typedef struct s_data {
     int     bpp;               // Bits por pixel
     int     size_line;         // Tamaño de la línea
     int     endian;            // Endian
+    camera  camera;
 }           t_data;
 
 // WINDOWS MANAGEMENT
@@ -58,4 +60,7 @@ int array_len(char **array);
 void    free_array(char **array);
 
 int is_valid_ratio(float ratio);
+void swap_points(vector2 *p1, vector2 *p2);
+void draw_horizontal_line(t_data *data, int x_start, int x_end, int y, int color);
+void fill_triangle(t_data *data, vector2 *a, vector2 *b, vector2 *c, int color);
 #endif
