@@ -1,6 +1,11 @@
 #include "../../include/minirt.h"
-#include <ctype.h>
 
+/**
+ * @brief Checks if a given string represents a valid floating-point number.
+ * 
+ * @param str The string to be checked.
+ * @return 1 if the string is a valid float, 0 otherwise.
+ */
 int is_float(const char *str)
 {
     int dot = 0;
@@ -19,6 +24,12 @@ int is_float(const char *str)
     return 1;
 }
 
+/**
+ * @brief Checks if a given string represents a valid integer.
+ *
+ * @param str The string to be checked.
+ * @return 1 if the string is a valid integer, 0 otherwise.
+ */
 int is_int(const char *str)
 {
     if (!str || *str == '\0')
@@ -30,14 +41,19 @@ int is_int(const char *str)
             return 0;
         str++;
     }
-
     return 1;
 }
 
+/**
+ * @brief Checks if an array of strings contains exactly three valid floats.
+ *
+ * @param tokens An array of strings representing float values.
+ * @return 1 if the array contains three valid floats, 0 otherwise.
+ */
 int three_floats(char **tokens)
 {
     int i = 0;
-    
+
     while (tokens[i])
     {
         if (i > 2)
@@ -49,6 +65,12 @@ int three_floats(char **tokens)
     return 1;
 }
 
+/**
+ * @brief Checks if an array of strings contains exactly three valid integers.
+ *
+ * @param tokens An array of strings representing integer values.
+ * @return 1 if the array contains three valid integers, 0 otherwise.
+ */
 int three_ints(char **tokens)
 {
     int i = 0;
@@ -64,21 +86,40 @@ int three_ints(char **tokens)
     return 1;
 }
 
+/**
+ * @brief Validates if a color has RGB components within the valid range (0-255).
+ *
+ * @param rgb A color structure with r, g, and b components.
+ * @return 1 if all components are within the range, 0 otherwise.
+ */
 int is_valid_color(color rgb)
 {
     if (rgb.r < 0 || rgb.r > 255)
         return 0;
-    else if(rgb.g < 0 || rgb.g > 255)
+    else if (rgb.g < 0 || rgb.g > 255)
         return 0;
     else if (rgb.b < 0 || rgb.b > 255)
         return 0;
     return 1;
 }
 
+/**
+ * @brief Checks if a given ratio is within the valid range [0, 1].
+ *
+ * @param ratio The ratio to check.
+ * @return 1 if the ratio is valid, 0 otherwise.
+ */
 int is_valid_ratio(float ratio)
 {
     return (ratio >= 0 && ratio <= 1);
 }
+
+/**
+ * @brief Checks if a 3D vector is normalized (i.e., each component is between -1 and 1).
+ *
+ * @param v The 3D vector to check.
+ * @return 1 if the vector is normalized, 0 otherwise.
+ */
 int is_normalized_f_v3(vector3 v)
 {
     if (v.x < -1 || v.x > 1)
@@ -90,66 +131,13 @@ int is_normalized_f_v3(vector3 v)
     return 1;
 }
 
+/**
+ * @brief Checks if an angle is within the valid range [0, 180] degrees.
+ *
+ * @param angle The angle to check.
+ * @return 1 if the angle is valid, 0 otherwise.
+ */
 int is_valid_angle(int angle)
 {
     return (angle >= 0 && angle <= 180);
 }
-
-// #include "../../include/minirt.h"
-// #include <stdio.h>
-// #include <string.h>
-// #include <stdlib.h>
-
-
-// int main(int argc, char **argv)
-// {
-//     if (argc < 2)
-//     {
-//         printf("Uso: %s <opciones> <valores>\n", argv[0]);
-//         printf("Opciones:\n");
-//         printf("  -f <float>            Verifica si el valor es un float válido\n");
-//         printf("  -i <int>              Verifica si el valor es un int válido\n");
-//         printf("  -3f <float1> <float2> <float3> Verifica si los tres valores son floats válidos\n");
-//         printf("  -3i <int1> <int2> <int3> Verifica si los tres valores son ints válidos\n");
-//         return 1;
-//     }
-
-//     // Opción para verificar si un valor es un float
-//     if (strcmp(argv[1], "-f") == 0 && argc == 3)
-//     {
-//         if (is_float(argv[2]))
-//             printf("'%s' es un float válido\n", argv[2]);
-//         else
-//             printf("'%s' NO es un float válido\n", argv[2]);
-//     }
-//     // Opción para verificar si un valor es un int
-//     else if (strcmp(argv[1], "-i") == 0 && argc == 3)
-//     {
-//         if (is_int(argv[2]))
-//             printf("'%s' es un int válido\n", argv[2]);
-//         else
-//             printf("'%s' NO es un int válido\n", argv[2]);
-//     }
-//     // Opción para verificar si tres valores son floats válidos
-//     else if (strcmp(argv[1], "-3f") == 0 && argc == 5)
-//     {
-//         if (three_floats(&argv[2]))
-//             printf("Los valores '%s', '%s', '%s' son floats válidos\n", argv[2], argv[3], argv[4]);
-//         else
-//             printf("Uno o más de los valores no son floats válidos\n");
-//     }
-//     // Opción para verificar si tres valores son ints válidos
-//     else if (strcmp(argv[1], "-3i") == 0 && argc == 5)
-//     {
-//         if (three_ints(&argv[2]))
-//             printf("Los valores '%s', '%s', '%s' son ints válidos\n", argv[2], argv[3], argv[4]);
-//         else
-//             printf("Uno o más de los valores no son ints válidos\n");
-//     }
-//     else
-//     {
-//         printf("Argumentos no válidos. Usa -f, -i, -3f, o -3i con los valores correctos.\n");
-//     }
-
-//     return 0;
-// }

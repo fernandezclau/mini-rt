@@ -38,6 +38,9 @@
 #define NORMALIZED     1
 #define NOT_NORMALIZED 0
 
+// MATH 
+#define M_PI 3.14159265358979323846
+
 // COLORS
 #define RE      "\033[0m"
 #define YE      "\033[1;33m"

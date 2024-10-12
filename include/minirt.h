@@ -1,6 +1,26 @@
 #ifndef MINIRT_H
     #define MINIRT_H
 
+// ......... STRUCTS .......
+
+typedef struct s_data
+{
+    void    *mlx_ptr;         // Puntero a la estructura de miniLibX
+    void    *win_ptr;         // Puntero a la ventana de miniLibX
+    void    *image_ptr;       // Puntero a la imagen de miniLibX
+    char    *image_data;       // Puntero a los datos de la imagen
+    int     bpp;               // Bits por pixel
+    int     size_line;         // Tamaño de la línea
+    int     endian;            // Endian
+}           t_data;
+
+typedef struct color
+{
+    int r;
+    int g;
+    int b;
+}       color;
+
 // ......... LIBS ........
 # include <mlx.h>
 # include <stdlib.h>
@@ -9,23 +29,22 @@
 # include <string.h>
 # include <math.h>
 # include "./macros.h"
-# include "./structs.h"
 # include "./vectors.h"
-# include "./camera.h"
-# include "./plane.h"
+# include "./view.h"
+# include "./shapes.h"
 
-// ......... STRUCTS .......
-
-typedef struct s_data {
-    void    *mlx_ptr;         // Puntero a la estructura de miniLibX
-    void    *win_ptr;         // Puntero a la ventana de miniLibX
-    void    *image_ptr;       // Puntero a la imagen de miniLibX
-    char    *image_data;       // Puntero a los datos de la imagen
-    int     bpp;               // Bits por pixel
-    int     size_line;         // Tamaño de la línea
-    int     endian;            // Endian
-    camera  camera;
-}           t_data;
+typedef struct scene
+{
+    ambient_light   ambient;
+    camera          camera;
+    light           light;
+    sphere          *spheres;
+    plane           *planes;
+    cylinder        *cylinders;
+    int             num_spheres;
+    int             num_planes;
+    int             num_cylinders;
+}               scene;
 
 // WINDOWS MANAGEMENT
 int key_hook(int keycode, t_data *data);
@@ -49,7 +68,6 @@ void    ft_error(char *error);
 int is_rt_file(const char *filename);
 
 //CAMARA
-int process_view(char   **tokens, view *view);
 int process_camera(char **tokens, camera *camera);
 int process_ambient(char **tokens, ambient_light *ambient_light);
 int process_light(char **tokens, light *light);
@@ -59,8 +77,17 @@ int process_cylinder(char **tokens, cylinder **cy);
 int array_len(char **array);
 void    free_array(char **array);
 
+// INIT
+void    init_scene(scene *scene);
+void    print_scene(scene scene);
+void    free_scene(scene *scene);
+
 int is_valid_ratio(float ratio);
-void swap_points(vector2 *p1, vector2 *p2);
-void draw_horizontal_line(t_data *data, int x_start, int x_end, int y, int color);
-void fill_triangle(t_data *data, vector2 *a, vector2 *b, vector2 *c, int color);
+
+void    render(t_data *data, scene *scene);
+
+// UTILS
+int     rgb_to_hex(color *c);
+void    display_color(color c);
+int     init_r_color(color *c);
 #endif

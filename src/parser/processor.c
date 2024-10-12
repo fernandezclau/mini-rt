@@ -1,18 +1,12 @@
 #include "../../include/minirt.h"
 
-int process_view(char   **tokens, view *view)
-{
-    if (array_len(tokens) != 4)
-        return 0;
-
-    // FOV
-    if (!insert_angle(&view->fov, tokens[3]))
-         return 0;
-
-    *view = view_p_init(NEAR, FAR, 0, W_HEIGHT, W_WIDTH);
-    return 1;
-}
-
+/**
+ * @brief Processes camera parameters from tokens and updates the camera structure.
+ *
+ * @param tokens An array of strings containing the camera parameters.
+ * @param camera A pointer to the camera structure to be updated.
+ * @return int Returns 1 on success, 0 on failure (e.g., incorrect token count).
+ */
 int process_camera(char **tokens, camera *camera)
 {
     if (array_len(tokens) != 4)
@@ -26,21 +20,22 @@ int process_camera(char **tokens, camera *camera)
     // DIRECTION
     char    **direction = ft_split(tokens[2], ',');
     if (!insert_vector3(&camera->direction, direction, NORMALIZED))
-        return 0;
-    
-    //UP
-    vector3 up = {0.0f, 1.0f, 0.0f};
-    camera->up = up;
+        return 0; 
 
-    // VIEW MATRIX
-    calculate_view_matrix(camera);
     // FOV
-    // if (!insert_angle(&camera->fov, tokens[3]))
-    //     return 0;
+    if (!insert_angle(&camera->fov, tokens[3]))
+        return 0;
 
     return 1;
 }
 
+/**
+ * @brief Processes ambient light parameters from tokens and updates the ambient light structure.
+ *
+ * @param tokens An array of strings containing the ambient light parameters.
+ * @param ambient_light A pointer to the ambient light structure to be updated.
+ * @return int Returns 1 on success, 0 on failure (e.g., incorrect token count).
+ */
 int process_ambient(char **tokens, ambient_light *ambient_light)
 {
     if (array_len(tokens) != 3)
@@ -57,6 +52,13 @@ int process_ambient(char **tokens, ambient_light *ambient_light)
     return 1;
 }
 
+/**
+ * @brief Processes light parameters from tokens and updates the light structure.
+ *
+ * @param tokens An array of strings containing the light parameters.
+ * @param light A pointer to the light structure to be updated.
+ * @return int Returns 1 on success, 0 on failure (e.g., incorrect token count).
+ */
 int process_light(char **tokens, light *light)
 {
     if (array_len(tokens) != 4)
@@ -78,6 +80,13 @@ int process_light(char **tokens, light *light)
     return 1;
 }
 
+/**
+ * @brief Processes sphere parameters from tokens and adds a new sphere to the list.
+ *
+ * @param tokens An array of strings containing the sphere parameters.
+ * @param sp A double pointer to the head of the sphere linked list.
+ * @return int Returns 1 on success, 0 on failure (e.g., incorrect token count or memory allocation failure).
+ */
 int process_sphere(char **tokens, sphere **sp)
 {
     sphere *new_sphere = NULL;
@@ -111,6 +120,13 @@ int process_sphere(char **tokens, sphere **sp)
     return 1;
 }
 
+/**
+ * @brief Processes plane parameters from tokens and adds a new plane to the list.
+ *
+ * @param tokens An array of strings containing the plane parameters.
+ * @param pl A double pointer to the head of the plane linked list.
+ * @return int Returns 1 on success, 0 on failure (e.g., incorrect token count or memory allocation failure).
+ */
 int process_plane(char **tokens, plane **pl)
 {
     plane *new_plane = NULL;
@@ -145,6 +161,13 @@ int process_plane(char **tokens, plane **pl)
     return 1;
 }
 
+/**
+ * @brief Processes cylinder parameters from tokens and adds a new cylinder to the list.
+ *
+ * @param tokens An array of strings containing the cylinder parameters.
+ * @param cy A double pointer to the head of the cylinder linked list.
+ * @return int Returns 1 on success, 0 on failure (e.g., incorrect token count or memory allocation failure).
+ */
 int process_cylinder(char **tokens, cylinder **cy)
 {
     cylinder *new_cylinder = NULL;

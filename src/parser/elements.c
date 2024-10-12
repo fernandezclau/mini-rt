@@ -1,0 +1,107 @@
+#include "../../include/minirt.h"
+
+/**
+ * @brief Inserts values into a vector3 structure from a string array.
+ *
+ * @param v Pointer to the vector3 structure to be filled.
+ * @param tokens Array of string tokens containing the float values.
+ * @param is_normalized Flag indicating whether to check if the vector is normalized.
+ * @return 1 if successful, 0 if an error occurred (e.g., invalid tokens).
+ */
+int insert_vector3(vector3 *v, char **tokens, int is_normalized)
+{
+    if (!three_floats(tokens))
+        return free_array(tokens), 0;
+
+    v->x = atof(tokens[0]);
+    v->y = atof(tokens[1]);
+    v->z = atof(tokens[2]);
+    
+    free_array(tokens);
+
+    if (is_normalized && !is_normalized_f_v3(*v))
+        return 0;
+
+    return 1;
+}
+
+/**
+ * @brief Inserts values into a color structure from a string array.
+ *
+ * @param c Pointer to the color structure to be filled.
+ * @param tokens Array of string tokens containing the integer color values.
+ * @return 1 if successful, 0 if an error occurred (e.g., invalid tokens or color).
+ */
+int insert_color(color *c, char **tokens)
+{
+    if (!three_ints(tokens))
+        return free_array(tokens), 0;
+    
+    c->r = atoi(tokens[0]);
+    c->g = atoi(tokens[1]);
+    c->b = atoi(tokens[2]);
+
+    free_array(tokens);
+
+    if (!is_valid_color(*c))
+        return 0;
+
+    return 1;
+}
+
+/**
+ * @brief Inserts a field of view angle into a float variable.
+ *
+ * @param fov Pointer to the float variable to be filled.
+ * @param value String representing the field of view angle.
+ * @return 1 if successful, 0 if an error occurred (e.g., invalid value).
+ */
+int insert_angle(float *fov, char *value)
+{
+    if (!is_int(value))
+        return 0;
+    
+    *fov = atoi(value);
+    
+    if (!is_valid_angle(*fov))
+        return 0;
+
+    return 1;
+}
+
+/**
+ * @brief Inserts a ratio value into a float variable.
+ *
+ * @param ratio Pointer to the float variable to be filled.
+ * @param value String representing the ratio value.
+ * @return 1 if successful, 0 if an error occurred (e.g., invalid value).
+ */
+int insert_ratio(float *ratio, char *value)
+{
+    if (!is_float(value))
+        return 0;
+    
+    *ratio = atof(value);
+    
+    if (!is_valid_ratio(*ratio))
+        return 0;
+
+    return 1;
+}
+
+/**
+ * @brief Inserts a magnitude value into a float variable.
+ *s
+ * @param magnitude Pointer to the float variable to be filled.
+ * @param value String representing the magnitude value.
+ * @return 1 if successful, 0 if an error occurred (e.g., invalid value).
+ */
+int insert_magnitude(float *magnitude, char *value)
+{
+    if (!is_float(value))
+        return 0;
+    
+    *magnitude = atof(value);
+
+    return 1;
+}

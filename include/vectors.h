@@ -14,47 +14,23 @@ typedef struct vector3
     float   z;
 }           vector3;
 
-typedef struct vector4
-{
-    float   x;
-    float   y;
-    float   z;
-    float   k;
-}           vector4;
-
-typedef struct mat4
-{
-    vector4 a;
-    vector4 b;
-    vector4 c;
-    vector4 d;
-}           mat4;
-
-vector2 init_v2();
+// ________________ VECTOR 2 ____________________
+vector2 init_v2(void);
 vector2 init_p_v2(float x, float y);
+void    display_v2(vector2 v);
 
-vector3 init_v3();
+// ________________ VECTOR 3 ____________________
+vector3 init_v3(void);
 vector3 init_p_v3(float x, float y, float z);
-vector3 v3_substract(vector3 a, vector3 b);
-vector3 v3_cross_product(vector3 a, vector3 b);
-vector3 v3_multiple(vector3 a, vector3 b);
-vector3 v3_scale(vector3 v, float scalar);
-float v3_dot_product(vector3 a, vector3 b);
-float v3_length2(vector3 v);
-float v3_length(vector3 v);
-vector3 v3_normalize(vector3 v);
-void print_v3(vector3 v);
-
-vector4 init_v4();
-vector4 init_p_v4(float x, float y, float z, float k);
-vector4 multiple_v4_mat4(mat4 m, vector4 v);
-void print_v4(vector4 v);
-void    init_r_mat(mat4 *m);
-
-mat4 init_mac4();
-mat4 init_p_mac4(vector4 a, vector4 b, vector4 c, vector4 d);
-mat4 mac4_multiple(mat4 a, mat4 b);
-void    print_m4(mat4 m);
-
+vector3 init_r_v3(vector3 *v);
+vector3 substract_v3(vector3 a, vector3 b);
+vector3 cross_product_v3(vector3 a, vector3 b);
+vector3 multiple_v3(vector3 a, vector3 b);
+vector3 scale_v3(vector3 v, float scalar);
+float   dot_product_v3(vector3 a, vector3 b);
+float   pow_v3(vector3 v);
+float   length_v3(vector3 v);
+vector3 normalize_v3(vector3 v);
+void    display_v3(vector3 v);
 
 #endif  // VECTORS_H
