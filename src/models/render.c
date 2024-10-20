@@ -55,130 +55,72 @@ vector3 compute_direction(int x, int y, float fov)
  */
 void render(t_data *data, scene *scene)
 {
+    ray r;
+    hit hit;
     for (int x = 0; x < W_WIDTH; x++) {
         for (int y = 0; y < W_HEIGHT; y++) {
             ray r;
             r.origin = scene->camera.position;
             r.direction = compute_direction(x, y, scene->camera.fov);
             
-            float   min_dist = INFINITY;
+            float   min_dist;
             float dist;
             color final_color = {0, 0, 0};
             int     intersect = 0;
-
+            
+            init_hit_point(&hit);
             sphere *iter_spheres = scene->spheres;
             plane  *iter_planes= scene->planes;
             cylinder *iter_cylinder = scene->cylinders;
             
             // Spheres intersection
-            while (iter_spheres != NULL)
-            {   
-                if (intersect_ray_sphere(&r, &iter_spheres->center, iter_spheres->diameter /2, &dist))
-                {
-                    if (dist < min_dist || intersect == 0)
-                    {
-                        min_dist = abs(dist);
-                        final_color = iter_spheres->color;
-                    }
-                    intersect = 1;
-                }
-                iter_spheres = iter_spheres->next;
+            intersection_spheres(&r, &scene->spheres, &hit);
+            // while (iter_spheres != NULL)
+            // {   
+            //     if (intersect_ray_sphere(&r, iter_spheres, &hit.dist))
+            //     {
+            //         if (hit.dist < hit.min_dist || hit.intersect == 0)
+            //         {
+            //             hit.min_dist = abs(hit.dist);
+            //             hit.final_color = iter_spheres->color;
+            //         }
+            //         hit.intersect = 1;
+            //     }
+            //     iter_spheres = iter_spheres->next;
+            // }
+            // Planes intersection
+           interesection_planes(&r, &scene->planes, &hit);
+            // while (iter_planes != NULL)
+            // {   
+            //     if (intersect_ray_plane(&r, iter_planes, &dist))
+            //     {
+            //         if (dist < min_dist || intersect == 0)
+            //         {
+            //             min_dist = abs(dist);
+            //             final_color = iter_planes->color;
+            //         }
+            //         intersect = 1;
+            //     }
+            //     iter_planes = iter_planes->next;
+            // }
+            // Cylinders intersection
+            intersection_cylinders(&r, &scene->cylinders, &hit);
+            // cylinder *iter_cylinders = scene->cylinders;
+            // while (iter_cylinders != NULL) {
+            //     if (intersect_ray_cylinder(&r, iter_cylinders, &hit.dist)) {
+            //         if (hit.dist < hit.min_dist || hit.intersect == 0) {
+            //             hit.min_dist = dist;
+            //             hit.final_color = iter_cylinders->color;
+            //         }
+            //         hit.intersect = 1;
+            //     }
+            //     iter_cylinders = iter_cylinders->next;
+            // }
+            if (hit.intersect)
+            {
+                //calculate_ambient_light(&final_color, scene->ambient);
+                my_mlx_pixel_put(data, x, y, rgb_to_hex(&hit.final_color));
             }
-            // PLANOS
-            while (iter_planes != NULL)
-            {   
-                if (intersect_ray_plane(&r, &iter_planes->point, &iter_planes->normal, &dist))
-                {
-                    if (dist < min_dist || intersect == 0)
-                    {
-                        min_dist = abs(dist);
-                        final_color = iter_planes->color;
-                    }
-                    intersect = 1;
-                }
-                iter_planes = iter_planes->next;
-            }
-            // CILINDROS
-            while (iter_cylinder != NULL)
-            {   
-                if (intersect_ray_cylinder(&r, &iter_cylinder->center, iter_cylinder->diameter /2, iter_cylinder->height, &dist))
-                {
-                    if (dist < min_dist || intersect == 0)
-                    {
-                        min_dist = abs(dist);
-                        final_color = iter_cylinder->color;
-                    }
-                    intersect = 1;
-                }
-                iter_cylinder = iter_cylinder->next;
-            }
-            if (intersect)
-                my_mlx_pixel_put(data, x, y, rgb_to_hex(&final_color));
         }
     }
 }
-
-// /**
-//  * @brief Renders the scene into the image using ray tracing.
-//  *
-//  * @param data Pointer to the image data structure.
-//  * @param scene Pointer to the scene structure containing the objects to render.
-//  */
-// void render(t_data *data, scene *scene)
-// {
-//     for (int x = 0; x < W_WIDTH; x++) {
-//         for (int y = 0; y < W_HEIGHT; y++) {
-//             ray r;
-//             r.origin = scene->camera.position;
-//             r.direction = compute_direction(x, y, scene->camera.fov);
-            
-//             float min_dist = INFINITY;
-//             float dist;
-//             color final_color = {0, 0, 0};
-//             int intersect = 0;
-
-//             sphere *iter_spheres = scene->spheres;
-//             plane *iter_planes = scene->planes;
-//             cylinder *iter_cylinder = scene->cylinders;
-            
-//             // Spheres intersection
-//             while (iter_spheres != NULL) {   
-//                 if (intersect_ray_sphere(&r, &iter_spheres->center, iter_spheres->diameter / 2, &dist)) {
-//                     if (dist < min_dist) {
-//                         min_dist = dist;
-//                         final_color = iter_spheres->color;
-//                     }
-//                     intersect = 1;
-//                 }
-//                 iter_spheres = iter_spheres->next;
-//             }
-
-//             // Planes intersection
-//             while (iter_planes != NULL) {   
-//                 if (intersect_ray_plane(&r, &iter_planes->point, &iter_planes->normal, &dist)) {
-//                     if (dist < min_dist) {
-//                         min_dist = dist;
-//                         final_color = iter_planes->color;
-//                     }
-//                     intersect = 1;
-//                 }
-//                 iter_planes = iter_planes->next;
-//             }
-
-//             // Cylinders intersection
-//             while (iter_cylinder != NULL) {   
-//                 if (intersect_ray_cylinder(&r, &iter_cylinder->center, iter_cylinder->diameter / 2, iter_cylinder->height, &dist)) {
-//                     if (dist < min_dist) {
-//                         min_dist = dist;
-//                         final_color = iter_cylinder->color;
-//                     }
-//                     intersect = 1;
-//                 }
-//                 iter_cylinder = iter_cylinder->next;
-//             }
-
-//             if (intersect)
-//                 my_mlx_pixel_put(data, x, y, rgb_to_hex(&final_color));
-//         }
-//     }
-// }

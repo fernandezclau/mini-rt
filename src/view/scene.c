@@ -26,6 +26,11 @@ void init_scene(scene *scene)
     scene->cylinders = NULL;
 }
 
+void    init_hit_point(hit *hit)
+{
+    hit->intersect = 0;
+    init_r_color(&hit->final_color);
+}
 /**
  * @brief Frees all allocated resources in the scene.
  *

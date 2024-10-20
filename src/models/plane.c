@@ -1,5 +1,25 @@
 #include "../../include/minirt.h"
 
+void    interesection_planes(ray *r, plane **planes, hit *l_hit)
+{
+    plane   *iter_planes;
+    
+    iter_planes = *planes;
+    while (iter_planes != NULL)
+    {   
+        if (intersect_ray_plane(r, iter_planes, &l_hit->dist))
+        {
+            if (l_hit->dist < l_hit->min_dist || l_hit->intersect == 0)
+            {
+                l_hit->min_dist = abs(l_hit->dist);
+                l_hit->final_color = iter_planes->color;
+            }
+            l_hit->intersect = 1;
+        }
+        iter_planes = iter_planes->next;
+    }
+}
+
 /**
  * @brief Intersects a ray with a plane.
  *
@@ -11,21 +31,21 @@
  * @return Returns 1 if the ray intersects the plane and sets t to the distance to the intersection.
  *         Returns 0 if there is no intersection or if the ray is parallel to the plane.
  */
-int intersect_ray_plane(ray *r, vector3 *point_on_plane, vector3 *normal, float *t)
+int intersect_ray_plane(ray *r, plane *pl, float *t)
 {
-    float denom = normal->x * r->direction.x + normal->y * r->direction.y + normal->z * r->direction.z;
+    double  denom;
+    vector3 p0l0;
 
-    if (fabs(denom) > 1e-6) {
-        vector3 p0l0 = {point_on_plane->x - r->origin.x,
-                         point_on_plane->y - r->origin.y,
-                         point_on_plane->z - r->origin.z};
-
-        *t = (normal->x * p0l0.x + normal->y * p0l0.y + normal->z * p0l0.z) / denom;
-
+    denom = dot_product_v3(r->direction, pl->normal);
+    if (fabs(denom) > 1e-6)
+    {
+        p0l0 = substract_v3(pl->point, r->origin);
+        *t = dot_product_v3(pl->normal, p0l0) / denom;
         return (*t >= 0);
     }
     return 0;
 }
+
 
 /**
  * @brief Adds a plane to the end of the plane linked list.

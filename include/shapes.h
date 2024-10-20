@@ -16,6 +16,7 @@ typedef struct sphere
 {
     vector3         center;
     float           diameter;
+    float           radius;
     color           color;
     struct sphere   *next;
 }                   sphere;
@@ -42,10 +43,15 @@ void    add_sphere(sphere **head, sphere *new_sphere);
 void    add_plane(plane **head, plane *new_plain);
 void    add_cylinder(cylinder **head, cylinder *new_cylinder);
 
+// LIST INTERSECTIONS
+void    interesection_planes(ray *r, plane **planes, hit *l_hit);
+void    intersection_spheres(ray *r, sphere **spheres, hit *l_hit);
+void    intersection_cylinders(ray *r, cylinder **cylinders, hit *l_hit);
+
 // INTERSECTIONS
-int intersect_ray_plane(ray *r, vector3 *point_on_plane, vector3 *normal, float *t);
-int intersect_ray_sphere(ray *r, vector3 *center, float radius, float *t);
-int intersect_ray_cylinder(ray *r, vector3 *center, float radius, float height, float *t);
+int intersect_ray_plane(ray *r, plane *pl, float *t);
+int intersect_ray_sphere(ray *r, sphere *sphere, float *t);
+int intersect_ray_cylinder(ray *r, cylinder *cl, float *t);
 
 // MEMORY RELEASING
 void    free_spheres(sphere **head);

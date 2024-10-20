@@ -106,6 +106,9 @@ int process_sphere(char **tokens, sphere **sp)
     // DIAMETER
     if (!insert_magnitude(&new_sphere->diameter, tokens[2]))
         return free(new_sphere), 0;
+    
+    // RADIOUS
+    new_sphere->radius = new_sphere->diameter / 2.0f;
 
     // // COLOR
     char **colors = ft_split(tokens[3], ',');

@@ -23,6 +23,7 @@ void    display_v2(vector2 v);
 vector3 init_v3(void);
 vector3 init_p_v3(float x, float y, float z);
 vector3 init_r_v3(vector3 *v);
+vector3 sum_v3(vector3 a, vector3 b);
 vector3 substract_v3(vector3 a, vector3 b);
 vector3 cross_product_v3(vector3 a, vector3 b);
 vector3 multiple_v3(vector3 a, vector3 b);

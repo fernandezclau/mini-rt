@@ -1,5 +1,25 @@
 #include "../../include/minirt.h"
 
+void    intersection_cylinders(ray *r, cylinder **cylinders, hit *l_hit)
+{
+    cylinder   *iter_cylinders;
+    
+    iter_cylinders = *cylinders;
+    while (iter_cylinders != NULL)
+    {   
+        if (intersect_ray_cylinder(r, iter_cylinders, &l_hit->dist))
+        {
+            if (l_hit->dist < l_hit->min_dist || l_hit->intersect == 0)
+            {
+                l_hit->min_dist = abs(l_hit->dist);
+                l_hit->final_color = iter_cylinders->color;
+            }
+            l_hit->intersect = 1;
+        }
+        iter_cylinders = iter_cylinders->next;
+    }
+}
+
 /**
  * @brief Intersects a ray with a cylinder.
  *
@@ -12,34 +32,46 @@
  * @return Returns 1 if the ray intersects the cylinder and sets t to the distance to the intersection.
  *         Returns 0 if there is no intersection or if the intersections are not valid.
  */
-int intersect_ray_cylinder(ray *r, vector3 *center, float radius, float height, float *t) {
-    vector3 oc = {r->origin.x - center->x, r->origin.y - center->y, r->origin.z - center->z};
+int intersect_ray_cylinder(ray *r, cylinder *cl, float *t) {
+    // Definimos los puntos extremos del cilindro
+    vector3 a = cl->center;
+    vector3 b = sum_v3(cl->center, scale_v3(cl->direction, cl->height));
+    vector3 ba = substract_v3(b, a);  // Asegúrate de que sea (b - a)
+    double baba = dot_product_v3(ba, ba);
 
-    float a = r->direction.x * r->direction.x + r->direction.y * r->direction.y;
-    float b = 2.0 * (oc.x * r->direction.x + oc.y * r->direction.y);
-    float c = oc.x * oc.x + oc.y * oc.y - radius * radius;
+    // Definimos vectores auxiliares para los cálculos
+    vector3 oc = substract_v3(r->origin, a);
+    double bard = dot_product_v3(ba, r->direction);
+    double baoc = dot_product_v3(ba, oc);
+    double k2 = baba - bard * bard;
+    double k1 = baba * dot_product_v3(oc, r->direction) - baoc * bard;
+    double k0 = baba * dot_product_v3(oc, oc) - baoc * baoc - 
+                (cl->diameter / 2) * (cl->diameter / 2) * baba;
 
-    float discriminant = b * b - 4 * a * c;
-    if (discriminant < 0) {
+    double discr = k1 * k1 - k2 * k0;
+
+    *t = -1;
+    if (discr < 0)
         return 0;
-    } else {
-        float t0 = (-b - sqrt(discriminant)) / (2.0 * a);
-        float t1 = (-b + sqrt(discriminant)) / (2.0 * a);
 
-        float z0 = r->origin.z + t0 * r->direction.z;
-        float z1 = r->origin.z + t1 * r->direction.z;
+    discr = sqrt(discr);
+    double t0 = (-k1 - discr) / k2;
+    double t1 = (-k1 + discr) / k2;
 
-        if (z0 >= center->z && z0 <= center->z + height) {
-            *t = t0;
-            return 1;
-        }
-        if (z1 >= center->z && z1 <= center->z + height) {
-            *t = t1;
-            return 1;
-        }
+    double y0 = baoc + t0 * bard;
+    double y1 = baoc + t1 * bard;
+
+    if ((y0 < 0 || y0 > baba) && (y1 < 0 || y1 > baba))
         return 0;
-    }
+
+    if (y0 >= 0 && y0 <= baba)
+        *t = t0;
+    else
+        *t = t1;
+
+    return (fabs(*t) >= 0);
 }
+
 
 /**
  * @brief Adds a cylinder to the end of the cylinder linked list.

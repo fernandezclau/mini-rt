@@ -14,7 +14,7 @@ void free_mlx_resources(t_data *data)
 int close_window(t_data *data)
 {
     mlx_destroy_window(data->mlx_ptr, data->win_ptr);
- //   free_mlx_resources(data);
+    //free_mlx_resources(data);
     exit(0);
     return (0);
 }

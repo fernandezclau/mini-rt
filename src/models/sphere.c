@@ -1,5 +1,24 @@
 #include "../../include/minirt.h"
 
+void    intersection_spheres(ray *r, sphere **spheres, hit *l_hit)
+{
+    sphere   *iter_spheres;
+    
+    iter_spheres = *spheres;
+    while (iter_spheres != NULL)
+    {   
+        if (intersect_ray_sphere(r, iter_spheres, &l_hit->dist))
+        {
+            if (l_hit->dist < l_hit->min_dist || l_hit->intersect == 0)
+            {
+                l_hit->min_dist = abs(l_hit->dist);
+                l_hit->final_color = iter_spheres->color;
+            }
+            l_hit->intersect = 1;
+        }
+        iter_spheres = iter_spheres->next;
+    }
+}   
 /**
  * @brief Intersects a ray with a sphere.
  *
@@ -11,25 +30,26 @@
  * @return Returns 1 if the ray intersects the sphere and sets t to the distance to the intersection.
  *         Returns 0 if there is no intersection.
  */
-int intersect_ray_sphere(ray *r, vector3 *center, float radius, float *t)
+int intersect_ray_sphere(ray *r, sphere *sphere, float *t)
 {
-    vector3 oc = {r->origin.x - center->x, r->origin.y - center->y, r->origin.z - center->z};
+    vector3 oc;
+    float   a;
+    float   b;
+    float   c;
+    float   discriminant;
     
-    float a = (r->direction.x * r->direction.x) +
-              (r->direction.y * r->direction.y) +
-              (r->direction.z * r->direction.z);
-    
-    float b = 2.0f * (oc.x * r->direction.x + oc.y * r->direction.y + oc.z * r->direction.z);
-    
-    float c = (oc.x * oc.x + oc.y * oc.y + oc.z * oc.z) - (radius * radius);
-    
-    float discriminant = b * b - 4 * a * c;
-    if (discriminant < 0) {
-        return 0;
-    } else {
+    oc = substract_v3(r->origin, sphere->center);
+    a = dot_product_v3(r->direction, r->direction);
+    b = 2.0f * dot_product_v3(oc, r->direction);
+    c = dot_product_v3(oc, oc) - (sphere->radius * sphere->radius);
+    discriminant = b * b - 4 * a * c;
+    if (discriminant >= 0)
+    {
         *t = (-b - sqrt(discriminant)) / (2.0f * a);
-        return 1;
+        if(t >= 0)
+            return 1;
     }
+    return (0);
 }
 
 /**

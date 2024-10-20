@@ -14,6 +14,7 @@ SRC = $(SRC_DIR)/main.c \
       $(SRC_DIR)/view/window.c \
       $(SRC_DIR)/view/camera.c \
       $(SRC_DIR)/view/scene.c \
+      $(SRC_DIR)/view/light.c \
       $(SRC_DIR)/models/render.c \
       $(SRC_DIR)/models/sphere.c \
       $(SRC_DIR)/models/plane.c \

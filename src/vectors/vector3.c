@@ -35,8 +35,6 @@ vector3 init_p_v3(float x, float y, float z)
     return v;
 }
 
-#include "../../include/minirt.h"
-
 /**
  * @brief Initializes a vector3 structure to zero.
  *
@@ -49,6 +47,17 @@ vector3 init_r_v3(vector3 *v)
     v->z = 0;
 }
 
+/**
+ * @brief Sum two 3D vectors component-wise.
+ *
+ * @param a The first vector (minuend).
+ * @param b The second vector (subtrahend).
+ * @return A new vector3 representing the result of the sum.
+ */
+vector3 sum_v3(vector3 a, vector3 b)
+{
+    return init_p_v3(a.x + b.x, a.y + b.y, a.z + b.z);
+}
 
 /**
  * @brief Subtracts two 3D vectors component-wise.

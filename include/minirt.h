@@ -90,4 +90,5 @@ void    render(t_data *data, scene *scene);
 int     rgb_to_hex(color *c);
 void    display_color(color c);
 int     init_r_color(color *c);
+void    calculate_light(scene *scene, float dist, color *color, void *void_ptr);
 #endif
