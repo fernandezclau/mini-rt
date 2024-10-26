@@ -31,6 +31,20 @@ typedef struct cylinder
     struct cylinder *next;
 }                   cylinder;
 
+// LIST INTERSECTIONS
+void    interesection_planes(ray *r, plane **planes, hit *l_hit);
+void    intersection_spheres(ray *r, sphere **spheres, hit *l_hit);
+void    intersection_cylinders(ray *r, cylinder **cylinders, hit *l_hit);
+
+// SINGLE INTERSECTIONS
+int     intersect_ray_plane(ray *r, plane *pl, float *t);
+int     intersect_ray_sphere(ray *r, sphere *sphere, float *t);
+int     intersect_ray_cylinder(ray *r, cylinder *cl, float *t);
+
+// NORMAL
+void    set_cylinder_normal(ray *r, cylinder *cy, hit *l_hit);
+void    set_plane_normal(ray *r, hit *l_hit);
+
 // INSERTION
 int     insert_vector3(vector3 *v, char **tokens, int is_normalized);
 int     insert_color(color *c, char **tokens);
@@ -43,27 +57,12 @@ void    add_sphere(sphere **head, sphere *new_sphere);
 void    add_plane(plane **head, plane *new_plain);
 void    add_cylinder(cylinder **head, cylinder *new_cylinder);
 
-// LIST INTERSECTIONS
-void    interesection_planes(ray *r, plane **planes, hit *l_hit);
-void    intersection_spheres(ray *r, sphere **spheres, hit *l_hit);
-void    intersection_cylinders(ray *r, cylinder **cylinders, hit *l_hit);
-
-// INTERSECTIONS
-int intersect_ray_plane(ray *r, plane *pl, float *t);
-int intersect_ray_sphere(ray *r, sphere *sphere, float *t);
-int intersect_ray_cylinder(ray *r, cylinder *cl, float *t);
-
 // MEMORY RELEASING
 void    free_spheres(sphere **head);
 void    free_plane(plane **head);
 void    free_cylinder(cylinder **head);
 
-// PRINTING
-void    display_color(color c);
-void    display_v3(vector3 v);
-void    display_camera(camera c);
-void    display_ambient_light(ambient_light al);
-void    display_light(light l);
+// DISPLAY
 void    display_spheres(sphere *sp);
 void    display_planes(plane *pl);
 void    display_cylinders(cylinder *cl);

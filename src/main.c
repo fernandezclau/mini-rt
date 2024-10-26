@@ -16,6 +16,7 @@ int main(int argc, char **argv)
                                     &data.endian);
         render(&data, &scene);
         mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.image_ptr, 0, 0);
+        
         // HOOKS
         mlx_key_hook(data.win_ptr, key_hook, &data);
         mlx_hook(data.win_ptr, 0, 0, close_window, &data);

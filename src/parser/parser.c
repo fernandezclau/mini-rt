@@ -17,9 +17,9 @@ int parse_line(char *line, scene *scene)
         
     if (tokens[0][0] == CAMERA && !process_camera(tokens, &scene->camera))
         ft_error(E_CAMERA), error = 0;
-    else if (tokens[0][0] == AMBIENT_LIGHT && !process_ambient(tokens, &scene->ambient))
+    else if (tokens[0][0] == AMBIENT_LIGHT && !process_ambient(tokens, &scene->ambient_light))
         ft_error(E_AMBIENT_LIGHT), error = 0;
-    else if (tokens[0][0] == LIGHT && !process_light(tokens, &scene->light))
+    else if (tokens[0][0] == LIGHT && !process_light(tokens, &scene->lights))
         ft_error(E_LIGHT), error = 0;
     else if (!strcmp(tokens[0], SPHERE) && !process_sphere(tokens, &scene->spheres))
         ft_error(E_SPHERE), error = 0;

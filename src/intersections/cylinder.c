@@ -1,5 +1,14 @@
 #include "../../include/minirt.h"
 
+/**
+ * @brief Checks for intersections between a ray and a list of cylinders.
+ * If an intersection is found, updates the hit record with the distance to the 
+ * closest intersection point and the color of the intersecting cylinder.
+ * 
+ * @param r The ray being tested for intersections.
+ * @param cylinders A pointer to a linked list of cylinders to test against.
+ * @param l_hit A pointer to the hit record to update with intersection details.
+ */
 void    intersection_cylinders(ray *r, cylinder **cylinders, hit *l_hit)
 {
     cylinder   *iter_cylinders;
@@ -13,6 +22,7 @@ void    intersection_cylinders(ray *r, cylinder **cylinders, hit *l_hit)
             {
                 l_hit->min_dist = abs(l_hit->dist);
                 l_hit->final_color = iter_cylinders->color;
+                set_cylinder_normal(r, iter_cylinders, l_hit);
             }
             l_hit->intersect = 1;
         }
@@ -32,14 +42,13 @@ void    intersection_cylinders(ray *r, cylinder **cylinders, hit *l_hit)
  * @return Returns 1 if the ray intersects the cylinder and sets t to the distance to the intersection.
  *         Returns 0 if there is no intersection or if the intersections are not valid.
  */
-int intersect_ray_cylinder(ray *r, cylinder *cl, float *t) {
-    // Definimos los puntos extremos del cilindro
+int intersect_ray_cylinder(ray *r, cylinder *cl, float *t)
+{
     vector3 a = cl->center;
     vector3 b = sum_v3(cl->center, scale_v3(cl->direction, cl->height));
-    vector3 ba = substract_v3(b, a);  // Asegúrate de que sea (b - a)
+    vector3 ba = substract_v3(b, a);
     double baba = dot_product_v3(ba, ba);
 
-    // Definimos vectores auxiliares para los cálculos
     vector3 oc = substract_v3(r->origin, a);
     double bard = dot_product_v3(ba, r->direction);
     double baoc = dot_product_v3(ba, oc);
@@ -70,6 +79,26 @@ int intersect_ray_cylinder(ray *r, cylinder *cl, float *t) {
         *t = t1;
 
     return (fabs(*t) >= 0);
+}
+
+/**
+ * @brief Computes the surface normal of a cylinder at the intersection point.
+ * 
+ * @param r The ray intersecting the cylinder.
+ * @param cy The cylinder structure containing its center and direction.
+ * @param l_hit The hit record to store the calculated normal and intersection position.
+ */
+void    set_cylinder_normal(ray *r, cylinder *cy, hit *l_hit)
+{
+    vector3 point_to_center;
+    float   projection;
+    vector3 closest_point_center;
+
+    l_hit->position = sum_v3(r->origin, scale_v3(r->direction, l_hit->min_dist));
+    point_to_center = substract_v3(l_hit->position, cy->center);
+    projection = dot_product_v3(point_to_center, cy->direction);
+    closest_point_center = sum_v3(cy->center, scale_v3(cy->direction, projection));
+    l_hit->normal = normalize_v3(substract_v3(l_hit->position, closest_point_center));
 }
 
 

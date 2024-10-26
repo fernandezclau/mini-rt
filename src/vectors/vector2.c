@@ -1,7 +1,5 @@
 #include "../../include/minirt.h"
 
-// INITIALIZATION
-
 /**
  * @brief Creates and returns a 2D vector initialized to (0, 0).
  *
@@ -33,7 +31,6 @@ vector2 init_p_v2(float x, float y)
     return v;
 }
 
-// DISPLAY
 /**
  * @brief Displays a 2D vector in console.
  * 

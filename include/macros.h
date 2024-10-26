@@ -1,12 +1,11 @@
 #ifndef MACROS_H
 #define MACROS_H
 
-// provisional
 // windows sizing
 # define W_WIDTH    800
 # define W_HEIGHT   600
-# define FAR        1000.0f
-# define NEAR       0.0f
+# define REFLECT_RATIO  0.0
+# define INTENSITY_RATIO   0.8
 
 // PROJECT TITLE
 # define W_TITLE    "mini-rt .-."

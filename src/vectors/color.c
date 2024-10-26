@@ -1,6 +1,19 @@
 #include "../../include/minirt.h"
 
 /**
+ * @brief Initializes a color structure to zero.
+ *
+ * @param c A pointer to the color structure to be initialized.
+ * @return An integer value indicating success (1) or failure (0).
+ */
+int init_r_color(color *c)
+{
+    c->r = 0;
+    c->g = 0;
+    c->b = 0;
+}
+
+/**
  * @brief   Converts a RGB color to a hex value.
  *
  * @param c Color struct with the RGB elements.
@@ -16,16 +29,21 @@ int rgb_to_hex(color *c)
 }
 
 /**
- * @brief Initializes a color structure to zero.
+ * @brief Scales a color by a scalar value.
  *
- * @param c A pointer to the color structure to be initialized.
- * @return An integer value indicating success (1) or failure (0).
+ * @param c The color to scale.
+ * @param scalar The scaling factor.
+ * @return A new color scaled by the given scalar.
  */
-int init_r_color(color *c)
+color   scale_color(color c, float scale)
 {
-    c->r = 0;
-    c->g = 0;
-    c->b = 0;
+    color new;
+
+    new.r = c.r * scale;
+    new.g = c.g * scale;
+    new.b = c.b * scale;
+
+    return new;
 }
 
 /**

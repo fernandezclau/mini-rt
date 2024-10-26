@@ -10,23 +10,26 @@
 int process_camera(char **tokens, camera *camera)
 {
     if (array_len(tokens) != 4)
-        return 0;
+        return (0);
 
     // POSITION
     char    **position = ft_split(tokens[1], ',');
     if (!insert_vector3(&camera->position, position, NOT_NORMALIZED))
-        return 0;
+        return (0);
     
     // DIRECTION
     char    **direction = ft_split(tokens[2], ',');
     if (!insert_vector3(&camera->direction, direction, NORMALIZED))
-        return 0; 
+        return (0);
+    camera->direction = normalize_v3(camera->direction); 
 
     // FOV
     if (!insert_angle(&camera->fov, tokens[3]))
-        return 0;
+        return (0);
 
-    return 1;
+    compute_camera_basis(camera);
+
+    return (1);
 }
 
 /**
@@ -39,7 +42,7 @@ int process_camera(char **tokens, camera *camera)
 int process_ambient(char **tokens, ambient_light *ambient_light)
 {
     if (array_len(tokens) != 3)
-        return 0;
+        return (0);
     
     //LIGHTNING RATIO
     insert_ratio(&ambient_light->ratio, tokens[1]);
@@ -47,9 +50,9 @@ int process_ambient(char **tokens, ambient_light *ambient_light)
     //COLOR
     char **colors = ft_split(tokens[2], ',');
     if (!insert_color(&ambient_light->color, colors))
-         return 0;
+         return (0);
 
-    return 1;
+    return (1);
 }
 
 /**
@@ -59,25 +62,36 @@ int process_ambient(char **tokens, ambient_light *ambient_light)
  * @param light A pointer to the light structure to be updated.
  * @return int Returns 1 on success, 0 on failure (e.g., incorrect token count).
  */
-int process_light(char **tokens, light *light)
+int process_light(char **tokens, light **l)
 {
+    light *new_light = NULL;
+
     if (array_len(tokens) != 4)
-        return 0;
+        return (0);
+    
+    new_light = (light *)malloc(sizeof(light));
+    if (!new_light)
+        return (0);
 
     // POSITION
     char    **position = ft_split(tokens[1], ',');
-    if (!insert_vector3(&light->position, position, NOT_NORMALIZED))
-        return 0;
+    if (!insert_vector3(&new_light->position, position, NOT_NORMALIZED))
+        return free(new_light), (0);
 
     // BRIGTHNESS RATIO 
-    insert_ratio(&light->brightness, tokens[2]);
+    if (!insert_ratio(&new_light->brightness, tokens[2]))
+        return free(new_light), (0);
 
     // COLOR
     char **colors = ft_split(tokens[3], ',');
-    if (!insert_color(&light->color, colors))
-         return 0;
+    if (!insert_color(&new_light->color, colors))
+         return free(new_light), (0);
 
-    return 1;
+    // NEXT
+    new_light->next = NULL;
+
+    add_light(l, new_light);
+    return (1);
 }
 
 /**
@@ -92,35 +106,35 @@ int process_sphere(char **tokens, sphere **sp)
     sphere *new_sphere = NULL;
 
     if (array_len(tokens) != 4)
-        return 0;
+        return (0);
 
     new_sphere = (sphere *)malloc(sizeof(sphere));
     if (!new_sphere)
-        return 0;
+        return (0);
 
     // CENTER
     char **position = ft_split(tokens[1], ',');
     if (!insert_vector3(&new_sphere->center, position, NOT_NORMALIZED))
-        return free(new_sphere), 0;
+        return free(new_sphere), (0);
 
     // DIAMETER
     if (!insert_magnitude(&new_sphere->diameter, tokens[2]))
-        return free(new_sphere), 0;
+        return free(new_sphere), (0);
     
     // RADIOUS
     new_sphere->radius = new_sphere->diameter / 2.0f;
 
-    // // COLOR
+    // COLOR
     char **colors = ft_split(tokens[3], ',');
     if (!insert_color(&new_sphere->color, colors))
-        return free(new_sphere), 0;
+        return free(new_sphere), (0);
 
-    // // NEXT
+    // NEXT
     new_sphere->next = NULL;
 
     add_sphere(sp, new_sphere);
 
-    return 1;
+    return (1);
 }
 
 /**

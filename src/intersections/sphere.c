@@ -1,5 +1,14 @@
 #include "../../include/minirt.h"
 
+/**
+ * @brief Checks for intersections between a ray and a list of spheres.
+ * If an intersection is found, updates the hit record with the distance to the 
+ * closest intersection point and the color of the intersecting sphere.
+ * 
+ * @param r The ray being tested for intersections.
+ * @param spheres A pointer to a linked list of spheres to test against.
+ * @param l_hit A pointer to the hit record to update with intersection details.
+ */
 void    intersection_spheres(ray *r, sphere **spheres, hit *l_hit)
 {
     sphere   *iter_spheres;
@@ -11,14 +20,17 @@ void    intersection_spheres(ray *r, sphere **spheres, hit *l_hit)
         {
             if (l_hit->dist < l_hit->min_dist || l_hit->intersect == 0)
             {
-                l_hit->min_dist = abs(l_hit->dist);
+                l_hit->min_dist = l_hit->dist;
                 l_hit->final_color = iter_spheres->color;
+                l_hit->position = sum_v3(r->origin, scale_v3(r->direction, l_hit->min_dist));
+                l_hit->normal = normalize_v3(substract_v3(l_hit->position, iter_spheres->center));
             }
             l_hit->intersect = 1;
         }
         iter_spheres = iter_spheres->next;
     }
-}   
+} 
+
 /**
  * @brief Intersects a ray with a sphere.
  *
@@ -45,7 +57,7 @@ int intersect_ray_sphere(ray *r, sphere *sphere, float *t)
     discriminant = b * b - 4 * a * c;
     if (discriminant >= 0)
     {
-        *t = (-b - sqrt(discriminant)) / (2.0f * a);
+        *t = (-b - sqrt(discriminant)) / (2 * a);
         if(t >= 0)
             return 1;
     }

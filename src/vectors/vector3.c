@@ -108,6 +108,23 @@ float dot_product_v3(vector3 a, vector3 b)
 }
 
 /**
+ * @brief Negates a 3D vector.
+ * 
+ * @param v The vector to negate.
+ * @return vector3 The negated vector.
+ */
+vector3 negate_v3(vector3 v)
+{
+    vector3 result;
+    
+    result.x = -v.x;
+    result.y = -v.y;
+    result.z = -v.z;
+    
+    return (result);
+}
+
+/**
  * @brief Computes the cross product of two 3D vectors.
  *
  * @param a The first vector.
@@ -144,7 +161,7 @@ float pow_v3(vector3 v)
  */
 float length_v3(vector3 v)
 {
-    return sqrt(pow_v3(v));
+    return sqrtf(pow_v3(v));
 }
 
 /**
@@ -162,6 +179,54 @@ vector3 normalize_v3(vector3 v)
     }
 
     return v;
+}
+
+/**
+ * @brief Calculates the cosine of the angle between two 3D vectors.
+ * 
+ * @param a The first vector.
+ * @param b The second vector.
+ * @return float The cosine of the angle between `a` and `b`.
+ */
+float	cos_v3(vector3 a, vector3 b)
+{
+	return (dot_product_v3(a, b) / (length_v3(a) * length_v3(b)));
+}
+
+/**
+ * @brief Calculates the sine of the angle between two 3D vectors.
+ * 
+ * @param a The first vector.
+ * @param b The second vector.
+ * @return float The sine of the angle between `a` and `b`.
+ */
+float	sin_v3(vector3 a, vector3 b)
+{
+	return (length_v3(cross_product_v3(a, b)) * (length_v3(a) * length_v3(b)));
+}
+
+/**
+ * @brief Rotates a vector around a given axis by a specified angle.
+ * 
+ * @param vector The vector to rotate.
+ * @param axis The axis around which to rotate the vector.
+ * @param cos_theta The cosine of the rotation angle.
+ * @param sin_theta The sine of the rotation angle.
+ * @return vector3 The rotated vector.
+ */
+vector3 rotate_vect(vector3 vector, vector3 axis, float cos_theta, float sin_theta)
+{
+    vector3 axis_component;
+    vector3 vector_component;
+    vector3 cross_component;
+    float   axis_scale;
+    
+    axis_scale = dot_product_v3(vector, axis) * (1 - cos_theta);
+    axis_component = scale_v3(axis, axis_scale);
+    vector_component = scale_v3(vector, cos_theta);
+    cross_component = scale_v3(cross_product_v3(axis, vector), sin_theta);
+
+    return (sum_v3(sum_v3(vector_component, cross_component), axis_component));
 }
 
 /**

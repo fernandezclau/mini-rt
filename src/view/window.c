@@ -24,9 +24,7 @@ int key_hook(int keycode, t_data *data)
     if (keycode == ESC_KEY)
         close_window(data);
     else if (keycode == A_KEY)
-    {
         printf("Mover izquierda");
-    }
     else if (keycode == D_KEY)
         printf("Mover derecha");
     else if (keycode == W_KEY)

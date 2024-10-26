@@ -11,10 +11,10 @@ void init_scene(scene *scene)
     init_camera(&scene->camera);
 
     // LIGHT INIT
-    init_light(&scene->light);
+    scene->lights = NULL;
 
     // AMBIENT LIGHT INIT
-    init_ambient_light(&scene->ambient);
+    init_ambient_light(&scene->ambient_light);
 
     // SPHERE INIT
     scene->spheres = NULL;
@@ -26,11 +26,19 @@ void init_scene(scene *scene)
     scene->cylinders = NULL;
 }
 
+/**
+ * @brief Initializes a hit structure by setting all its parameters to NULL.
+ *
+ * @param hit A pointer to the hit structure to be initialized.
+ */
 void    init_hit_point(hit *hit)
 {
     hit->intersect = 0;
+    hit->min_dist = INFINITY;
+    hit->reflection = REFLECT_RATIO;
     init_r_color(&hit->final_color);
 }
+
 /**
  * @brief Frees all allocated resources in the scene.
  *
@@ -38,6 +46,7 @@ void    init_hit_point(hit *hit)
  */
 void free_scene(scene *scene)
 {
+    free_lights(&scene->lights);
     free_spheres(&scene->spheres);
     free_plane(&scene->planes);
     free_cylinder(&scene->cylinders);
@@ -51,8 +60,8 @@ void free_scene(scene *scene)
 void print_scene(scene scene)
 {
     display_camera(scene.camera);
-    display_ambient_light(scene.ambient);
-    display_light(scene.light);
+    display_ambient_light(scene.ambient_light);
+    display_light(scene.lights);
     display_spheres(scene.spheres);
     display_cylinders(scene.cylinders);
     display_planes(scene.planes);
