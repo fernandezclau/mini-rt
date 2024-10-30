@@ -1,25 +1,79 @@
 #include "../../include/minirt.h"
 
-void   calculate_light(scene *scene)
+vector3 final_intensity(light light, vector3 normal, vector3 p_to_l);
+
+vector3	intersection_point(ray ray, double distance)
 {
-    color intensity;
+	vector3	intersection;
+
+	intersection = sum_v3(ray.origin, \
+		scale_v3(ray.direction, distance));
+	return (intersection);
+}
+
+color   calculate_light(ray r, scene *scene)
+{
+    vector3 intensity;
     light   *iter_light;
     hit     hit;
     ambient_light al;
     vector3 point_to_l;
+    vector3 p_intensity;
+    color c = {0, 0, 0};
 
     al = scene->ambient_light;
     hit = scene->hit;
     iter_light = scene->lights;
-
+    vector3 point = intersection_point(r, hit.min_dist);
     intensity = calculate_ambient_light(al);
     while (iter_light != NULL)
     {
-        // TODO   
+        point_to_l = normalize_v3(substract_v3(iter_light->position, point));
+        p_intensity = final_intensity(*iter_light, hit.normal, point_to_l);
+        if (is_in_shadow(point, scene->lights, scene))
+            p_intensity = scale_v3(p_intensity, 0);
+        intensity = sum_v3(intensity, p_intensity);
         iter_light = iter_light->next;
     }
+    c.r = hit.final_color.r * intensity.x;
+    c.g = hit.final_color.g * intensity.y;
+    c.b = hit.final_color.b * intensity.z;
+    return (c);
 }
 
+vector3 final_intensity(light light, vector3 normal, vector3 p_to_l)
+{
+    vector3 light_intensity;
+    vector3 diffuse;
+    vector3 specular;
+    vector3 intensity;
+
+    light_intensity = calculate_intensity(light.color, light.brightness);
+    specular = specular_intensity(normal, p_to_l, light_intensity);
+    diffuse = diffuse_intensity(normal, p_to_l, light_intensity);
+    
+    return (sum_v3(specular, diffuse));
+}
+/**
+ * @brief Calculates the effect of ambient light on a given color.
+ *
+ * @param color Pointer to the color structure that will be modified to 
+ *              incorporate the ambient light effect.
+ * @param light The ambient light structure containing the color and ratio 
+ *              of the ambient light.
+*/
+vector3 calculate_intensity(color colour, float ratio)
+{
+    vector3 intensity;
+    int     sum_color;
+
+    sum_color = colour.r + colour.g + colour.b;
+    intensity.x = INTENSITY_RATIO * 3 * ratio * colour.r / sum_color;
+    intensity.y = INTENSITY_RATIO * 3 * ratio * colour.g / sum_color;
+    intensity.z = INTENSITY_RATIO * 3 * ratio * colour.b / sum_color;
+
+    return (intensity);
+}
 /**
  * @brief Initializes a light structure to default values.
  *

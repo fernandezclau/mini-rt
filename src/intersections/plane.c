@@ -23,7 +23,9 @@ void    interesection_planes(ray *r, plane **planes, hit *l_hit)
                 l_hit->min_dist = l_hit->dist;
                 l_hit->final_color = iter_planes->color;
                 l_hit->position = sum_v3(r->origin, scale_v3(r->direction, l_hit->min_dist));
-	            set_plane_normal(r, l_hit);
+                set_plane_normal(r, l_hit, iter_planes);
+                l_hit->is_plane = 1;
+	            l_hit->on_object = is_on_plane(*iter_planes, l_hit->position);
             }
             l_hit->intersect = 1;
         }
@@ -63,12 +65,11 @@ int intersect_ray_plane(ray *r, plane *pl, float *t)
  * @param r The ray intersecting with the plane.
  * @param l_hit The hit record containing intersection details, including the plane's normal.
  */
-void    set_plane_normal(ray *r, hit *l_hit)
+void    set_plane_normal(ray *r, hit *l_hit, plane *pl)
 {
-    if (dot_product_v3(r->direction, l_hit->normal) > 0)
-        l_hit->normal = normalize_v3(scale_v3(l_hit->normal, -1));
-    else
-        l_hit->normal = normalize_v3(l_hit->normal);
+    l_hit->normal = pl->normal;
+	if (dot_product_v3(r->direction, pl->normal) > 0)
+		l_hit->normal = substract_v3((vector3){0, 0, 0}, pl->normal);
 }
 
 /**

@@ -50,7 +50,10 @@ void    display_v3(vector3 v);
 /* COLOR */
 int     init_r_color(color *c);
 int     rgb_to_hex(color *c);
-color   scale_color(color c, float scale);
+color   multiply_color(color c, vector3 v);
+color   scale_c(color c, float factor);
+color   add_color(color a, color b);
 void    display_color(color c);
+color   vector3_to_color(vector3 v);
 
 #endif  // VECTORS_H

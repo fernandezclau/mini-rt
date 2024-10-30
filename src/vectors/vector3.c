@@ -173,10 +173,10 @@ float length_v3(vector3 v)
 vector3 normalize_v3(vector3 v)
 {
     float len = length_v3(v);
-
-    if (len > 0) {
+    if (!len)
+		return ((vector3){0, 0, 0});
+    if (len > 0)
         return scale_v3(v, 1.0f / len);
-    }
 
     return v;
 }

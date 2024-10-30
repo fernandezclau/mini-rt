@@ -23,6 +23,7 @@ void    intersection_spheres(ray *r, sphere **spheres, hit *l_hit)
                 l_hit->min_dist = l_hit->dist;
                 l_hit->final_color = iter_spheres->color;
                 l_hit->position = sum_v3(r->origin, scale_v3(r->direction, l_hit->min_dist));
+                l_hit->on_object = is_on_sphere(*iter_spheres, l_hit->position);
                 l_hit->normal = normalize_v3(substract_v3(l_hit->position, iter_spheres->center));
             }
             l_hit->intersect = 1;

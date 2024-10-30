@@ -44,7 +44,9 @@ void    render(t_data *data, scene *scene);
 
 // RAY INTERSECTION
 void    ray_intersection(ray r, scene *scene);
-void    calculate_light(scene *scene);
+int is_in_shadow(vector3 point, light *light_source, scene *scene);
+color   calculate_light(ray r, scene *scene);
+vector3	intersection_point(ray ray, double distance);
 
 // SCENE
 void    init_scene(scene *scene);

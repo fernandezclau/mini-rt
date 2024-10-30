@@ -29,22 +29,58 @@ int rgb_to_hex(color *c)
 }
 
 /**
+ * @brief   Converts a vector3 to a color.
+ *
+ * @param v Vector3 struct.
+ * @return  Corresponding color struct.
+ */
+color   vector3_to_color(vector3 v)
+{
+    color   c;
+
+    c.r = v.x;
+    c.g = v.y;
+    c.b = v.z;
+
+    return (c);
+}
+
+/**
  * @brief Scales a color by a scalar value.
  *
  * @param c The color to scale.
  * @param scalar The scaling factor.
  * @return A new color scaled by the given scalar.
  */
-color   scale_color(color c, float scale)
+color   multiply_color(color c, vector3 v)
 {
     color new;
 
-    new.r = c.r * scale;
-    new.g = c.g * scale;
-    new.b = c.b * scale;
+    new.r = c.r * v.x;
+    new.g = c.g * v.y;
+    new.b = c.b * v.z;
 
     return new;
 }
+
+color add_color(color a, color b)
+{
+    color result;
+    result.r = fminf(fmaxf(a.r + b.r, 0), 255); // Asegúrate de que esté en el rango 0-255
+    result.g = fminf(fmaxf(a.g + b.g, 0), 255);
+    result.b = fminf(fmaxf(a.b + b.b, 0), 255);
+    return result;
+}
+
+color scale_c(color c, float factor)
+{
+    color result;
+    result.r = fminf(fmaxf(c.r * factor, 0), 255); // Asegúrate de que esté en el rango 0-255
+    result.g = fminf(fmaxf(c.g * factor, 0), 255);
+    result.b = fminf(fmaxf(c.b * factor, 0), 255);
+    return result;
+}
+
 
 /**
  * @brief Displays the RGB components of a color.

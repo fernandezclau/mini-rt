@@ -8,8 +8,8 @@
 void compute_camera_basis(camera *cam)
 {
     vector3 axis;
-    float   cos_theta;
-    float   sin_theta;
+    double   cos_theta;
+    double   sin_theta;
 
     cam->identity[0] = (vector3){1, 0, 0};
 	cam->identity[1] = (vector3){0, 1, 0};

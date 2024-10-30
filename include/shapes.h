@@ -43,7 +43,12 @@ int     intersect_ray_cylinder(ray *r, cylinder *cl, float *t);
 
 // NORMAL
 void    set_cylinder_normal(ray *r, cylinder *cy, hit *l_hit);
-void    set_plane_normal(ray *r, hit *l_hit);
+void    set_plane_normal(ray *r, hit *l_hit, plane *pl);
+
+// ON OBJECT
+int     is_on_plane(plane plane, vector3 point);
+int     is_on_cylinder(cylinder cylinder, vector3 point);
+int     is_on_sphere(sphere sphere, vector3 point);
 
 // INSERTION
 int     insert_vector3(vector3 *v, char **tokens, int is_normalized);

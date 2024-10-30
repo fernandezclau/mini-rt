@@ -8,15 +8,15 @@
  * @param light The ambient light structure containing the color and ratio 
  *              of the ambient light.
 */
-color calculate_ambient_light(ambient_light light)
+vector3 calculate_ambient_light(ambient_light light)
 {
-    color intensity;
+    vector3 intensity;
     int     sum_color;
 
     sum_color = light.color.r + light.color.g + light.color.b;
-    intensity.r = INTENSITY_RATIO * 3 * light.ratio * light.color.r / sum_color;
-    intensity.g = INTENSITY_RATIO * 3 * light.ratio * light.color.g / sum_color;
-    intensity.b = INTENSITY_RATIO * 3 * light.ratio * light.color.b / sum_color;
+    intensity.x =  light.ratio * light.color.r / sum_color;
+    intensity.y =  light.ratio * light.color.g / sum_color;
+    intensity.z =  light.ratio * light.color.b / sum_color;
 
     return (intensity);
 }

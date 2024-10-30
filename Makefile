@@ -25,6 +25,8 @@ SRC = $(SRC_DIR)/main.c \
       $(SRC_DIR)/vectors/color.c \
       $(SRC_DIR)/light/light.c \
       $(SRC_DIR)/light/ambient_light.c \
+      $(SRC_DIR)/light/diffuse_light.c \
+      $(SRC_DIR)/light/shadow.c \
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

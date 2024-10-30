@@ -39,16 +39,22 @@ typedef struct hit
     color   final_color;
     vector3 position;
     vector3 normal;
+    int     on_object;
+    int     is_plane;
     int     reflection;
 }               hit;
 
 
 // CAMERA
-void compute_camera_basis(camera *cam);
+void    compute_camera_basis(camera *cam);
 vector3 compute_ray_direction(int x, int y, float fov, camera *cam);
 
 // LIGHT
-color calculate_ambient_light(ambient_light light);
+vector3 calculate_intensity(color colour, float ratio);
+vector3 calculate_ambient_light(ambient_light light);
+vector3 final_intensity(light light, vector3 normal, vector3 p_to_l);
+vector3	diffuse_intensity(vector3 normal, vector3 p_to_l, vector3 light);
+vector3 specular_intensity(vector3 normal, vector3 p_to_l, vector3 light);
 
 // AMBIENT LIGHT
 

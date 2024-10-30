@@ -19,6 +19,7 @@ void render(t_data *data, scene *scene)
             ray_intersection(r, scene);
             if (scene->hit.intersect)
             {
+                scene->hit.final_color = calculate_light(r, scene);
                 pixel_put(data, x, y, rgb_to_hex(&scene->hit.final_color));
             }
         }
