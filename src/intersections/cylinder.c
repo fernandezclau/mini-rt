@@ -37,95 +37,32 @@ void    intersection_cylinders(ray *r, cylinder **cylinders, hit *l_hit)
  * @return Returns 1 if the ray intersects the cylinder and sets t to the distance to the intersection.
  *         Returns 0 if there is no intersection or if the intersections are not valid.
  */
-// int intersect_ray_cylinder(ray *r, cylinder *cl, float *t)
-// {
-//     // Variables temporales para almacenar los valores de intersección
-//     float t_top, t_bottom, t_body;
-//     int hit_top = 0, hit_bottom = 0, hit_body = 0;
-
-//     // Normalizar la dirección del cilindro
-//     vector3 normalized_direction = normalize_v3(cl->direction);
-
-//     // Definir los puntos extremos del cilindro usando la dirección normalizada
-//     vector3 a = cl->center;
-//     vector3 b = sum_v3(a, scale_v3(normalized_direction, cl->height));
-
-//     // Recalcular el vector ba y su magnitud cuadrada (baba)
-//     vector3 ba = substract_v3(b, a);
-//     float baba = dot_product_v3(ba, ba);  // Debería ser equivalente a cl->height * cl->height
-
-//     // Comprobar intersección con la tapa superior
-//     vector3 c_center = sum_v3(cl->center, scale_v3(normalized_direction, cl->height));
-//     if (intersect_circle(r, c_center, normalized_direction, cl->diameter / 2, &t_top) && t_top >= 0)
-//         hit_top = 1;
-
-//     // Comprobar intersección con la tapa inferior
-//     vector3 c2_center = cl->center;
-//     if (intersect_circle(r, c2_center, normalized_direction, cl->diameter / 2, &t_bottom) && t_bottom >= 0)
-//         hit_bottom = 1;
-
-//     // Definir vectores auxiliares para los cálculos
-//     vector3 oc = substract_v3(r->origin, a);
-//     float bard = dot_product_v3(ba, r->direction);
-//     float baoc = dot_product_v3(ba, oc);
-//     float k2 = baba - bard * bard;
-//     float k1 = baba * dot_product_v3(oc, r->direction) - baoc * bard;
-//     float k0 = baba * dot_product_v3(oc, oc) - baoc * baoc - 
-//                (cl->diameter / 2) * (cl->diameter / 2) * baba;
-
-//     float discr = k1 * k1 - k2 * k0;
-
-//     // Comprobar intersección con el cuerpo del cilindro
-//     if (discr >= 0) {
-//         discr = sqrt(discr);
-//         float t0 = (-k1 - discr) / k2;
-//         float t1 = (-k1 + discr) / k2;
-
-//         float y0 = baoc + t0 * bard;
-//         float y1 = baoc + t1 * bard;
-
-//         // Verificar si las intersecciones están dentro de los límites del cilindro
-//         if (y0 >= 0 && y0 <= baba) {
-//             t_body = t0;
-//             hit_body = 1;
-//         }
-//         if (y1 >= 0 && y1 <= baba) {
-//             if (!hit_body || t1 < t_body) {
-//                 t_body = t1;
-//                 hit_body = 1;
-//             }
-//         }
-//     }
-
-//     *t = -1;
-//     if (hit_top && (t_top < *t || *t < 0)) *t = t_top;
-//     if (hit_bottom && (t_bottom < *t || *t < 0)) *t = t_bottom;
-//     if (hit_body && (t_body < *t || *t < 0)) *t = t_body;
-
-//     return (*t >= 0);
-// }
-
 int intersect_ray_cylinder(ray *r, cylinder *cl, float *t)
 {
     // Variables temporales para almacenar los valores de intersección
     float t_top, t_bottom, t_body;
     int hit_top = 0, hit_bottom = 0, hit_body = 0;
 
+    // Normalizar la dirección del cilindro
+    vector3 normalized_direction = normalize_v3(cl->direction);
+
+    // Definir los puntos extremos del cilindro usando la dirección normalizada
+    vector3 a = cl->center;
+    vector3 b = sum_v3(a, scale_v3(normalized_direction, cl->height));
+
+    // Recalcular el vector ba y su magnitud cuadrada (baba)
+    vector3 ba = substract_v3(b, a);
+    float baba = dot_product_v3(ba, ba);  // Debería ser equivalente a cl->height * cl->height
+
     // Comprobar intersección con la tapa superior
-    vector3 c_center = sum_v3(cl->center, scale_v3(cl->direction, cl->height));
-    if (intersect_circle(r, c_center, cl->direction, cl->diameter / 2, &t_top) && t_top >= 0)
+    vector3 c_center = sum_v3(cl->center, scale_v3(normalized_direction, cl->height));
+    if (intersect_circle(r, c_center, normalized_direction, cl->diameter / 2, &t_top) && t_top >= 0)
         hit_top = 1;
 
     // Comprobar intersección con la tapa inferior
     vector3 c2_center = cl->center;
-    if (intersect_circle(r, c2_center, cl->direction, cl->diameter / 2, &t_bottom) && t_bottom >= 0)
+    if (intersect_circle(r, c2_center, normalized_direction, cl->diameter / 2, &t_bottom) && t_bottom >= 0)
         hit_bottom = 1;
-    
-    // Definir puntos extremos del cilindro
-    vector3 a = cl->center;
-    vector3 b = sum_v3(cl->center, scale_v3(cl->direction, cl->height));
-    vector3 ba = substract_v3(b, a);
-    float baba = dot_product_v3(ba, ba);
 
     // Definir vectores auxiliares para los cálculos
     vector3 oc = substract_v3(r->origin, a);
@@ -168,39 +105,106 @@ int intersect_ray_cylinder(ray *r, cylinder *cl, float *t)
     return (*t >= 0);
 }
 
+// int intersect_ray_cylinder(ray *r, cylinder *cl, float *t)
+// {
+//     // Variables temporales para almacenar los valores de intersección
+//     float t_top, t_bottom, t_body;
+//     int hit_top = 0, hit_bottom = 0, hit_body = 0;
 
-int intersect_circle(ray *r, vector3 center, vector3 normal, float radius, float *t)
-{
-    float   denom;
-    vector3 oc;
-    vector3  intersection_point;
+//     // Comprobar intersección con la tapa superior
+//     vector3 c_center = sum_v3(cl->center, scale_v3(cl->direction, cl->height));
+//     if (intersect_circle(r, c_center, cl->direction, cl->diameter / 2, &t_top) && t_top >= 0)
+//         hit_top = 1;
+
+//     // Comprobar intersección con la tapa inferior
+//     vector3 c2_center = cl->center;
+//     if (intersect_circle(r, c2_center, cl->direction, cl->diameter / 2, &t_bottom) && t_bottom >= 0)
+//         hit_bottom = 1;
     
-    denom = dot_product_v3(normal, r->direction);
-    if (fabs(denom) < 1e-5)
-        return 0;
-    oc = substract_v3(center, r->origin);
-    *t = dot_product_v3(oc, normal) / denom;
-    if (*t < 0)
-        return 0;
-    intersection_point = sum_v3(r->origin, scale_v3(r->direction, *t));
-    if (length_v3(substract_v3(intersection_point, center)) <= radius)
-        return 1;
-    return 0;
+//     // Definir puntos extremos del cilindro
+//     vector3 a = cl->center;
+//     vector3 b = sum_v3(cl->center, scale_v3(cl->direction, cl->height));
+//     vector3 ba = substract_v3(b, a);
+//     float baba = dot_product_v3(ba, ba);
+
+//     // Definir vectores auxiliares para los cálculos
+//     vector3 oc = substract_v3(r->origin, a);
+//     float bard = dot_product_v3(ba, r->direction);
+//     float baoc = dot_product_v3(ba, oc);
+//     float k2 = baba - bard * bard;
+//     float k1 = baba * dot_product_v3(oc, r->direction) - baoc * bard;
+//     float k0 = baba * dot_product_v3(oc, oc) - baoc * baoc - 
+//                (cl->diameter / 2) * (cl->diameter / 2) * baba;
+
+//     float discr = k1 * k1 - k2 * k0;
+
+//     // Comprobar intersección con el cuerpo del cilindro
+//     if (discr >= 0) {
+//         discr = sqrt(discr);
+//         float t0 = (-k1 - discr) / k2;
+//         float t1 = (-k1 + discr) / k2;
+
+//         float y0 = baoc + t0 * bard;
+//         float y1 = baoc + t1 * bard;
+
+//         // Verificar si las intersecciones están dentro de los límites del cilindro
+//         if (y0 >= 0 && y0 <= baba) {
+//             t_body = t0;
+//             hit_body = 1;
+//         }
+//         if (y1 >= 0 && y1 <= baba) {
+//             if (!hit_body || t1 < t_body) {
+//                 t_body = t1;
+//                 hit_body = 1;
+//             }
+//         }
+//     }
+
+//     *t = -1;
+//     if (hit_top && (t_top < *t || *t < 0)) *t = t_top;
+//     if (hit_bottom && (t_bottom < *t || *t < 0)) *t = t_bottom;
+//     if (hit_body && (t_body < *t || *t < 0)) *t = t_body;
+
+//     return (*t >= 0);
+// }
+
+
+int intersect_circle(ray *r, vector3 center, vector3 normal, float radius, float *t) {
+    vector3 OC = substract_v3(center, r->origin);
+    float denom = dot_product_v3(r->direction, normal);
+
+    if (fabs(denom) < 1e-6) {
+        return 0;  // El rayo es paralelo al plano del círculo
+    }
+
+    float t_intersect = dot_product_v3(OC, normal) / denom;
+    if (t_intersect < 0) {
+        return 0;  // Intersección detrás del origen del rayo
+    }
+
+    vector3 intersectionPoint = sum_v3(r->origin, scale_v3(r->direction, t_intersect));
+    float distanceToCenter = length_v3(substract_v3(intersectionPoint, center));
+    if (distanceToCenter > radius) {
+        return 0;  // Punto fuera del círculo
+    }
+
+    *t = t_intersect;
+    return 1;
 }
 
-void    set_cylinder_normal(ray *r, cylinder *cy, hit *l_hit)
-{
-    l_hit->position = intersection_point(*r, l_hit->min_dist);
-    vector3 PC = substract_v3(l_hit->position, cy->center);
-    float projection_length = dot_product_v3(PC, cy->direction);
+// Función para configurar la normal en el punto de intersección con el cilindro
+void set_cylinder_normal(ray *r, cylinder *cy, hit *l_hit) {
+    vector3 baseToPoint = substract_v3(l_hit->position, cy->center);
+    float distance = dot_product_v3(baseToPoint, cy->direction);
+    float epsilon = 0.0001f;
 
-    if (projection_length >= cy->height - EPSILON)
-        l_hit->normal = normalize_v3(cy->direction);
-    else if (projection_length <= EPSILON)
-        l_hit->normal = scale_v3(cy->direction, -1);
-    else {
-        vector3 Q = substract_v3(l_hit->position, scale_v3(cy->direction, projection_length));
-        l_hit->normal = normalize_v3(Q);
+    if (distance <= epsilon) {
+        l_hit->normal = negate_v3(cy->direction);  // Tapa inferior
+    } else if (distance < cy->height + epsilon) {
+        vector3 projectedPoint = sum_v3(cy->center, scale_v3(cy->direction, distance));
+        l_hit->normal = normalize_v3(substract_v3(l_hit->position, projectedPoint));  // Superficie lateral
+    } else {
+        l_hit->normal = cy->direction;  // Tapa superior
     }
 }
 

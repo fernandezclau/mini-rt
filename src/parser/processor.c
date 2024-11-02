@@ -28,7 +28,6 @@ int process_camera(char **tokens, camera *camera)
         return (0);
 
     compute_camera_basis(camera);
-
     return (1);
 }
 

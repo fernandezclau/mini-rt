@@ -19,26 +19,26 @@ color   calculate_light(ray r, scene *scene)
     ambient_light al;
     vector3 point_to_l;
     vector3 p_intensity;
-    color c = {0, 0, 0};
+    vector3 c = {0, 0, 0};
 
     al = scene->ambient_light;
     hit = scene->hit;
     iter_light = scene->lights;
-    vector3 point = intersection_point(r, hit.min_dist);
+    vector3 point = scene->hit.position;//intersection_point(r, hit.min_dist);
     intensity = calculate_ambient_light(al);
     while (iter_light != NULL)
     {
         point_to_l = normalize_v3(substract_v3(iter_light->position, point));
-        p_intensity = final_intensity(*iter_light, hit.normal, point_to_l);
+        p_intensity = final_intensity(*iter_light, scene->hit.normal, point_to_l);
         if (is_in_shadow(point, scene->lights, scene))
-            p_intensity = scale_v3(p_intensity, 0);
+            p_intensity = (vector3){0, 0,0};
         intensity = sum_v3(intensity, p_intensity);
         iter_light = iter_light->next;
     }
-    c.r = hit.final_color.r * intensity.x;
-    c.g = hit.final_color.g * intensity.y;
-    c.b = hit.final_color.b * intensity.z;
-    return (c);
+    c.x = hit.final_color.r * intensity.x;
+    c.y = hit.final_color.g * intensity.y;
+    c.z = hit.final_color.b * intensity.z;
+    return (vector3_to_color(c));
 }
 
 vector3 final_intensity(light light, vector3 normal, vector3 p_to_l)

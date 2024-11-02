@@ -20,6 +20,7 @@ typedef struct s_data
 # include <ctype.h>
 # include <string.h>
 # include <math.h>
+# include <float.h>
 # include "./macros.h"
 # include "./vectors.h"
 # include "./view.h"

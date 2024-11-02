@@ -229,6 +229,20 @@ vector3 rotate_vect(vector3 vector, vector3 axis, float cos_theta, float sin_the
     return (sum_v3(sum_v3(vector_component, cross_component), axis_component));
 }
 
+vector3 reflect_v3(vector3 light_direction, vector3 normal)
+{
+    // Calcular el producto escalar entre el vector de luz y la normal
+    float dotLN = dot_product_v3(light_direction, normal);
+    
+    // Calcular el vector reflejado: R = L - 2 * (L · N) * N
+    vector3 reflected;
+    reflected.x = light_direction.x - 2.0f * dotLN * normal.x;
+    reflected.y = light_direction.y - 2.0f * dotLN * normal.y;
+    reflected.z = light_direction.z - 2.0f * dotLN * normal.z;
+
+    return reflected;
+}
+
 /**
  * @brief Prints the components of a 3D vector on the console.
  * 

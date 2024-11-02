@@ -14,9 +14,9 @@ vector3 calculate_ambient_light(ambient_light light)
     int     sum_color;
 
     sum_color = light.color.r + light.color.g + light.color.b;
-    intensity.x =  light.ratio * light.color.r / sum_color;
-    intensity.y =  light.ratio * light.color.g / sum_color;
-    intensity.z =  light.ratio * light.color.b / sum_color;
+    intensity.x = INTENSITY_RATIO * 3 * light.ratio * light.color.r / sum_color;
+    intensity.y = INTENSITY_RATIO *3 * light.ratio * light.color.g / sum_color;
+    intensity.z = INTENSITY_RATIO *3 * light.ratio * light.color.b / sum_color;
 
     return (intensity);
 }

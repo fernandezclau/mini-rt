@@ -34,7 +34,7 @@ void init_scene(scene *scene)
 void    init_hit_point(hit *hit)
 {
     hit->intersect = 0;
-    hit->dist = 0;
+    hit->dist = INFINITY;
     hit->intersect = 0;
     hit->min_dist = INFINITY;
     hit->reflection = REFLECT_RATIO;

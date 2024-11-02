@@ -1,20 +1,37 @@
 #include "../../include/minirt.h"
 
-int is_in_shadow(vector3 point, light *light_source, scene *scene)
-{
-    ray ray;
-    ray.origin = point;
-    ray.direction = normalize_v3(substract_v3(light_source->position, point));
+int is_in_shadow(vector3 point, light *light_source, scene *scene) {
+    // Dirección hacia la luz desde el punto de intersección
+    vector3 view_direction = normalize_v3(substract_v3(scene->camera.position, scene->hit.position));
+	vector3 light_direction = normalize_v3(substract_v3(light_source->position, scene->hit.position));
 
-    init_hit_point(&scene->hit);
+    float light_distance = length_v3(substract_v3(light_source->position, scene->hit.position));
 
-    ray_intersection(ray, scene);
-    if (scene->hit.is_plane)
-		return 1;
-    if (scene->hit.intersect && scene->hit.min_dist > 0)
-		return 1;
-    return 0;
+    // Crear el rayo de sombra con un pequeño desplazamiento (bias)
+    ray shadow_ray;
+    const float bias = 0.01f; // Ajusta este valor según el tamaño de la escena
+	shadow_ray.origin = sum_v3(point, scale_v3(scene->hit.normal, bias));
+    shadow_ray.direction = light_direction;
+
+    // Guardar el hit original
+    hit original_hit = scene->hit;
+
+    // Comprobar si el rayo de sombra interseca algún objeto
+    int in_shadow = 0;
+	ray_intersection(shadow_ray, scene);
+    if (scene->hit.intersect) {
+        // Si hay una intersección y está antes de la luz, está en sombra
+        if (scene->hit.dist < light_distance) {
+            in_shadow = 1;
+        }
+    }
+
+    // Restaurar el hit original
+    //scene->hit = original_hit;
+
+    return in_shadow;
 }
+
 
 
 int	is_on_plane(plane plane, vector3 point)

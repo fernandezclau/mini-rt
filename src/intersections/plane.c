@@ -24,8 +24,6 @@ void    interesection_planes(ray *r, plane **planes, hit *l_hit)
                 l_hit->final_color = iter_planes->color;
                 l_hit->position = sum_v3(r->origin, scale_v3(r->direction, l_hit->min_dist));
                 set_plane_normal(r, l_hit, iter_planes);
-                l_hit->is_plane = 1;
-	            l_hit->on_object = is_on_plane(*iter_planes, l_hit->position);
             }
             l_hit->intersect = 1;
         }
@@ -43,19 +41,27 @@ void    interesection_planes(ray *r, plane **planes, hit *l_hit)
  * @return Returns 1 if the ray intersects the plane and sets t to the distance to the intersection.
  *         Returns 0 if there is no intersection or if the ray is parallel to the plane.
  */
-int intersect_ray_plane(ray *r, plane *pl, float *t)
+int intersect_ray_plane(ray* r, plane* pl, float* d)
 {
-    double  denom;
-    vector3 p0l0;
+    // Calcular el denominador para comprobar si el rayo es paralelo al plano
+    float denom = dot_product_v3(r->direction, pl->normal);
+    
+    // Comprobar si el rayo es paralelo al plano
+    if (fabs(denom) < 1e-6)
+        return 0; // El rayo es paralelo, no hay intersección
 
-    denom = dot_product_v3(r->direction, pl->normal);
-    if (fabs(denom) > 1e-6)
-    {
-        p0l0 = substract_v3(pl->point, r->origin);
-        *t = dot_product_v3(pl->normal, p0l0) / denom;
-        return (*t >= 0);
-    }
-    return 0;
+    // Calcular la distancia a la intersección
+    vector3 point_minus_origin = substract_v3(pl->point, r->origin); // point - r.origin
+    float t = dot_product_v3(point_minus_origin, pl->normal) / denom;
+
+    // Si t es negativo, la intersección está detrás del origen del rayo
+    if (t < 0)
+        return 0;
+    vector3 scaled_direction = scale_v3(r->direction, t);
+    pl->point = sum_v3(r->origin, scaled_direction);
+    *d = t;
+
+    return 1;
 }
 
 /**

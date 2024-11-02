@@ -44,7 +44,7 @@ vector3 normalize_v3(vector3 v);
 float	cos_v3(vector3 a, vector3 b);
 float	sin_v3(vector3 a, vector3 b);
 vector3	rotate_vect(vector3 vector, vector3 axis, float cos, float sin);
-
+vector3 reflect_v3(vector3 light_direction, vector3 normal);
 void    display_v3(vector3 v);
 
 /* COLOR */
