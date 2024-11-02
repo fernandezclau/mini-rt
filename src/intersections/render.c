@@ -47,14 +47,13 @@ void render(t_data *data, scene *scene)
 
             // Crear el rayo
             ray r;
-            r.direction = rayDirection;// compute_ray_direction(x, y, scene->camera.fov, &scene->camera);//rayDirection;
+            r.direction = rayDirection;
             r.origin = scene->camera.position;
 
             ray_intersection(r, scene);
             // Si hubo una intersecci�n con alguna figura
-            if (scene->hit.intersect)
-            {
-                //scene->hit.final_color = calculate_light(r, scene);
+            if (scene->hit.intersect) {
+                calculate_light(r, scene);
                 pixel_put(data, x, y, rgb_to_hex(&scene->hit.final_color));
             }
         }
