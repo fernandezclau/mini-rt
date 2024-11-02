@@ -54,7 +54,7 @@ void render(t_data *data, scene *scene)
             // Si hubo una intersecci�n con alguna figura
             if (scene->hit.intersect)
             {
-                scene->hit.final_color = calculate_light(r, scene);
+                //scene->hit.final_color = calculate_light(r, scene);
                 pixel_put(data, x, y, rgb_to_hex(&scene->hit.final_color));
             }
         }

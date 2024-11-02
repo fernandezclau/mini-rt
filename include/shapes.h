@@ -37,12 +37,12 @@ void    intersection_spheres(ray *r, sphere **spheres, hit *l_hit);
 void    intersection_cylinders(ray *r, cylinder **cylinders, hit *l_hit);
 
 // SINGLE INTERSECTIONS
-int     intersect_ray_plane(ray *r, plane *pl, float *t);
+int intersect_ray_plane(ray* r, plane* pl, hit* hit);
 int     intersect_ray_sphere(ray *r, sphere *sphere, float *t);
 int     intersect_ray_cylinder(ray *r, cylinder *cl, float *t);
 
 // NORMAL
-//void    set_cylinder_normal(ray *r, cylinder *cy, hit *l_hit);
+void    set_cylinder_normal(ray *r, cylinder *cy, hit *l_hit);
 void    set_plane_normal(ray *r, hit *l_hit, plane *pl);
 
 // ON OBJECT
