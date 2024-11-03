@@ -1,4 +1,4 @@
-# ifndef MACROS_H
+#ifndef MACROS_H
 # define MACROS_H
 
 // windows sizing
@@ -11,19 +11,19 @@
 # define W_TITLE    "mini-rt .-."
 
 // KEYS
-# ifdef __APPLE__
-	# define ESC_KEY 53
-	# define A_KEY	0
-	# define W_KEY	13
-	# define S_KEY   1
-	# define D_KEY   2
-# elif __linux__
-    # define ESC_KEY 65307
-    # define A_KEY   97
-    # define W_KEY   119
-    # define S_KEY   115
-    # define D_KEY   100
-# endif
+#ifdef __APPLE__
+# define ESC_KEY	53
+#define A_KEY	0
+#define W_KEY	13
+#define S_KEY	1
+#define D_KEY	2
+#elif __linux__
+#define ESC_KEY	65307
+#define A_KEY	97
+#define W_KEY	119
+#define S_KEY	115
+#define D_KEY	100
+#endif
 
 // FILE FIELDS
 # define AMBIENT_LIGHT   'A'
@@ -40,6 +40,7 @@
 // MATH 
 # define M_PI 3.14159265358979323846
 # define EPSILON 0.0001
+# define FLT_MAX 340282346638528859811704183484516925440.000000
 
 // COLORS
 # define RE      "\033[0m"

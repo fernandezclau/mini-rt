@@ -8,17 +8,16 @@
  * @param light The ambient light structure containing the color and ratio 
  *              of the ambient light.
 */
-vector3 calculate_ambient_light(ambient_light light)
+vector3	calculate_ambient_light(ambient_light light)
 {
-    vector3 intensity;
-    int     sum_color;
+	vector3	intensity;
+	int		sum_color;
 
-    sum_color = light.color.r + light.color.g + light.color.b;
-    intensity.x = INTENSITY_RATIO * 3 * light.ratio * light.color.r / sum_color;
-    intensity.y = INTENSITY_RATIO *3 * light.ratio * light.color.g / sum_color;
-    intensity.z = INTENSITY_RATIO *3 * light.ratio * light.color.b / sum_color;
-
-    return (intensity);
+	sum_color = light.color.r + light.color.g + light.color.b;
+	intensity.x = INTENSITY_RATIO * 3 * light.ratio * light.color.r / sum_color;
+	intensity.y = INTENSITY_RATIO * 3 * light.ratio * light.color.g / sum_color;
+	intensity.z = INTENSITY_RATIO * 3 * light.ratio * light.color.b / sum_color;
+	return (intensity);
 }
 
 /**
@@ -26,10 +25,10 @@ vector3 calculate_ambient_light(ambient_light light)
  *
  * @param al A pointer to the ambient light structure to be initialized.
  */
-void init_ambient_light(ambient_light *al)
+void	init_ambient_light(ambient_light *al)
 {
-    init_r_color(&al->color);
-    al->ratio = 0;
+	init_r_color(&al->color);
+	al->ratio = 0;
 }
 
 /**
@@ -37,14 +36,14 @@ void init_ambient_light(ambient_light *al)
  *
  * @param al The ambient light structure to be displayed.
  */
-void display_ambient_light(ambient_light al)
+void	display_ambient_light(ambient_light al)
 {
-    printf(" %s____ AMBIENT LIGHT ____ %s\n", WH, RE);
-    printf("\n");
-    printf("%s > Ratio %s", WH, RE);
-    printf("%s[%f]%s\n", CY, al.ratio, RE);
-    printf("\n");
-    printf("%s > Color %s", WH, RE);
-    display_color(al.color);
-    printf("\n");
+	printf(" %s____ AMBIENT LIGHT ____ %s\n", WH, RE);
+	printf("\n");
+	printf("%s > Ratio %s", WH, RE);
+	printf("%s[%f]%s\n", CY, al.ratio, RE);
+	printf("\n");
+	printf("%s > Color %s", WH, RE);
+	display_color(al.color);
+	printf("\n");
 }

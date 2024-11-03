@@ -5,24 +5,20 @@
  *
  * @param v Pointer to the vector3 structure to be filled.
  * @param tokens Array of string tokens containing the float values.
- * @param is_normalized Flag indicating whether to check if the vector is normalized.
+ * @param is_normalized Check if the vector is normalized.
  * @return 1 if successful, 0 if an error occurred (e.g., invalid tokens).
  */
-int insert_vector3(vector3 *v, char **tokens, int is_normalized)
+int	insert_vector3(vector3 *v, char **tokens, int is_normalized)
 {
-    if (!three_floats(tokens))
-        return free_array(tokens), 0;
-
-    v->x = atof(tokens[0]);
-    v->y = atof(tokens[1]);
-    v->z = atof(tokens[2]);
-    
-    free_array(tokens);
-
-    if (is_normalized && !is_normalized_f_v3(*v))
-        return 0;
-
-    return 1;
+	if (!three_floats(tokens))
+		return (free_array(tokens), 0);
+	v->x = atof(tokens[0]);
+	v->y = atof(tokens[1]);
+	v->z = atof(tokens[2]);
+	free_array(tokens);
+	if (is_normalized && !is_normalized_f_v3(*v))
+		return (0);
+	return (1);
 }
 
 /**
@@ -30,23 +26,19 @@ int insert_vector3(vector3 *v, char **tokens, int is_normalized)
  *
  * @param c Pointer to the color structure to be filled.
  * @param tokens Array of string tokens containing the integer color values.
- * @return 1 if successful, 0 if an error occurred (e.g., invalid tokens or color).
+ * @return 1 if successful, 0 if an error occurred.
  */
-int insert_color(color *c, char **tokens)
+int	insert_color(color *c, char **tokens)
 {
-    if (!three_ints(tokens))
-        return free_array(tokens), 0;
-    
-    c->r = atoi(tokens[0]);
-    c->g = atoi(tokens[1]);
-    c->b = atoi(tokens[2]);
-
-    free_array(tokens);
-
-    if (!is_valid_color(*c))
-        return 0;
-
-    return 1;
+	if (!three_ints(tokens))
+		return (free_array(tokens), 0);
+	c->r = atoi(tokens[0]);
+	c->g = atoi(tokens[1]);
+	c->b = atoi(tokens[2]);
+	free_array(tokens);
+	if (!is_valid_color(*c))
+		return (0);
+	return (1);
 }
 
 /**
@@ -56,17 +48,14 @@ int insert_color(color *c, char **tokens)
  * @param value String representing the field of view angle.
  * @return 1 if successful, 0 if an error occurred (e.g., invalid value).
  */
-int insert_angle(float *fov, char *value)
+int	insert_angle(float *fov, char *value)
 {
-    if (!is_int(value))
-        return 0;
-    
-    *fov = atoi(value);
-    
-    if (!is_valid_angle(*fov))
-        return 0;
-
-    return 1;
+	if (!is_int(value))
+		return (0);
+	*fov = atoi(value);
+	if (!is_valid_angle(*fov))
+		return (0);
+	return (1);
 }
 
 /**
@@ -76,17 +65,14 @@ int insert_angle(float *fov, char *value)
  * @param value String representing the ratio value.
  * @return 1 if successful, 0 if an error occurred (e.g., invalid value).
  */
-int insert_ratio(float *ratio, char *value)
+int	insert_ratio(float *ratio, char *value)
 {
-    if (!is_float(value))
-        return 0;
-    
-    *ratio = atof(value);
-    
-    if (!is_valid_ratio(*ratio))
-        return 0;
-
-    return 1;
+	if (!is_float(value))
+		return (0);
+	*ratio = atof(value);
+	if (!is_valid_ratio(*ratio))
+		return (0);
+	return (1);
 }
 
 /**
@@ -96,12 +82,10 @@ int insert_ratio(float *ratio, char *value)
  * @param value String representing the magnitude value.
  * @return 1 if successful, 0 if an error occurred (e.g., invalid value).
  */
-int insert_magnitude(float *magnitude, char *value)
+int	insert_magnitude(float *magnitude, char *value)
 {
-    if (!is_float(value))
-        return 0;
-    
-    *magnitude = atof(value);
-
-    return 1;
+	if (!is_float(value))
+		return (0);
+	*magnitude = atof(value);
+	return (1);
 }

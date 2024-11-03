@@ -9,7 +9,9 @@ OBJ_DIR = ./.obj
 SRC = $(SRC_DIR)/main.c \
       $(SRC_DIR)/parser/parser.c \
       $(SRC_DIR)/parser/conditions.c \
+      $(SRC_DIR)/parser/conditions_2.c \
       $(SRC_DIR)/parser/processor.c \
+      $(SRC_DIR)/parser/processor_2.c \
       $(SRC_DIR)/parser/elements.c \
       $(SRC_DIR)/view/window.c \
       $(SRC_DIR)/view/camera.c \
@@ -20,13 +22,17 @@ SRC = $(SRC_DIR)/main.c \
       $(SRC_DIR)/intersections/plane.c \
       $(SRC_DIR)/intersections/cylinder.c \
       $(SRC_DIR)/utils/utils.c \
+      $(SRC_DIR)/utils/error.c \
       $(SRC_DIR)/vectors/vector2.c \
       $(SRC_DIR)/vectors/vector3.c \
+      $(SRC_DIR)/vectors/vector3_2.c \
+      $(SRC_DIR)/vectors/vector3_3.c \
+      $(SRC_DIR)/vectors/vector3_4.c \
       $(SRC_DIR)/vectors/color.c \
+      $(SRC_DIR)/vectors/color_2.c \
       $(SRC_DIR)/light/light.c \
       $(SRC_DIR)/light/ambient_light.c \
-      $(SRC_DIR)/light/diffuse_light.c \
-      $(SRC_DIR)/light/shadow.c \
+      $(SRC_DIR)/light/spotlight.c \
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

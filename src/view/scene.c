@@ -5,25 +5,14 @@
  *
  * @param scene A pointer to the scene structure to be initialized.
  */
-void init_scene(scene *scene)
+void	init_scene(scene *scene)
 {
-    // CAMERA INIT
-    init_camera(&scene->camera);
-
-    // LIGHT INIT
-    scene->lights = NULL;
-
-    // AMBIENT LIGHT INIT
-    init_ambient_light(&scene->ambient_light);
-
-    // SPHERE INIT
-    scene->spheres = NULL;
-    
-    // PLANE INIT
-    scene->planes = NULL;
-
-    // CYLINDER INIT
-    scene->cylinders = NULL;
+	init_camera(&scene->camera);
+	scene->lights = NULL;
+	init_ambient_light(&scene->ambient_light);
+	scene->spheres = NULL;
+	scene->planes = NULL;
+	scene->cylinders = NULL;
 }
 
 /**
@@ -31,16 +20,16 @@ void init_scene(scene *scene)
  *
  * @param hit A pointer to the hit structure to be initialized.
  */
-void    init_hit_point(hit *hit)
+void	init_hit_point(hit *hit)
 {
-    hit->intersect = 0;
-    hit->dist = INFINITY;
-    hit->intersect = 0;
-    hit->min_dist = INFINITY;
-    hit->reflection = REFLECT_RATIO;
-    init_r_color(&hit->final_color);
-    init_r_v3(&hit->position);
-    init_r_v3(&hit->normal);
+	hit->intersect = 0;
+	hit->dist = INFINITY;
+	hit->intersect = 0;
+	hit->min_dist = INFINITY;
+	hit->reflection = REFLECT_RATIO;
+	init_r_color(&hit->final_color);
+	init_r_v3(&hit->position);
+	init_r_v3(&hit->normal);
 }
 
 /**
@@ -48,25 +37,26 @@ void    init_hit_point(hit *hit)
  *
  * @param scene A pointer to the scene structure to be freed.
  */
-void free_scene(scene *scene)
+void	free_scene(scene *scene)
 {
-    free_lights(&scene->lights);
-    free_spheres(&scene->spheres);
-    free_plane(&scene->planes);
-    free_cylinder(&scene->cylinders);
+	free_lights(&scene->lights);
+	free_spheres(&scene->spheres);
+	free_plane(&scene->planes);
+	free_cylinder(&scene->cylinders);
 }
 
 /**
  * @brief Prints the details of the scene to the standard output.
  *
- * @param scene The scene structure containing all the scene elements to be displayed.
+ * @param scene The scene structure containing all the scene elements 
+ * to be displayed.
  */
-void print_scene(scene scene)
+void	print_scene(scene scene)
 {
-    display_camera(scene.camera);
-    display_ambient_light(scene.ambient_light);
-    display_light(scene.lights);
-    display_spheres(scene.spheres);
-    display_cylinders(scene.cylinders);
-    display_planes(scene.planes);
+	display_camera(scene.camera);
+	display_ambient_light(scene.ambient_light);
+	display_light(scene.lights);
+	display_spheres(scene.spheres);
+	display_cylinders(scene.cylinders);
+	display_planes(scene.planes);
 }
