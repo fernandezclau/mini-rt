@@ -21,8 +21,10 @@ SRC = $(SRC_DIR)/main.c \
       $(SRC_DIR)/intersections/sphere.c \
       $(SRC_DIR)/intersections/plane.c \
       $(SRC_DIR)/intersections/cylinder.c \
+      $(SRC_DIR)/intersections/normal.c \
       $(SRC_DIR)/utils/utils.c \
       $(SRC_DIR)/utils/error.c \
+      $(SRC_DIR)/utils/log.c \
       $(SRC_DIR)/vectors/vector2.c \
       $(SRC_DIR)/vectors/vector3.c \
       $(SRC_DIR)/vectors/vector3_2.c \

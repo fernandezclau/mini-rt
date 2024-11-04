@@ -44,35 +44,17 @@ int	intersect_ray_plane(ray *r, plane *pl, hit *hit)
 {
 	float	denom;
 	vector3	point_origin;
-	float	t;
 	vector3	scaled_direction;
 
+	pl->normal = normalize_v3(pl->normal);
 	denom = dot_product_v3(r->direction, pl->normal);
-	if (fabs(denom) < 1e-6)
+	if (fabs(denom) < EPSILON_4)
 		return (0);
 	point_origin = substract_v3(pl->point, r->origin);
-	t = dot_product_v3(point_origin, pl->normal) / denom;
-	if (t < 0)
-		return (0);
-	scaled_direction = scale_v3(r->direction, t);
+	hit->dist = dot_product_v3(pl->normal, point_origin) / denom;
+	scaled_direction = scale_v3(r->direction, hit->dist);
 	hit->position = sum_v3(r->origin, scaled_direction);
-	hit->dist = t;
 	return (1);
-}
-
-/**
- * @brief Adjusts the normal of a plane at the intersection point to ensure
- * it faces against the ray direction for correct shading.
- * 
- * @param r The ray intersecting with the plane.
- * @param l_hit The hit record.
- * @param pl The plane structure.
- */
-void	set_plane_normal(ray *r, hit *l_hit, plane *pl)
-{
-	l_hit->normal = normalize_v3(pl->normal);
-	if (dot_product_v3(r->direction, pl->normal) > 0)
-		l_hit->normal = substract_v3((vector3){0, 0, 0}, normalize_v3(pl->normal));
 }
 
 /**
@@ -115,34 +97,4 @@ void	free_plane(plane **head)
 		current = next;
 	}
 	*head = NULL;
-}
-
-/**
- * @brief Prints the information of all planes in the linked list.
- *
- * @param pl A pointer to the head of the plane linked list.
- */
-void	display_planes(plane *pl)
-{
-	plane	*current;
-	int		i;
-
-	current = pl;
-	i = 1;
-	printf(" %s____ PLANES ____ %s\n\n", WH, RE);
-	while (current)
-	{
-		printf("%s %d. %s\n\n", WH, i, RE);
-		printf("%s > Point %s", WH, RE);
-		display_v3(current->point);
-		printf("\n");
-		printf("%s > Normal %s", WH, RE);
-		display_v3(current->normal);
-		printf("\n");
-		printf("%s > Color %s", WH, RE);
-		display_color(current->color);
-		printf("\n");
-		current = current->next;
-		i++;
-	}
 }

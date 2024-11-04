@@ -47,7 +47,7 @@ void render(t_data *data, scene *scene)
 
             // Crear el rayo
             ray r;
-            r.direction = rayDirection;// compute_ray_direction(x, y, scene->camera.fov, &scene->camera);
+            r.direction = compute_ray_direction(x, y, scene->camera.fov, &scene->camera);
             r.origin = scene->camera.position;
 
             ray_intersection(r, scene);

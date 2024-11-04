@@ -1,5 +1,7 @@
 #include "../../include/minirt.h"
 
+int	calculate_intersection_times(float a, float b, float discr, hit *hit);
+
 /**
  * @brief Checks for intersections between a ray and a list of spheres.
  * If an intersection is found, updates the hit record with the distance to the 
@@ -22,8 +24,7 @@ void	intersection_spheres(ray *r, sphere **spheres, hit *l_hit)
 			{
 				l_hit->min_dist = l_hit->dist;
 				l_hit->final_color = iter_spheres->color;
-				l_hit->normal = normalize_v3(substract_v3(l_hit->position, iter_spheres->center));
-				//set_sphere_normal(r, l_hit, iter_spheres);
+				set_sphere_normal(r, l_hit, iter_spheres);
 			}
 			l_hit->intersect = 1;
 		}
@@ -43,65 +44,53 @@ void	intersection_spheres(ray *r, sphere **spheres, hit *l_hit)
  */
 int	intersect_ray_sphere(ray *r, sphere *sp, hit *hit)
 {
-	vector3 oc;
-    float   a;
-    float   b;
-    float   c;
-    float   discriminant;
-    float   t1;
-    float   t2;
-    
-    oc = substract_v3(r->origin, sp->center);
-    a = dot_product_v3(r->direction, r->direction);
-    b = 2.0f * dot_product_v3(oc, r->direction);
-    c = dot_product_v3(oc, oc) - (sp->radius * sp->radius);
-    discriminant = b * b - 4 * a * c;
-    if (discriminant < 0)
-        return 0;
-    t1 = (-b - sqrt(discriminant)) / (2 * a);
-    t2 = (-b + sqrt(discriminant)) / (2 * a);
-    if (t1 > 0 && t2 > 0)
-        hit->dist = fmin(t1, t2);
-    else if (t1 > 0)
-        hit->dist = t1;
-    else if (t2 > 0)
-        hit->dist = t2;
-    else
-        return (0);
-    hit->position = sum_v3(r->origin, scale_v3(r->direction, hit->dist));
-    return (1); 
-	// vector3	oc;
-	// float	a;
-	// float	b;
-	// float	c;
-	// float	discriminant;
+	vector3	oc;
+	float	a;
+	float	b;
+	float	c;
+	float	discriminant;
 
-	// oc = substract_v3(r->origin, sp->center);
-	// a = dot_product_v3(r->direction, r->direction);
-	// b = 2.0f * dot_product_v3(oc, r->direction);
-	// c = dot_product_v3(oc, oc) - (sp->radius * sp->radius);
-	// discriminant = b * b - 4 * a * c;
-	// if (discriminant >= 0)
-	// {
-	// 	hit->dist = (-b - sqrt(discriminant)) / (2 * a);
-	// 	if (hit->dist >= 0)
-	// 		return (1);
-	// }
-	// hit->position = sum_v3(r->origin, scale_v3(r->direction, hit->dist));
-	// return (0);
+	oc = substract_v3(r->origin, sp->center);
+	a = dot_product_v3(r->direction, r->direction);
+	b = 2.0f * dot_product_v3(oc, r->direction);
+	c = dot_product_v3(oc, oc) - (sp->radius * sp->radius);
+	discriminant = b * b - 4 * a * \
+			(dot_product_v3(oc, oc) - (sp->radius * sp->radius));
+	if (discriminant < 0)
+		return (0);
+	if (!calculate_intersection_times(a, b, discriminant, hit))
+		return (0);
+	hit->position = sum_v3(r->origin, scale_v3(r->direction, hit->dist));
+	return (1);
 }
 
 /**
- * @brief Adjusts the normal of a sphere at the intersection point to ensure
- * it faces against the ray direction for correct shading.
+ * @brief Calculates the intersection times between a ray and a sphere.
  * 
- * @param r The ray intersecting with the sphere.
- * @param l_hit The hit record.
- * @param pl The sphere structure.
+ * @param a The quadratic coefficient of the intersection equation.
+ * @param b The linear coefficient of the intersection equation.
+ * @param discriminant The discriminant of the quadratic equation.
+ * @param r Ray that is being intersected.
+ * @param hit Structure that will store the intersection distance and position.
+ * 
+ * @return int Returns 1 if a valid intersection exists, or 0 if not.
  */
-void	set_sphere_normal(ray *r, hit *l_hit, sphere *sp)
+int	calculate_intersection_times(float a, float b, float discriminant, hit *hit)
 {
-	l_hit->normal = normalize_v3(substract_v3(l_hit->position, sp->center));
+	float	t1;
+	float	t2;
+
+	t1 = (-b - sqrt(discriminant)) / (2 * a);
+	t2 = (-b + sqrt(discriminant)) / (2 * a);
+	if (t1 > 0 && t2 > 0)
+		hit->dist = fmin(t1, t2);
+	else if (t1 > 0)
+		hit->dist = t1;
+	else if (t2 > 0)
+		hit->dist = t2;
+	else
+		return (0);
+	return (1);
 }
 
 /**
@@ -144,33 +133,4 @@ void	free_spheres(sphere **head)
 		current = next;
 	}
 	*head = NULL;
-}
-
-/**
- * @brief Prints the information of all spheres in the linked list.
- *
- * @param sp A pointer to the head of the sphere linked list.
- */
-void	display_spheres(sphere *sp)
-{
-	sphere	*current;
-	int		i;
-
-	current = sp;
-	i = 1;
-	printf(" %s____ SPHERES ____ %s\n\n", WH, RE);
-	while (current)
-	{
-		printf("%s %d. %s\n\n", WH, i, RE);
-		printf("%s > Center %s", WH, RE);
-		display_v3(current->center);
-		printf("\n");
-		printf("%s > Diameter %s", WH, RE);
-		printf("%s[%f]%s\n\n", CY, current->diameter, RE);
-		printf("%s > Color %s", WH, RE);
-		display_color(current->color);
-		printf("\n");
-		current = current->next;
-		i++;
-	}
 }
