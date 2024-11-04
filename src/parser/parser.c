@@ -49,10 +49,10 @@ int	parse_file(const char *filename, scene *scene)
 	line = NULL;
 	len = 0;
 	if (!is_rt_file(filename))
-		return (ft_error(E_EXTENSION), 1);
+		return (ft_error(E_EXTENSION), 0);
 	file = fopen(filename, "r");
 	if (!file)
-		return (perror("\033[1;31mError\033[1;37m"), 1);
+		return (perror("\033[1;31mError\033[1;37m"), 0);
 	while (getline(&line, &len, file) != -1)
 		if (!parse_line(line, scene))
 			return (free(line), fclose(file), 0);

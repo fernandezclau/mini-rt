@@ -1,7 +1,5 @@
 #include "../../include/minirt.h"
 
-int	calculate_intersection_times(float a, float b, float discr, hit *hit);
-
 /**
  * @brief Checks for intersections between a ray and a list of spheres.
  * If an intersection is found, updates the hit record with the distance to the 
@@ -58,7 +56,7 @@ int	intersect_ray_sphere(ray *r, sphere *sp, hit *hit)
 			(dot_product_v3(oc, oc) - (sp->radius * sp->radius));
 	if (discriminant < 0)
 		return (0);
-	if (!calculate_intersection_times(a, b, discriminant, hit))
+	if (!calculate_intersection_times(a, b, discriminant, &hit->dist))
 		return (0);
 	hit->position = sum_v3(r->origin, scale_v3(r->direction, hit->dist));
 	return (1);
@@ -71,23 +69,25 @@ int	intersect_ray_sphere(ray *r, sphere *sp, hit *hit)
  * @param b The linear coefficient of the intersection equation.
  * @param discriminant The discriminant of the quadratic equation.
  * @param r Ray that is being intersected.
- * @param hit Structure that will store the intersection distance and position.
+ * @param d Float that wilñ store the intersection distance.
  * 
  * @return int Returns 1 if a valid intersection exists, or 0 if not.
  */
-int	calculate_intersection_times(float a, float b, float discriminant, hit *hit)
+int	calculate_intersection_times(float a, float b, float discriminant, float *d)
 {
 	float	t1;
 	float	t2;
+	float	sqrt_disc;
 
-	t1 = (-b - sqrt(discriminant)) / (2 * a);
-	t2 = (-b + sqrt(discriminant)) / (2 * a);
+	sqrt_disc = sqrt(discriminant);
+	t1 = (-b - sqrt_disc) / (2 * a);
+	t2 = (-b + sqrt_disc) / (2 * a);
 	if (t1 > 0 && t2 > 0)
-		hit->dist = fmin(t1, t2);
+		*d = fmin(t1, t2);
 	else if (t1 > 0)
-		hit->dist = t1;
+		*d = t1;
 	else if (t2 > 0)
-		hit->dist = t2;
+		*d = t2;
 	else
 		return (0);
 	return (1);

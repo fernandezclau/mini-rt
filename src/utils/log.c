@@ -58,3 +58,35 @@ void	display_spheres(sphere *sp)
 		i++;
 	}
 }
+
+/**
+ * @brief Prints the information of all cylinders in the linked list.
+ *
+ * @param cy A pointer to the head of the cylinder linked list.
+ */
+void	display_cylinders(cylinder *cy)
+{
+	cylinder	*current;
+	int			i;
+
+	current = cy;
+	i = 1;
+	printf(" %s____ CYLINDERS ____ %s\n\n", WH, RE);
+	while (current)
+	{
+		printf("%s %d. %s\n\n", WH, i, RE);
+		printf("%s > Center %s", WH, RE);
+		display_v3(current->center);
+		printf("\n%s > Direction %s", WH, RE);
+		display_v3(current->direction);
+		printf("\n%s > Diameter %s", WH, RE);
+		printf("%s[%f]%s\n\n", CY, current->diameter, RE);
+		printf("%s > Height %s", WH, RE);
+		printf("%s[%f]%s\n\n", CY, current->height, RE);
+		printf("%s > Color %s", WH, RE);
+		display_color(current->color);
+		printf("\n");
+		current = current->next;
+		i++;
+	}
+}

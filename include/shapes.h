@@ -31,6 +31,14 @@ typedef struct cylinder
 	struct cylinder	*next;
 }			cylinder;
 
+typedef	struct ugh
+{
+	float	distance;
+	vector3	position;
+	vector3	center;
+	vector3	direction;
+}				ugh;
+
 // LIST INTERSECTIONS
 void	interesection_planes(ray *r, plane **planes, hit *l_hit);
 void	intersection_spheres(ray *r, sphere **spheres, hit *l_hit);
@@ -39,17 +47,12 @@ void	intersection_cylinders(ray *r, cylinder **cylinders, hit *l_hit);
 // SINGLE INTERSECTIONS
 int		intersect_ray_plane(ray *r, plane *pl, hit *hit);
 int		intersect_ray_sphere(ray *r, sphere *sphere, hit *hit);
-int		intersect_ray_cylinder(ray *r, vector3 *p, float *dist, cylinder *cl);
+int		intersect_ray_cylinder(ray *r, hit *hit, cylinder *cl);
 
 // NORMAL
 void	set_cylinder_normal(ray *r, cylinder *cy, hit *l_hit);
 void	set_sphere_normal(ray *r, hit *l_hit, sphere *sp);
 void	set_plane_normal(ray *r, hit *l_hit, plane *pl);
-
-// ON OBJECT
-int		is_on_plane(plane plane, vector3 point);
-int		is_on_cylinder(cylinder cylinder, vector3 point);
-int		is_on_sphere(sphere sphere, vector3 point);
 
 // INSERTION
 int		insert_vector3(vector3 *v, char **tokens, int is_normalized);
@@ -73,4 +76,14 @@ void	display_spheres(sphere *sp);
 void	display_planes(plane *pl);
 void	display_cylinders(cylinder *cl);
 
+// CYLINDER CALCS
+int		intersect_circle(ray *r, ugh *ugh, float radius);
+int		intersect_cylinder(ray *r, cylinder *cl, ugh *ugh);
+int		calculate_intersection_times(float a, float b, float discriminant, \
+		float *d);
+int		select_dist_cylinder(ugh cylinder_body, ugh top_cap, ugh bottom_cap, \
+		hit *hit);
+int		select_dist_cylinder2(ugh top_cap, ugh bottom_cap, hit *hit);
+int		cylinder_calculations(vector3 d_perp, vector3 w_perp, \
+		cylinder *cl, float *d);
 #endif  // SHAPES_H

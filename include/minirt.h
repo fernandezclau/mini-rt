@@ -90,5 +90,7 @@ char	**split_spaces(char const *s);
 int		array_len(char **array);
 void	free_array(char **array);
 void	ft_error(char *error);
+void	init_ugh_cylinder(ugh *top_cap, ugh *cylinder_cap, \
+		ugh *bottom_cap, cylinder *cl);
 
 #endif

@@ -27,3 +27,23 @@ void	set_sphere_normal(ray *r, hit *l_hit, sphere *sp)
 {
 	l_hit->normal = normalize_v3(substract_v3(l_hit->position, sp->center));
 }
+
+void	set_cylinder_normal(ray *r, cylinder *cy, hit *l_hit)
+{
+	vector3	base_to_point;
+	float	distance;
+	vector3	projected_point;
+
+	base_to_point = substract_v3(l_hit->position, cy->center);
+	distance = dot_product_v3(base_to_point, cy->direction);
+	if (distance <= EPSILON_4)
+		l_hit->normal = scale_v3(normalize_v3(cy->direction), -1);
+	else if (distance < cy->height - EPSILON_4)
+	{
+		projected_point = sum_v3(cy->center, scale_v3(cy->direction, distance));
+		l_hit->normal = normalize_v3(substract_v3(l_hit->position, \
+					projected_point));
+	}
+	else if (distance >= cy->height - EPSILON_4)
+		l_hit->normal = normalize_v3(cy->direction);
+}

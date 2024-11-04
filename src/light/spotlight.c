@@ -35,7 +35,7 @@ vector3	specular_intensity(vector3 normal, vector3 p_to_l, vector3 light)
 	specular = scale_v3(light, pow(ratio, 70) * 3);
 	return (specular);
 }
-
+/*
 int is_in_shadow(vector3 point, light *light_source, scene *scene)
 {
     vector3 view_direction = normalize_v3(substract_v3(scene->camera.position, scene->hit.position));
@@ -62,4 +62,4 @@ int is_in_shadow(vector3 point, light *light_source, scene *scene)
     //scene->hit = original_hit;
 
     return in_shadow;
-}
+}*/
