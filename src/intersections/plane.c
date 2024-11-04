@@ -70,9 +70,9 @@ int	intersect_ray_plane(ray *r, plane *pl, hit *hit)
  */
 void	set_plane_normal(ray *r, hit *l_hit, plane *pl)
 {
-	l_hit->normal = pl->normal;
+	l_hit->normal = normalize_v3(pl->normal);
 	if (dot_product_v3(r->direction, pl->normal) > 0)
-		l_hit->normal = substract_v3((vector3){0, 0, 0}, pl->normal);
+		l_hit->normal = substract_v3((vector3){0, 0, 0}, normalize_v3(pl->normal));
 }
 
 /**
