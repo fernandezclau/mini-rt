@@ -17,9 +17,9 @@
  *
  * @return A vector3 structure with all components (x, y, z) set to 0.
  */
-vector3	init_v3(void)
+t_vector3	init_v3(void)
 {
-	vector3	v;
+	t_vector3	v;
 
 	v.x = 0;
 	v.y = 0;
@@ -35,9 +35,9 @@ vector3	init_v3(void)
  * @param z The z component of the vector.
  * @return A vector3 structure initialized with the given x, y, and z values.
  */
-vector3	init_p_v3(float x, float y, float z)
+t_vector3	init_p_v3(float x, float y, float z)
 {
-	vector3	v;
+	t_vector3	v;
 
 	v.x = x;
 	v.y = y;
@@ -50,7 +50,7 @@ vector3	init_p_v3(float x, float y, float z)
  *
  * @param v A pointer to the vector3 structure to be initialized.
  */
-vector3	init_r_v3(vector3 *v)
+t_vector3	init_r_v3(t_vector3 *v)
 {
 	v->x = 0;
 	v->y = 0;
@@ -64,7 +64,7 @@ vector3	init_r_v3(vector3 *v)
  * @param b The second vector (subtrahend).
  * @return A new vector3 representing the result of the sum.
  */
-vector3	sum_v3(vector3 a, vector3 b)
+t_vector3	sum_v3(t_vector3 a, t_vector3 b)
 {
 	return (init_p_v3(a.x + b.x, a.y + b.y, a.z + b.z));
 }
@@ -76,7 +76,7 @@ vector3	sum_v3(vector3 a, vector3 b)
  * @param b The second vector (subtrahend).
  * @return A new vector3 representing the result of the subtraction.
  */
-vector3	substract_v3(vector3 a, vector3 b)
+t_vector3	substract_v3(t_vector3 a, t_vector3 b)
 {
 	return (init_p_v3(a.x - b.x, a.y - b.y, a.z - b.z));
 }

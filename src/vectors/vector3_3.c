@@ -19,7 +19,7 @@
  * @param b The second vector.
  * @return A float representing the dot product of the two vectors.
  */
-float	dot_product_v3(vector3 a, vector3 b)
+float	dot_product_v3(t_vector3 a, t_vector3 b)
 {
 	return ((a.x * b.x) + (a.y * b.y) + (a.z * b.z));
 }
@@ -31,7 +31,7 @@ float	dot_product_v3(vector3 a, vector3 b)
  * @param b The second vector.
  * @return A new vector3 that is the cross product of `a` and `b`.
  */
-vector3	cross_product_v3(vector3 a, vector3 b)
+t_vector3	cross_product_v3(t_vector3 a, t_vector3 b)
 {
 	return (init_p_v3(
 			a.y * b.z - a.z * b.y,
@@ -45,7 +45,7 @@ vector3	cross_product_v3(vector3 a, vector3 b)
  * @param v The vector whose squared length is to be calculated.
  * @return A float representing the squared length of the vector.
  */
-float	pow_v3(vector3 v)
+float	pow_v3(t_vector3 v)
 {
 	return (pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2));
 }
@@ -58,7 +58,7 @@ float	pow_v3(vector3 v)
  * @param v The vector whose length is to be calculated.
  * @return A float representing the length of the vector.
  */
-float	length_v3(vector3 v)
+float	length_v3(t_vector3 v)
 {
 	return (sqrtf(pow_v3(v)));
 }
@@ -69,13 +69,13 @@ float	length_v3(vector3 v)
  * @param v The vector to normalize.
  * @return A new vector3 that is the normalized version of the input vector.
  */
-vector3	normalize_v3(vector3 v)
+t_vector3	normalize_v3(t_vector3 v)
 {
 	float	len;
 
 	len = length_v3(v);
 	if (!len)
-		return ((vector3){0, 0, 0});
+		return ((t_vector3){0, 0, 0});
 	if (len > 0)
 		return (scale_v3(v, 1.0f / len));
 	return (v);

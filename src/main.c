@@ -15,7 +15,7 @@
 int	main(int argc, char **argv)
 {
 	t_data	data;
-	scene	scene;
+	t_scene	scene;
 
 	(void)argc, (void) argv;
 	if (get_scene(argc, argv[1], &scene))

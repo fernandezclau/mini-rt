@@ -17,9 +17,9 @@
  *
  * @param pl A pointer to the head of the plane linked list.
  */
-void	display_planes(plane *pl)
+void	display_planes(t_plane *pl)
 {
-	plane	*current;
+	t_plane	*current;
 	int		i;
 
 	current = pl;
@@ -47,9 +47,9 @@ void	display_planes(plane *pl)
  *
  * @param sp A pointer to the head of the sphere linked list.
  */
-void	display_spheres(sphere *sp)
+void	display_spheres(t_sphere *sp)
 {
-	sphere	*current;
+	t_sphere	*current;
 	int		i;
 
 	current = sp;
@@ -76,9 +76,9 @@ void	display_spheres(sphere *sp)
  *
  * @param cy A pointer to the head of the cylinder linked list.
  */
-void	display_cylinders(cylinder *cy)
+void	display_cylinders(t_cylinder *cy)
 {
-	cylinder	*current;
+	t_cylinder	*current;
 	int			i;
 
 	current = cy;

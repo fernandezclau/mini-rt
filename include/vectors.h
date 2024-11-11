@@ -6,7 +6,7 @@
 /*   By: claferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:56:44 by claferna          #+#    #+#             */
-/*   Updated: 2024/11/11 16:56:45 by claferna         ###   ########.fr       */
+/*   Updated: 2024/11/11 18:01:33 by claferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,54 +17,54 @@ typedef struct s_vector2
 {
 	float	x;
 	float	y;
-}		vector2;
+}		t_vector2;
 
 typedef struct s_vector3
 {
 	float	x;
 	float	y;
 	float	z;
-}		vector3;
+}		t_vector3;
 
 typedef struct s_color
 {
 	int	r;
 	int	g;
 	int	b;
-}		color;
+}		t_color;
 
 // VECTOR 2
-vector2	init_v2(void);
-vector2	init_p_v2(float x, float y);
-void	display_v2(vector2 v);
+t_vector2	init_v2(void);
+t_vector2	init_p_v2(float x, float y);
+void		display_v2(t_vector2 v);
 
 // VECTOR 3
-vector3	init_v3(void);
-vector3	init_p_v3(float x, float y, float z);
-vector3	init_r_v3(vector3 *v);
+t_vector3	init_v3(void);
+t_vector3	init_p_v3(float x, float y, float z);
+t_vector3	init_r_v3(t_vector3 *v);
 
-vector3	sum_v3(vector3 a, vector3 b);
-vector3	substract_v3(vector3 a, vector3 b);
-vector3	cross_product_v3(vector3 a, vector3 b);
-vector3	multiple_v3(vector3 a, vector3 b);
-vector3	scale_v3(vector3 v, float scalar);
-float	dot_product_v3(vector3 a, vector3 b);
-float	pow_v3(vector3 v);
-float	length_v3(vector3 v);
-vector3	normalize_v3(vector3 v);
-float	cos_v3(vector3 a, vector3 b);
-float	sin_v3(vector3 a, vector3 b);
-vector3	rotate_vect(vector3 vector, vector3 axis, float cos, float sin);
-vector3	reflect_v3(vector3 light_direction, vector3 normal);
-void	display_v3(vector3 v);
+t_vector3	sum_v3(t_vector3 a, t_vector3 b);
+t_vector3	substract_v3(t_vector3 a, t_vector3 b);
+t_vector3	cross_product_v3(t_vector3 a, t_vector3 b);
+t_vector3	multiple_v3(t_vector3 a, t_vector3 b);
+t_vector3	scale_v3(t_vector3 v, float scalar);
+float		dot_product_v3(t_vector3 a, t_vector3 b);
+float		pow_v3(t_vector3 v);
+float		length_v3(t_vector3 v);
+t_vector3	normalize_v3(t_vector3 v);
+float		cos_v3(t_vector3 a, t_vector3 b);
+float		sin_v3(t_vector3 a, t_vector3 b);
+t_vector3	rotate_vect(t_vector3 vector, t_vector3 axis, float cos, float sin);
+t_vector3	reflect_v3(t_vector3 light_direction, t_vector3 normal);
+void		display_v3(t_vector3 v);
 
 /* COLOR */
-int		init_r_color(color *c);
-int		rgb_to_hex(color *c);
-color	multiply_color(color c, vector3 v);
-color	scale_c(color c, float factor);
-color	add_color(color a, color b);
-void	display_color(color c);
-color	vector3_to_color(vector3 v);
+int			init_r_color(t_color *c);
+int			rgb_to_hex(t_color *c);
+t_color		multiply_color(t_color c, t_vector3 v);
+t_color		scale_c(t_color c, float factor);
+t_color		add_color(t_color a, t_color b);
+void		display_color(t_color c);
+t_color		vector3_to_color(t_vector3 v);
 
 #endif  // VECTORS_H

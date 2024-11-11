@@ -17,7 +17,7 @@
  *
  * @param scene A pointer to the scene structure to be initialized.
  */
-void	init_scene(scene *scene)
+void	init_scene(t_scene *scene)
 {
 	init_camera(&scene->camera);
 	scene->lights = NULL;
@@ -32,7 +32,7 @@ void	init_scene(scene *scene)
  *
  * @param hit A pointer to the hit structure to be initialized.
  */
-void	init_hit_point(hit *hit)
+void	init_hit_point(t_hit *hit)
 {
 	hit->intersect = 0;
 	hit->dist = INFINITY;
@@ -49,7 +49,7 @@ void	init_hit_point(hit *hit)
  *
  * @param scene A pointer to the scene structure to be freed.
  */
-void	free_scene(scene *scene)
+void	free_scene(t_scene *scene)
 {
 	free_lights(&scene->lights);
 	free_spheres(&scene->spheres);
@@ -63,7 +63,7 @@ void	free_scene(scene *scene)
  * @param scene The scene structure containing all the scene elements 
  * to be displayed.
  */
-void	print_scene(scene scene)
+void	print_scene(t_scene scene)
 {
 	display_camera(scene.camera);
 	display_ambient_light(scene.ambient_light);

@@ -18,15 +18,15 @@
  * @param cam Pointer to the camera structure with direction and identity 
  * basis vectors.
  */
-void	compute_camera_basis(camera *cam)
+void	compute_camera_basis(t_camera *cam)
 {
-	vector3	axis;
+	t_vector3	axis;
 	float	cos_theta;
 	float	sin_theta;
 
-	cam->identity[0] = (vector3){1, 0, 0};
-	cam->identity[1] = (vector3){0, 1, 0};
-	cam->identity[2] = (vector3){0, 0, 1};
+	cam->identity[0] = (t_vector3){1, 0, 0};
+	cam->identity[1] = (t_vector3){0, 1, 0};
+	cam->identity[2] = (t_vector3){0, 0, 1};
 	axis = normalize_v3(cross_product_v3(cam->identity[2], cam->direction));
 	cos_theta = cos_v3(cam->identity[2], cam->direction);
 	sin_theta = sin_v3(cam->identity[2], cam->direction);
@@ -43,7 +43,7 @@ void	compute_camera_basis(camera *cam)
  *
  * @param c A pointer to the camera structure to be initialized.
  */
-void	init_camera(camera *c)
+void	init_camera(t_camera *c)
 {
 	init_r_v3(&c->position);
 	init_r_v3(&c->direction);
@@ -55,7 +55,7 @@ void	init_camera(camera *c)
  *
  * @param c The camera structure to be displayed.
  */
-void	display_camera(camera c)
+void	display_camera(t_camera c)
 {
 	printf(" %s____ CAMARA ____ %s\n", WH, RE);
 	printf("\n");

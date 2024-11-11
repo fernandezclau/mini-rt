@@ -19,7 +19,7 @@
  * @param scene Pointer to the scene structure to update.
  * @return 1 if successful, 0 if an error occurred during parsing.
  */
-int	parse_line(char *line, scene *scene)
+int	parse_line(char *line, t_scene *scene)
 {
 	char	**tokens;
 
@@ -52,7 +52,7 @@ int	parse_line(char *line, scene *scene)
  * @param scene Pointer to the scene structure to update.
  * @return 1 if successful, 0 if an error occurred during parsing.
  */
-int	parse_file(const char *filename, scene *scene)
+int	parse_file(const char *filename, t_scene *scene)
 {
 	FILE	*file;
 	char	*line;
@@ -81,7 +81,7 @@ int	parse_file(const char *filename, scene *scene)
  * @param scene Pointer to the scene structure to update.
  * @return 1 if successful, 0 if an error occurred or the usage is incorrect.
  */
-int	get_scene(int argc, char *filename, scene *scene)
+int	get_scene(int argc, char *filename, t_scene *scene)
 {
 	if (argc == 2)
 	{

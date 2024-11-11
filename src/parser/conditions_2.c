@@ -29,7 +29,7 @@ int	is_valid_ratio(float ratio)
  * @param v The 3D vector to check.
  * @return 1 if the vector is normalized, 0 otherwise.
  */
-int	is_normalized_f_v3(vector3 v)
+int	is_normalized_f_v3(t_vector3 v)
 {
 	if (v.x < -1 || v.x > 1)
 		return (0);

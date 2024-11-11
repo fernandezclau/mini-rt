@@ -20,7 +20,7 @@
  * @param camera A pointer to the camera structure to be updated.
  * @return int Returns 1 on success, 0 on failure (e.g., incorrect token count).
  */
-int	process_camera(char **tokens, camera *camera)
+int	process_camera(char **tokens, t_camera *camera)
 {
 	char	**position;
 	char	**direction;
@@ -48,7 +48,7 @@ int	process_camera(char **tokens, camera *camera)
  * @param ambient_light A pointer to the ambient light structure to be updated.
  * @return int Returns 1 on success, 0 on failure (e.g., incorrect token count).
  */
-int	process_ambient(char **tokens, ambient_light *ambient_light)
+int	process_ambient(char **tokens, t_ambient_light *ambient_light)
 {
 	char	**colors;
 
@@ -68,16 +68,16 @@ int	process_ambient(char **tokens, ambient_light *ambient_light)
  * @param light A pointer to the light structure to be updated.
  * @return int Returns 1 on success, 0 on failure (e.g., incorrect token count).
  */
-int	process_light(char **tokens, light **l)
+int	process_light(char **tokens, t_light **l)
 {
-	light	*new_light;
+	t_light	*new_light;
 	char	**position;
 	char	**colors;
 
 	new_light = NULL;
 	if (array_len(tokens) != 4)
 		return (0);
-	new_light = (light *)malloc(sizeof(light));
+	new_light = (t_light *)malloc(sizeof(t_light));
 	if (!new_light)
 		return (0);
 	position = ft_split(tokens[1], ',');

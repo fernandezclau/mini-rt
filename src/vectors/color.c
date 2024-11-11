@@ -18,7 +18,7 @@
  * @param c A pointer to the color structure to be initialized.
  * @return An integer value indicating success (1) or failure (0).
  */
-int	init_r_color(color *c)
+int	init_r_color(t_color *c)
 {
 	c->r = 0;
 	c->g = 0;
@@ -31,7 +31,7 @@ int	init_r_color(color *c)
  * @param c Color struct with the RGB elements.
  * @return  Corresponding hex value.
  */
-int	rgb_to_hex(color *c)
+int	rgb_to_hex(t_color *c)
 {
 	int	r;
 	int	g;
@@ -64,9 +64,9 @@ int	rgb_to_hex(color *c)
  * @param v Vector3 struct.
  * @return  Corresponding color struct.
  */
-color	vector3_to_color(vector3 v)
+t_color	vector3_to_color(t_vector3 v)
 {
-	color	c;
+	t_color	c;
 
 	c.r = v.x;
 	c.g = v.y;
@@ -81,9 +81,9 @@ color	vector3_to_color(vector3 v)
  * @param scalar The scaling factor.
  * @return A new color scaled by the given scalar.
  */
-color	multiply_color(color c, vector3 v)
+t_color	multiply_color(t_color c, t_vector3 v)
 {
-	color	new;
+	t_color	new;
 
 	new.r = c.r * v.x;
 	new.g = c.g * v.y;
@@ -99,9 +99,9 @@ color	multiply_color(color c, vector3 v)
  * @param b The second color to be added.
  * @return color Resulting color from the addition.
  */
-color	add_color(color a, color b)
+t_color	add_color(t_color a, t_color b)
 {
-	color	result;
+	t_color	result;
 
 	result.r = fminf(fmaxf(a.r + b.r, 0), 255);
 	result.g = fminf(fmaxf(a.g + b.g, 0), 255);

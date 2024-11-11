@@ -17,9 +17,9 @@
  *
  * @return A vector2 structure with x and y components set to 0.
  */
-vector2	init_v2(void)
+t_vector2	init_v2(void)
 {
-	vector2	v;
+	t_vector2	v;
 
 	v.x = 0;
 	v.y = 0;
@@ -33,9 +33,9 @@ vector2	init_v2(void)
  * @param y The y component of the vector.
  * @return A vector2 structure initialized with the given x and y values.
  */
-vector2	init_p_v2(float x, float y)
+t_vector2	init_p_v2(float x, float y)
 {
-	vector2	v;
+	t_vector2	v;
 
 	v.x = x;
 	v.y = y;
@@ -47,7 +47,7 @@ vector2	init_p_v2(float x, float y)
  * 
  * @param x The 2D vector to display.
  */
-void	display_v2(vector2 v)
+void	display_v2(t_vector2 v)
 {
 	printf("x: %f\t", v.x);
 	printf("y: %f\t", v.y);

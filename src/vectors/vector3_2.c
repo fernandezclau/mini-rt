@@ -19,7 +19,7 @@
  * @param b The second vector.
  * @return float The cosine of the angle between `a` and `b`.
  */
-float	cos_v3(vector3 a, vector3 b)
+float	cos_v3(t_vector3 a, t_vector3 b)
 {
 	return (dot_product_v3(a, b) / (length_v3(a) * length_v3(b)));
 }
@@ -31,7 +31,7 @@ float	cos_v3(vector3 a, vector3 b)
  * @param b The second vector.
  * @return float The sine of the angle between `a` and `b`.
  */
-float	sin_v3(vector3 a, vector3 b)
+float	sin_v3(t_vector3 a, t_vector3 b)
 {
 	return (length_v3(cross_product_v3(a, b)) * (length_v3(a) * length_v3(b)));
 }
@@ -45,12 +45,12 @@ float	sin_v3(vector3 a, vector3 b)
  * @param sin_theta The sine of the rotation angle.
  * @return vector3 The rotated vector.
  */
-vector3	rotate_vect(vector3 vector, vector3 axis, \
+t_vector3	rotate_vect(t_vector3 vector, t_vector3 axis, \
 		float cos_theta, float sin_theta)
 {
-	vector3	axis_component;
-	vector3	vector_component;
-	vector3	cross_component;
+	t_vector3	axis_component;
+	t_vector3	vector_component;
+	t_vector3	cross_component;
 	float	axis_scale;
 
 	axis_scale = dot_product_v3(vector, axis) * (1 - cos_theta);
@@ -69,10 +69,10 @@ vector3	rotate_vect(vector3 vector, vector3 axis, \
  * @return vector3 Reflected vector based on the given light direction and
  * normal.
  */
-vector3	reflect_v3(vector3 light_direction, vector3 normal)
+t_vector3	reflect_v3(t_vector3 light_direction, t_vector3 normal)
 {
 	float	dot_ln;
-	vector3	reflected;
+	t_vector3	reflected;
 
 	dot_ln = dot_product_v3(light_direction, normal);
 	reflected.x = light_direction.x - 2.0f * dot_ln * normal.x;
@@ -86,7 +86,7 @@ vector3	reflect_v3(vector3 light_direction, vector3 normal)
  * 
  * @param v The 3D vector to print.
  */
-void	display_v3(vector3 v)
+void	display_v3(t_vector3 v)
 {
 	printf("x:%s [%f] %s \t", PIN, v.x, RE);
 	printf("y:%s [%f] %s \t", CY, v.y, RE);

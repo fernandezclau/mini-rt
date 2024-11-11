@@ -19,9 +19,9 @@
  * @param cylinders List of cylinder structures to check for intersections.
  * @param l_hit Hit structure where the closest inters details are stored.
  */
-void	intersection_cylinders(ray *r, cylinder **cylinders, hit *l_hit)
+void	intersection_cylinders(t_ray *r, t_cylinder **cylinders, t_hit *l_hit)
 {
-	cylinder	*iter_cylinders;
+	t_cylinder	*iter_cylinders;
 
 	iter_cylinders = *cylinders;
 	while (iter_cylinders != NULL)
@@ -50,11 +50,11 @@ void	intersection_cylinders(ray *r, cylinder **cylinders, hit *l_hit)
  * 
  * @return Returns 1 if the ray intersects any part; otherwise, returns 0.
  */
-int	intersect_ray_cylinder(ray *r, hit *hit, cylinder *cl)
+int	intersect_ray_cylinder(t_ray *r, t_hit *hit, t_cylinder *cl)
 {
-	ugh	top_cap;
-	ugh	cylinder_body;
-	ugh	bottom_cap;
+	t_ugh	top_cap;
+	t_ugh	cylinder_body;
+	t_ugh	bottom_cap;
 
 	init_ugh_cylinder(&top_cap, &cylinder_body, &bottom_cap, cl);
 	intersect_circle(r, &top_cap, cl->diameter / 2);
@@ -77,11 +77,11 @@ int	intersect_ray_cylinder(ray *r, hit *hit, cylinder *cl)
  * @return Returns 1 if there is an intersection between ray and cylinder. 
  * Or 0 if no intersection is found or if it's outside the cylinder’s bounds.
  */
-int	intersect_cylinder(ray *r, cylinder *cl, ugh *ugh)
+int	intersect_cylinder(t_ray *r, t_cylinder *cl, t_ugh *ugh)
 {
-	vector3	w;
-	vector3	d_perp;
-	vector3	w_perp;
+	t_vector3	w;
+	t_vector3	d_perp;
+	t_vector3	w_perp;
 	float	projection_axis;
 	float	d;
 
@@ -107,9 +107,9 @@ int	intersect_cylinder(ray *r, cylinder *cl, ugh *ugh)
  * @param head A pointer to a pointer to the head of the cylinder linked list.
  * @param new_cylinder A pointer to the new cylinder to be added.
  */
-void	add_cylinder(cylinder **head, cylinder *new_cylinder)
+void	add_cylinder(t_cylinder **head, t_cylinder *new_cylinder)
 {
-	cylinder	*last;
+	t_cylinder	*last;
 
 	if (*head == NULL)
 		*head = new_cylinder;
@@ -127,10 +127,10 @@ void	add_cylinder(cylinder **head, cylinder *new_cylinder)
  *
  * @param head A pointer to a pointer to the head of the cylinder linked list.
  */
-void	free_cylinder(cylinder **head)
+void	free_cylinder(t_cylinder **head)
 {
-	cylinder	*current;
-	cylinder	*next;
+	t_cylinder	*current;
+	t_cylinder	*next;
 
 	current = *head;
 	next = NULL;

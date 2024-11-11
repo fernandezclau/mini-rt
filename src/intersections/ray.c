@@ -12,7 +12,7 @@
 
 #include "../../include/minirt.h"
 
-static vector3	get_direction(camera *cam, float x_nds, float y_nds);
+static t_vector3	get_direction(t_camera *cam, float x_nds, float y_nds);
 
 /**
  * @brief Calculates the intersections of a ray with scene objects 
@@ -22,7 +22,7 @@ static vector3	get_direction(camera *cam, float x_nds, float y_nds);
  * @param scene The structure containing the scene's objects 
  * (spheres, planes, and cylinders) and the intersection results.
  */
-void	ray_intersection(ray r, scene *scene)
+void	ray_intersection(t_ray r, t_scene *scene)
 {
 	init_hit_point(&scene->hit);
 	intersection_spheres(&r, &scene->spheres, &scene->hit);
@@ -39,7 +39,7 @@ void	ray_intersection(ray r, scene *scene)
  * @param cam Pointer to the camera structure with position and basis vectors.
  * @return vector3 Normalized direction vector of the ray.
  */
-vector3	compute_ray_direction(int x, int y, float fov, camera *cam)
+t_vector3	compute_ray_direction(int x, int y, float fov, t_camera *cam)
 {
 	float	fov_ratio;
 	float	width_aspect_ratio;
@@ -64,13 +64,13 @@ vector3	compute_ray_direction(int x, int y, float fov, camera *cam)
  * @param y_nds The y-coordinate in normalized device coordinates.
  * @return The computed and normalized direction vector.
  */
-static vector3	get_direction(camera *cam, float x_nds, float y_nds)
+static t_vector3	get_direction(t_camera *cam, float x_nds, float y_nds)
 {
 	float	z;
-	vector3	direction;
-	vector3	dir_x;
-	vector3	dir_y;
-	vector3	dir_z;
+	t_vector3	direction;
+	t_vector3	dir_x;
+	t_vector3	dir_y;
+	t_vector3	dir_z;
 
 	z = 1;
 	dir_x = scale_v3(cam->identity[0], x_nds);

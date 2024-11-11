@@ -21,9 +21,9 @@
  * @param spheres A pointer to a linked list of spheres to test against.
  * @param l_hit A pointer to the hit record to update with intersection details.
  */
-void	intersection_spheres(ray *r, sphere **spheres, hit *l_hit)
+void	intersection_spheres(t_ray *r, t_sphere **spheres, t_hit *l_hit)
 {
-	sphere	*iter_spheres;
+	t_sphere	*iter_spheres;
 
 	iter_spheres = *spheres;
 	while (iter_spheres != NULL)
@@ -52,9 +52,9 @@ void	intersection_spheres(ray *r, sphere **spheres, hit *l_hit)
  * @return Returns 1 if the ray intersects.
  *         Returns 0 if there is no intersection.
  */
-int	intersect_ray_sphere(ray *r, sphere *sp, hit *hit)
+int	intersect_ray_sphere(t_ray *r, t_sphere *sp, t_hit *hit)
 {
-	vector3	oc;
+	t_vector3	oc;
 	float	a;
 	float	b;
 	float	c;
@@ -111,9 +111,9 @@ int	calculate_intersection_times(float a, float b, float discriminant, float *d)
  * @param head A pointer to a pointer to the head of the sphere linked list.
  * @param new_sphere A pointer to the new sphere to be added.
  */
-void	add_sphere(sphere **head, sphere *new_sphere)
+void	add_sphere(t_sphere **head, t_sphere *new_sphere)
 {
-	sphere	*last;
+	t_sphere	*last;
 
 	if (*head == NULL)
 		*head = new_sphere;
@@ -131,10 +131,10 @@ void	add_sphere(sphere **head, sphere *new_sphere)
  *
  * @param head A pointer to a pointer to the head of the sphere linked list.
  */
-void	free_spheres(sphere **head)
+void	free_spheres(t_sphere **head)
 {
-	sphere	*current;
-	sphere	*next;
+	t_sphere	*current;
+	t_sphere	*next;
 
 	current = *head;
 	next = NULL;

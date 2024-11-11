@@ -6,7 +6,7 @@
 /*   By: claferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:56:48 by claferna          #+#    #+#             */
-/*   Updated: 2024/11/11 17:03:02 by claferna         ###   ########.fr       */
+/*   Updated: 2024/11/11 18:04:09 by claferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,69 +17,71 @@
 
 typedef struct s_camera
 {
-	vector3	position;
-	vector3	direction;
-	float	fov;
-	vector3	identity[3];
-}			camera;
+	t_vector3	position;
+	t_vector3	direction;
+	float		fov;
+	t_vector3	identity[3];
+}				t_camera;
 
 typedef struct s_ray
 {
-	vector3	origin;
-	vector3	direction;
-}			ray;
+	t_vector3	origin;
+	t_vector3	direction;
+}				t_ray;
 
 typedef struct s_ambient_light
 {
 	float	ratio;
-	color	color;
-}			ambient_light;
+	t_color	color;
+}			t_ambient_light;
 
 typedef struct s_light
 {
-	vector3			position;
+	t_vector3		position;
 	float			brightness;
-	color			color;
+	t_color			color;
 	struct s_light	*next;
-}					light;
+}					t_light;
 
 typedef struct s_hit
 {
-	float	dist;
-	float	min_dist;
-	int		intersect;
-	color	final_color;
-	vector3	position;
-	vector3	normal;
-	int		reflection;
-}			hit;
+	float		dist;
+	float		min_dist;
+	int			intersect;
+	t_color		final_color;
+	t_vector3	position;
+	t_vector3	normal;
+	int			reflection;
+}				t_hit;
 
 // CAMERA
-void	compute_camera_basis(camera *cam);
-vector3	compute_ray_direction(int x, int y, float fov, camera *cam);
+void		compute_camera_basis(t_camera *cam);
+t_vector3	compute_ray_direction(int x, int y, float fov, t_camera *cam);
 
 // LIGHT
-vector3	calculate_intensity(color colour, float ratio);
-vector3	calculate_ambient_light(ambient_light light);
-vector3	final_intensity(light light, vector3 normal, vector3 p_to_l);
-vector3	diffuse_intensity(vector3 normal, vector3 p_to_l, vector3 light);
-vector3	specular_intensity(vector3 normal, vector3 p_to_l, vector3 light);
+t_vector3	calculate_intensity(t_color colour, float ratio);
+t_vector3	calculate_ambient_light(t_ambient_light light);
+t_vector3	final_intensity(t_light light, t_vector3 normal, t_vector3 p_to_l);
+t_vector3	diffuse_intensity(t_vector3 normal, t_vector3 p_to_l, \
+	t_vector3 light);
+t_vector3	specular_intensity(t_vector3 normal, t_vector3 p_to_l, \
+	t_vector3 light);
 
 // INITIALIZATION
-void	init_camera(camera *c);
-void	init_light(light *l);
-void	init_ambient_light(ambient_light *al);
-void	init_hit_point(hit *hit);
+void		init_camera(t_camera *c);
+void		init_light(t_light *l);
+void		init_ambient_light(t_ambient_light *al);
+void		init_hit_point(t_hit *hit);
 
 // LIST
-void	add_light(light **head, light *new_plain);
+void		add_light(t_light **head, t_light *new_plain);
 
 // MEMORY RELEASING
-void	free_lights(light **head);
+void		free_lights(t_light **head);
 
 // DISPLAY
-void	display_camera(camera c);
-void	display_ambient_light(ambient_light al);
-void	display_light(light *l);
+void		display_camera(t_camera c);
+void		display_ambient_light(t_ambient_light al);
+void		display_light(t_light *l);
 
 #endif // VIEW_H

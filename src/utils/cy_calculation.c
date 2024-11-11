@@ -20,8 +20,8 @@
  * @param bottom_cap Ugh structure representing the bottom cap of the cylinder.
  * @param cl Cylinder structure to initialize intersection data for.
  */
-void	init_ugh_cylinder(ugh *top_cap, ugh *cylinder_cap, ugh *bottom_cap, \
-		cylinder *cl)
+void	init_ugh_cylinder(t_ugh *top_cap, t_ugh *cylinder_cap, t_ugh *bottom_cap, \
+		t_cylinder *cl)
 {
 	cl->direction = normalize_v3(cl->direction);
 	top_cap->distance = FLT_MAX;
@@ -45,8 +45,8 @@ void	init_ugh_cylinder(ugh *top_cap, ugh *cylinder_cap, ugh *bottom_cap, \
  * 
  * @return Returns 1 if an intersection occurs; otherwise, returns 0.
  */
-int	cylinder_calculations(vector3 d_perp, vector3 w_perp, \
-		cylinder *cl, float *d)
+int	cylinder_calculations(t_vector3 d_perp, t_vector3 w_perp, \
+		t_cylinder *cl, float *d)
 {
 	float	a;
 	float	b;
@@ -80,8 +80,8 @@ int	cylinder_calculations(vector3 d_perp, vector3 w_perp, \
  * 
  * @return Returns 1 if a valid intersection is found; otherwise, returns 0.
  */
-int	select_dist_cylinder(ugh cylinder_body, ugh top_cap, \
-		ugh bottom_cap, hit *hit)
+int	select_dist_cylinder(t_ugh cylinder_body, t_ugh top_cap, \
+		t_ugh bottom_cap, t_hit *hit)
 {
 	if (cylinder_body.distance <= top_cap.distance)
 	{
@@ -119,7 +119,7 @@ int	select_dist_cylinder(ugh cylinder_body, ugh top_cap, \
  * 
  * @return Returns 1 if a valid intersection is found; otherwise, returns 0.
  */
-int	select_dist_cylinder2(ugh top_cap, ugh bottom_cap, hit *hit)
+int	select_dist_cylinder2(t_ugh top_cap, t_ugh bottom_cap, t_hit *hit)
 {
 	if (top_cap.distance <= bottom_cap.distance)
 	{
@@ -153,12 +153,12 @@ int	select_dist_cylinder2(ugh top_cap, ugh bottom_cap, hit *hit)
  * 
  * @return Returns 1 if the ray intersects the circular cap; otherwise, 0.
  */
-int	intersect_circle(ray *r, ugh *ugh, float radius)
+int	intersect_circle(t_ray *r, t_ugh *ugh, float radius)
 {
-	vector3	oc;
+	t_vector3	oc;
 	float	denom;
 	float	t;
-	vector3	intersect_point;
+	t_vector3	intersect_point;
 	float	distance_center;
 
 	oc = substract_v3(ugh->center, r->origin);

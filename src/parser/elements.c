@@ -20,7 +20,7 @@
  * @param is_normalized Check if the vector is normalized.
  * @return 1 if successful, 0 if an error occurred (e.g., invalid tokens).
  */
-int	insert_vector3(vector3 *v, char **tokens, int is_normalized)
+int	insert_vector3(t_vector3 *v, char **tokens, int is_normalized)
 {
 	if (!three_floats(tokens))
 		return (free_array(tokens), 0);
@@ -40,7 +40,7 @@ int	insert_vector3(vector3 *v, char **tokens, int is_normalized)
  * @param tokens Array of string tokens containing the integer color values.
  * @return 1 if successful, 0 if an error occurred.
  */
-int	insert_color(color *c, char **tokens)
+int	insert_color(t_color *c, char **tokens)
 {
 	if (!three_ints(tokens))
 		return (free_array(tokens), 0);

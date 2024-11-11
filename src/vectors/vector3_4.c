@@ -19,7 +19,7 @@
  * @param b The second vector.
  * @return A new vector3 representing the component-wise product of `a` and `b`.
  */
-vector3	multiple_v3(vector3 a, vector3 b)
+t_vector3	multiple_v3(t_vector3 a, t_vector3 b)
 {
 	return (init_p_v3(a.x * b.x, a.y * b.y, a.z * b.z));
 }
@@ -31,7 +31,7 @@ vector3	multiple_v3(vector3 a, vector3 b)
  * @param scalar The scaling factor.
  * @return A new vector3 scaled by the given scalar.
  */
-vector3	scale_v3(vector3 v, float scalar)
+t_vector3	scale_v3(t_vector3 v, float scalar)
 {
 	return (init_p_v3(v.x * scalar, v.y * scalar, v.z * scalar));
 }

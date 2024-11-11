@@ -20,14 +20,14 @@
  * @param data The rendering data structure for pixel output.
  * @param scene The scene data containing camera, objects, and light sources.
  */
-void	render(t_data *data, scene *scene)
+void	render(t_data *data, t_scene *scene)
 {
-	ray	r;
+	t_ray	r;
 	float tanFOV = tan(scene->camera.fov * M_PI / 360.0f);
 	float aspectRatio = (float)(W_WIDTH) / (float)(W_HEIGHT);
-	vector3 up = init_p_v3(0.0f, 1.0f, 0.0f);
-	vector3 right = normalize_v3(cross_product_v3(scene->camera.direction, up));
-	vector3 trueUp = normalize_v3(cross_product_v3(right, scene->camera.direction));
+	t_vector3 up = init_p_v3(0.0f, 1.0f, 0.0f);
+	t_vector3 right = normalize_v3(cross_product_v3(scene->camera.direction, up));
+	t_vector3 trueUp = normalize_v3(cross_product_v3(right, scene->camera.direction));
 	for (unsigned x = 0; x < W_WIDTH; ++x)
 	{
 		float normalizedX = (x + 0.5f) / W_WIDTH;
@@ -36,10 +36,10 @@ void	render(t_data *data, scene *scene)
 		{
 			float normalizedY = (y + 0.5f) / W_HEIGHT;
 			float screenY = (1.0f - 2.0f * normalizedY) * tanFOV;
-			vector3 rayDirection;
-			vector3 rightScaled = scale_v3(right, screenX);
-			vector3 trueUpScaled = scale_v3(trueUp, screenY);
-			vector3 temp = sum_v3(rightScaled, trueUpScaled);
+			t_vector3 rayDirection;
+			t_vector3 rightScaled = scale_v3(right, screenX);
+			t_vector3 trueUpScaled = scale_v3(trueUp, screenY);
+			t_vector3 temp = sum_v3(rightScaled, trueUpScaled);
 			rayDirection = sum_v3(temp, scene->camera.direction);
 			rayDirection = normalize_v3(rayDirection);
 			r.direction = compute_ray_direction(x, y, scene->camera.fov, &scene->camera);

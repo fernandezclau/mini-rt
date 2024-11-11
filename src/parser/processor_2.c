@@ -20,16 +20,16 @@
  * @param sp A double pointer to the head of the sphere linked list.
  * @return int Returns 1 on success, 0 on failure.
  */
-int	process_sphere(char **tokens, sphere **sp)
+int	process_sphere(char **tokens, t_sphere **sp)
 {
-	sphere	*new_sphere;
+	t_sphere	*new_sphere;
 	char	**position;
 	char	**colors;
 
 	new_sphere = NULL;
 	if (array_len(tokens) != 4)
 		return (0);
-	new_sphere = (sphere *)malloc(sizeof(sphere));
+	new_sphere = (t_sphere *)malloc(sizeof(t_sphere));
 	if (!new_sphere)
 		return (0);
 	position = ft_split(tokens[1], ',');
@@ -54,9 +54,9 @@ int	process_sphere(char **tokens, sphere **sp)
  * @param pl A double pointer to the head of the plane linked list.
  * @return int Returns 1 on success, 0 on failure.
  */
-int	process_plane(char **tokens, plane **pl)
+int	process_plane(char **tokens, t_plane **pl)
 {
-	plane	*new_plane;
+	t_plane	*new_plane;
 	char	**point;
 	char	**normal;
 	char	**colors;
@@ -64,7 +64,7 @@ int	process_plane(char **tokens, plane **pl)
 	new_plane = NULL;
 	if (array_len(tokens) != 4)
 		return (0);
-	new_plane = (plane *)malloc(sizeof(plane));
+	new_plane = (t_plane *)malloc(sizeof(t_plane));
 	if (!new_plane)
 		return (0);
 	point = ft_split(tokens[1], ',');
@@ -89,15 +89,15 @@ int	process_plane(char **tokens, plane **pl)
  * @param cy A double pointer to the head of the cylinder linked list.
  * @return int Returns 1 on success, 0 on failure.
  */
-int	process_cylinder(char **tokens, cylinder **cy)
+int	process_cylinder(char **tokens, t_cylinder **cy)
 {
-	cylinder	*new_cylinder;
+	t_cylinder	*new_cylinder;
 	char		**center;
 	char		**direction;
 	char		**colors;
 
 	new_cylinder = NULL;
-	new_cylinder = (cylinder *)malloc(sizeof(cylinder));
+	new_cylinder = (t_cylinder *)malloc(sizeof(t_cylinder));
 	if (array_len(tokens) != 6 || !new_cylinder)
 		return (0);
 	center = ft_split(tokens[1], ',');

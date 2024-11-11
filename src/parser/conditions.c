@@ -109,7 +109,7 @@ int	three_ints(char **tokens)
  * @param rgb A color structure with r, g, and b components.
  * @return 1 if all components are within the range, 0 otherwise.
  */
-int	is_valid_color(color rgb)
+int	is_valid_color(t_color rgb)
 {
 	if (rgb.r < 0 || rgb.r > 255)
 		return (0);

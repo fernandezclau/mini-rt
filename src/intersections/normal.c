@@ -20,7 +20,7 @@
  * @param l_hit The hit record.
  * @param pl The plane structure.
  */
-void	set_plane_normal(ray *r, hit *l_hit, plane *pl)
+void	set_plane_normal(t_ray *r, t_hit *l_hit, t_plane *pl)
 {
 	l_hit->normal = normalize_v3(pl->normal);
 	if (dot_product_v3(r->direction, pl->normal) > 0)
@@ -35,16 +35,16 @@ void	set_plane_normal(ray *r, hit *l_hit, plane *pl)
  * @param l_hit The hit record.
  * @param pl The sphere structure.
  */
-void	set_sphere_normal(ray *r, hit *l_hit, sphere *sp)
+void	set_sphere_normal(t_ray *r, t_hit *l_hit, t_sphere *sp)
 {
 	l_hit->normal = normalize_v3(substract_v3(l_hit->position, sp->center));
 }
 
-void	set_cylinder_normal(ray *r, cylinder *cy, hit *l_hit)
+void	set_cylinder_normal(t_ray *r, t_cylinder *cy, t_hit *l_hit)
 {
-	vector3	base_to_point;
+	t_vector3	base_to_point;
 	float	distance;
-	vector3	projected_point;
+	t_vector3	projected_point;
 
 	base_to_point = substract_v3(l_hit->position, cy->center);
 	distance = dot_product_v3(base_to_point, cy->direction);

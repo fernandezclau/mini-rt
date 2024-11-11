@@ -21,9 +21,9 @@
  * @param planes A pointer to a linked list of planes to test against.
  * @param l_hit A pointer to the hit record to update with intersection details.
  */
-void	interesection_planes(ray *r, plane **planes, hit *l_hit)
+void	interesection_planes(t_ray *r, t_plane **planes, t_hit *l_hit)
 {
-	plane	*iter_planes;
+	t_plane	*iter_planes;
 
 	iter_planes = *planes;
 	while (iter_planes != NULL)
@@ -52,11 +52,11 @@ void	interesection_planes(ray *r, plane **planes, hit *l_hit)
  * @return Returns 1 if the ray intersects.
  *         Returns 0 if there is no intersection.
  */
-int	intersect_ray_plane(ray *r, plane *pl, hit *hit)
+int	intersect_ray_plane(t_ray *r, t_plane *pl, t_hit *hit)
 {
 	float	denom;
-	vector3	point_origin;
-	vector3	scaled_direction;
+	t_vector3	point_origin;
+	t_vector3	scaled_direction;
 
 	pl->normal = normalize_v3(pl->normal);
 	denom = dot_product_v3(r->direction, pl->normal);
@@ -75,9 +75,9 @@ int	intersect_ray_plane(ray *r, plane *pl, hit *hit)
  * @param head A pointer to a pointer to the head of the plane linked list.
  * @param new_plain A pointer to the new plane to be added.
  */
-void	add_plane(plane **head, plane *new_plain)
+void	add_plane(t_plane **head, t_plane *new_plain)
 {
-	plane	*last;
+	t_plane	*last;
 
 	if (*head == NULL)
 		*head = new_plain;
@@ -95,10 +95,10 @@ void	add_plane(plane **head, plane *new_plain)
  *
  * @param head A pointer to a pointer to the head of the plane linked list.
  */
-void	free_plane(plane **head)
+void	free_plane(t_plane **head)
 {
-	plane	*current;
-	plane	*next;
+	t_plane	*current;
+	t_plane	*next;
 
 	current = *head;
 	next = NULL;
