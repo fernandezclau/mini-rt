@@ -13,20 +13,20 @@
 #ifndef VECTORS_H
 # define VECTORS_H
 
-typedef struct vector2
+typedef struct s_vector2
 {
 	float	x;
 	float	y;
 }		vector2;
 
-typedef struct vector3
+typedef struct s_vector3
 {
 	float	x;
 	float	y;
 	float	z;
 }		vector3;
 
-typedef struct color
+typedef struct s_color
 {
 	int	r;
 	int	g;

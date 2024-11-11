@@ -37,7 +37,7 @@ typedef struct s_data
 	int		endian;
 }	t_data;
 
-typedef struct scene
+typedef struct s_scene
 {
 	camera			camera;
 	ambient_light	ambient_light;

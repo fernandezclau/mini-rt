@@ -15,7 +15,7 @@
 
 # include "./minirt.h"
 
-typedef struct camera
+typedef struct s_camera
 {
 	vector3	position;
 	vector3	direction;
@@ -23,27 +23,27 @@ typedef struct camera
 	vector3	identity[3];
 }			camera;
 
-typedef struct ray
+typedef struct s_ray
 {
 	vector3	origin;
 	vector3	direction;
 }			ray;
 
-typedef struct ambient_light
+typedef struct s_ambient_light
 {
 	float	ratio;
 	color	color;
 }			ambient_light;
 
-typedef struct light
+typedef struct s_light
 {
 	vector3			position;
 	float			brightness;
 	color			color;
-	struct light	*next;
+	struct s_light	*next;
 }					light;
 
-typedef struct hit
+typedef struct s_hit
 {
 	float	dist;
 	float	min_dist;

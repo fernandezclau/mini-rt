@@ -16,34 +16,34 @@
 # include "./view.h"
 # include "./minirt.h"
 
-typedef struct plane
+typedef struct s_plane
 {
 	vector3			point;
 	vector3			normal;
 	color			color;
-	struct plane	*next;
+	struct s_plane	*next;
 }					plane;
 
-typedef struct sphere
+typedef struct s_sphere
 {
 	vector3			center;
 	float			diameter;
 	float			radius;
 	color			color;
-	struct sphere	*next;
+	struct s_sphere	*next;
 }					sphere;
 
-typedef struct cylinder
+typedef struct s_cylinder
 {
 	vector3			center;
 	vector3			direction;
 	float			diameter;
 	float			height;
 	color			color;
-	struct cylinder	*next;
+	struct s_cylinder	*next;
 }					cylinder;
 
-typedef struct ugh
+typedef struct s_ugh
 {
 	float	distance;
 	vector3	position;
