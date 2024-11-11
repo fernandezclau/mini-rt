@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   macros.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: claferna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/11 16:55:45 by claferna          #+#    #+#             */
+/*   Updated: 2024/11/11 16:59:25 by claferna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MACROS_H
 # define MACROS_H
 
@@ -11,19 +23,11 @@
 # define W_TITLE    "mini-rt .-."
 
 // KEYS
-#ifdef __APPLE__
-# define ESC_KEY	53
-#define A_KEY	0
-#define W_KEY	13
-#define S_KEY	1
-#define D_KEY	2
-#elif __linux__
-#define ESC_KEY	65307
-#define A_KEY	97
-#define W_KEY	119
-#define S_KEY	115
-#define D_KEY	100
-#endif
+# define ESC_KEY	65307
+# define A_KEY	97
+# define W_KEY	119
+# define S_KEY	115
+# define D_KEY	100
 
 // FILE FIELDS
 # define AMBIENT_LIGHT   'A'

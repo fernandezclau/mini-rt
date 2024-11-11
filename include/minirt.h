@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: claferna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/11 16:56:28 by claferna          #+#    #+#             */
+/*   Updated: 2024/11/11 17:00:25 by claferna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
 // ......... LIBS ........
-# include <mlx.h>
+# include "mlx.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <ctype.h>
@@ -28,7 +40,7 @@ typedef struct s_data
 typedef struct scene
 {
 	camera			camera;
-	ambient_light		ambient_light;
+	ambient_light	ambient_light;
 	light			*lights;
 	sphere			*spheres;
 	plane			*planes;
@@ -36,7 +48,7 @@ typedef struct scene
 	int				num_spheres;
 	int				num_planes;
 	int				num_cylinders;
-	hit		hit;
+	hit				hit;
 }			scene;
 
 // RENDER (MAIN FUNCTION)

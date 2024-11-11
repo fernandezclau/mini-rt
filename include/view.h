@@ -1,4 +1,16 @@
-# ifndef VIEW_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   view.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: claferna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/11 16:56:48 by claferna          #+#    #+#             */
+/*   Updated: 2024/11/11 17:03:02 by claferna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef VIEW_H
 # define VIEW_H
 
 # include "./minirt.h"
@@ -25,11 +37,11 @@ typedef struct ambient_light
 
 typedef struct light
 {
-	vector3		position;
-	float		brightness;
-	color		color;
+	vector3			position;
+	float			brightness;
+	color			color;
 	struct light	*next;
-}			light;
+}					light;
 
 typedef struct hit
 {

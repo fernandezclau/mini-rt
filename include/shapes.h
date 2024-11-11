@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shapes.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: claferna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/11 16:56:38 by claferna          #+#    #+#             */
+/*   Updated: 2024/11/11 17:02:11 by claferna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SHAPES_H
 # define SHAPES_H
 
@@ -6,38 +18,38 @@
 
 typedef struct plane
 {
-	vector3		point;
-	vector3		normal;
-	color		color;
+	vector3			point;
+	vector3			normal;
+	color			color;
 	struct plane	*next;
-}			plane;
+}					plane;
 
 typedef struct sphere
 {
-	vector3		center;
-	float		diameter;
-	float		radius;
-	color		color;
+	vector3			center;
+	float			diameter;
+	float			radius;
+	color			color;
 	struct sphere	*next;
-}			sphere;
+}					sphere;
 
 typedef struct cylinder
 {
-	vector3		center;
-	vector3		direction;
-	float		diameter;
-	float		height;
-	color		color;
+	vector3			center;
+	vector3			direction;
+	float			diameter;
+	float			height;
+	color			color;
 	struct cylinder	*next;
-}			cylinder;
+}					cylinder;
 
-typedef	struct ugh
+typedef struct ugh
 {
 	float	distance;
 	vector3	position;
 	vector3	center;
 	vector3	direction;
-}				ugh;
+}			ugh;
 
 // LIST INTERSECTIONS
 void	interesection_planes(ray *r, plane **planes, hit *l_hit);
