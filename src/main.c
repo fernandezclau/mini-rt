@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 		mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, \
 				data.image_ptr, 0, 0);
 		mlx_key_hook(data.win_ptr, key_hook, &data);
-		mlx_hook(data.win_ptr, 0, 0, close_window, &data);
+		mlx_hook(data.win_ptr, 17, 0, close_window, &data);
 		mlx_mouse_hook(data.win_ptr, mouse_hook, &data);
 		mlx_loop(data.mlx_ptr);
 		free_scene(&scene);
