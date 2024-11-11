@@ -6,12 +6,19 @@
 /*   By: claferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 17:08:13 by claferna          #+#    #+#             */
-/*   Updated: 2024/11/11 17:08:14 by claferna         ###   ########.fr       */
+/*   Updated: 2024/11/11 17:17:15 by claferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 
+/**
+ * @brief Calculates intersections between a ray and a list of cylinders.
+ * 
+ * @param r Ray structure containing the origin and direction of the ray.
+ * @param cylinders List of cylinder structures to check for intersections.
+ * @param l_hit Hit structure where the closest inters details are stored.
+ */
 void	intersection_cylinders(ray *r, cylinder **cylinders, hit *l_hit)
 {
 	cylinder	*iter_cylinders;
@@ -33,6 +40,16 @@ void	intersection_cylinders(ray *r, cylinder **cylinders, hit *l_hit)
 	}
 }
 
+/**
+ * @brief Checks if a ray intersects a specific cylinder, 
+ * including its body and caps.
+ * 
+ * @param r Ray structure containing the origin and direction of the ray.
+ * @param hit Hit structure where the intersection details are stored if found.
+ * @param cl Pointer to the cylinder structure to test for intersection.
+ * 
+ * @return Returns 1 if the ray intersects any part; otherwise, returns 0.
+ */
 int	intersect_ray_cylinder(ray *r, hit *hit, cylinder *cl)
 {
 	ugh	top_cap;
@@ -50,7 +67,16 @@ int	intersect_ray_cylinder(ray *r, hit *hit, cylinder *cl)
 	return (0);
 }
 
-// Intersección de un rayo con el cuerpo de un cilindro
+/**
+ * @brief Calculates the intersection between a ray and a cylinder.
+ * 
+ * @param r Ray structure containing the origin and direction of the ray.
+ * @param cl Cylinder structure containing info of the cylinder.
+ * @param ugh Structure where the intersection info will be stored.
+ * 
+ * @return Returns 1 if there is an intersection between ray and cylinder. 
+ * Or 0 if no intersection is found or if it's outside the cylinder’s bounds.
+ */
 int	intersect_cylinder(ray *r, cylinder *cl, ugh *ugh)
 {
 	vector3	w;

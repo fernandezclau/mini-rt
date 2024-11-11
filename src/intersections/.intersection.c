@@ -66,3 +66,31 @@
 	// }
 	// hit->position = sum_v3(r->origin, scale_v3(r->direction, hit->dist));
 	// return (0);
+    /*
+int is_in_shadow(vector3 point, light *light_source, scene *scene)
+{
+    vector3 view_direction = normalize_v3(substract_v3(scene->camera.position, scene->hit.position));
+	vector3 light_direction = normalize_v3(substract_v3(light_source->position, scene->hit.position));
+
+    float light_distance = length_v3(substract_v3(light_source->position, scene->hit.position));
+
+    ray shadow_ray;
+    const float bias = 0.01f; // Ajusta este valor según el tamaño de la escena
+	shadow_ray.origin = sum_v3(point, scale_v3(scene->hit.normal, bias));
+    shadow_ray.direction = light_direction;
+
+    hit original_hit = scene->hit;
+
+    int in_shadow = 0;
+	ray_intersection(shadow_ray, scene);
+    if (scene->hit.intersect) {
+        if (scene->hit.dist < light_distance) {
+            in_shadow = 1;
+        }
+    }
+
+    // Restaurar el hit original
+    //scene->hit = original_hit;
+
+    return in_shadow;
+}*/

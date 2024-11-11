@@ -6,12 +6,20 @@
 /*   By: claferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 17:04:24 by claferna          #+#    #+#             */
-/*   Updated: 2024/11/11 17:04:26 by claferna         ###   ########.fr       */
+/*   Updated: 2024/11/11 17:31:48 by claferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minirt.h"
 
+/**
+ * @brief Initializes intersection data for the cylinder caps and body.
+ * 
+ * @param top_cap Ugh structure representing the top cap of the cylinder.
+ * @param cylinder_cap Ugh structure representing the cylinder body.
+ * @param bottom_cap Ugh structure representing the bottom cap of the cylinder.
+ * @param cl Cylinder structure to initialize intersection data for.
+ */
 void	init_ugh_cylinder(ugh *top_cap, ugh *cylinder_cap, ugh *bottom_cap, \
 		cylinder *cl)
 {
@@ -25,6 +33,18 @@ void	init_ugh_cylinder(ugh *top_cap, ugh *cylinder_cap, ugh *bottom_cap, \
 	bottom_cap->direction = scale_v3(cl->direction, -1);
 }
 
+/**
+ * @brief Performs calculations for ray-cylinder intersection.
+ * 
+ * @param d_perp The perpendicular component of the ray’s direction
+ *  relative to the cylinder.
+ * @param w_perp The perpendicular component of the vector from the ray origin
+ *  to the cylinder’s center.
+ * @param cl Pointer to the cylinder structure to perform calculations for.
+ * @param d Pointer to store the resulting intersection distance.
+ * 
+ * @return Returns 1 if an intersection occurs; otherwise, returns 0.
+ */
 int	cylinder_calculations(vector3 d_perp, vector3 w_perp, \
 		cylinder *cl, float *d)
 {
@@ -45,6 +65,21 @@ int	cylinder_calculations(vector3 d_perp, vector3 w_perp, \
 	return (1);
 }
 
+/**
+ * @brief Selects the closest valid intersection distance among 
+ * cylinder body and caps.
+ *  
+ * @param cylinder_body The ugh structure representing the intersection data 
+ * for the cylinder body.
+ * @param top_cap The ugh structure representing the intersection data 
+ * for the top cap.
+ * @param bottom_cap The ugh structure representing the intersection data 
+ * for the bottom cap.
+ * @param hit Pointer to the hit structure to update with 
+ * the closest intersection details.
+ * 
+ * @return Returns 1 if a valid intersection is found; otherwise, returns 0.
+ */
 int	select_dist_cylinder(ugh cylinder_body, ugh top_cap, \
 		ugh bottom_cap, hit *hit)
 {
@@ -72,6 +107,18 @@ int	select_dist_cylinder(ugh cylinder_body, ugh top_cap, \
 	return (0);
 }
 
+/**
+ * @brief Selects the closest intersection distance between the cylinder caps.
+ * 
+ * @param top_cap The ugh structure representing the intersection data 
+ * for the top cap.
+ * @param bottom_cap The ugh structure representing the intersection data 
+ * for the bottom cap.
+ * @param hit Pointer to the hit structure to update with the closest
+ *  intersection details.
+ * 
+ * @return Returns 1 if a valid intersection is found; otherwise, returns 0.
+ */
 int	select_dist_cylinder2(ugh top_cap, ugh bottom_cap, hit *hit)
 {
 	if (top_cap.distance <= bottom_cap.distance)
@@ -95,7 +142,17 @@ int	select_dist_cylinder2(ugh top_cap, ugh bottom_cap, hit *hit)
 	return (0);
 }
 
-// Intersección de un rayo con un círculo
+/**
+ * @brief Checks if a ray intersects a circular cap of a cylinder.
+ * 
+ * @param r Pointer to the ray structure containing the origin and direction 
+ * of the ray.
+ * @param ugh Pointer to the ugh structure where the intersection data will be 
+ * stored if an intersection occurs.
+ * @param radius The radius of the circular cap.
+ * 
+ * @return Returns 1 if the ray intersects the circular cap; otherwise, 0.
+ */
 int	intersect_circle(ray *r, ugh *ugh, float radius)
 {
 	vector3	oc;

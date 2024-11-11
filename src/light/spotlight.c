@@ -6,7 +6,7 @@
 /*   By: claferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 17:09:47 by claferna          #+#    #+#             */
-/*   Updated: 2024/11/11 17:09:48 by claferna         ###   ########.fr       */
+/*   Updated: 2024/11/11 17:33:34 by claferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,31 +47,3 @@ vector3	specular_intensity(vector3 normal, vector3 p_to_l, vector3 light)
 	specular = scale_v3(light, pow(ratio, 70) * 3);
 	return (specular);
 }
-/*
-int is_in_shadow(vector3 point, light *light_source, scene *scene)
-{
-    vector3 view_direction = normalize_v3(substract_v3(scene->camera.position, scene->hit.position));
-	vector3 light_direction = normalize_v3(substract_v3(light_source->position, scene->hit.position));
-
-    float light_distance = length_v3(substract_v3(light_source->position, scene->hit.position));
-
-    ray shadow_ray;
-    const float bias = 0.01f; // Ajusta este valor según el tamaño de la escena
-	shadow_ray.origin = sum_v3(point, scale_v3(scene->hit.normal, bias));
-    shadow_ray.direction = light_direction;
-
-    hit original_hit = scene->hit;
-
-    int in_shadow = 0;
-	ray_intersection(shadow_ray, scene);
-    if (scene->hit.intersect) {
-        if (scene->hit.dist < light_distance) {
-            in_shadow = 1;
-        }
-    }
-
-    // Restaurar el hit original
-    //scene->hit = original_hit;
-
-    return in_shadow;
-}*/

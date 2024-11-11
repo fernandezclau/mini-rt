@@ -12,6 +12,14 @@
 
 #include "../../include/minirt.h"
 
+/**
+ * @brief Scales the RGB values of a color by a given factor.
+ * 
+ * @param c The original color structure with RGB values to be scaled.
+ * @param factor The scaling factor to adjust the color intensity.
+ * 
+ * @return The scaled color structure with modified RGB values.
+ */
 color	scale_c(color c, float factor)
 {
 	color	result;
