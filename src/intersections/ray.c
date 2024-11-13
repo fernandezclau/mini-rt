@@ -27,8 +27,8 @@ t_vector3	get_foward(t_scene *scene);
 void	ray_intersection(t_ray r, t_scene *scene)
 {
 	init_hit_point(&scene->hit);
-	intersection_spheres(&r, &scene->spheres, &scene->hit);
 	interesection_planes(&r, &scene->planes, &scene->hit);
+	intersection_spheres(&r, &scene->spheres, &scene->hit);
 	intersection_cylinders(&r, &scene->cylinders, &scene->hit);
 }
 

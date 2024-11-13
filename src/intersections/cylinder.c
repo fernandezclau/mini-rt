@@ -28,10 +28,12 @@ void	intersection_cylinders(t_ray *r, t_cylinder **cylinders, t_hit *l_hit)
 	{
 		if (intersect_ray_cylinder(r, l_hit, iter_cylinders))
 		{
-			if (l_hit->dist < l_hit->min_dist || l_hit->intersect == 0)
+			if (l_hit->dist > 0 && l_hit->dist < l_hit->min_dist \
+			|| l_hit->intersect == 0)
 			{
 				l_hit->min_dist = l_hit->dist;
 				l_hit->final_color = iter_cylinders->color;
+				set_intersection_position(r, l_hit);
 				set_cylinder_normal(r, iter_cylinders, l_hit);
 			}
 			l_hit->intersect = 1;

@@ -30,11 +30,13 @@ void	interesection_planes(t_ray *r, t_plane **planes, t_hit *l_hit)
 	{
 		if (intersect_ray_plane(r, iter_planes, l_hit))
 		{
-			if (l_hit->dist < l_hit->min_dist || l_hit->intersect == 0)
+			if (l_hit->dist > 0 && l_hit->dist < l_hit->min_dist \
+			|| l_hit->intersect == 0)
 			{
 				l_hit->min_dist = l_hit->dist;
 				l_hit->final_color = iter_planes->color;
 				l_hit->reflection = 0;
+				set_intersection_position(r, l_hit);
 				set_plane_normal(r, l_hit, iter_planes);
 			}
 			l_hit->intersect = 1;
@@ -69,7 +71,6 @@ int	intersect_ray_plane(t_ray *r, t_plane *pl, t_hit *hit)
 	if (t < 0)
 		return (0);
 	scaled_direction = scale_v3(r->direction, t);
-	hit->position = sum_v3(r->origin, scaled_direction);
 	hit->dist = t;
 	return (1);
 }

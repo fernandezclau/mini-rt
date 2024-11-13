@@ -62,3 +62,8 @@ void	pixel_put(t_data *data, int x, int y, int color)
 	dst = data->image_data + (y * data->size_line + x * (data->bpp / 8));
 	*(unsigned int *)dst = color;
 }
+
+void	set_intersection_position(t_ray *r, t_hit *hit)
+{
+	hit->position = sum_v3(r->origin, scale_v3(r->direction, hit->dist));
+}

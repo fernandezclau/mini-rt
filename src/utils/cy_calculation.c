@@ -90,7 +90,6 @@ int	select_dist_cylinder(t_ugh cylinder_body, t_ugh top_cap, \
 			if (cylinder_body.distance != FLT_MAX)
 			{
 				hit->dist = cylinder_body.distance;
-				hit->position = cylinder_body.position;
 				return (1);
 			}
 		}
@@ -99,7 +98,6 @@ int	select_dist_cylinder(t_ugh cylinder_body, t_ugh top_cap, \
 			if (bottom_cap.distance != FLT_MAX)
 			{
 				hit->dist = bottom_cap.distance;
-				hit->position = bottom_cap.position;
 				return (1);
 			}
 		}
@@ -126,7 +124,6 @@ int	select_dist_cylinder2(t_ugh top_cap, t_ugh bottom_cap, t_hit *hit)
 		if (top_cap.distance != FLT_MAX)
 		{
 			hit->dist = top_cap.distance;
-			hit->position = top_cap.position;
 			return (1);
 		}
 	}
@@ -135,7 +132,6 @@ int	select_dist_cylinder2(t_ugh top_cap, t_ugh bottom_cap, t_hit *hit)
 		if (bottom_cap.distance != FLT_MAX)
 		{
 			hit->dist = bottom_cap.distance;
-			hit->position = bottom_cap.position;
 			return (1);
 		}
 	}
