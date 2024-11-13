@@ -34,7 +34,6 @@ void	init_scene(t_scene *scene)
  */
 void	init_hit_point(t_hit *hit)
 {
-	hit->intersect = 0;
 	hit->dist = INFINITY;
 	hit->intersect = 0;
 	hit->min_dist = INFINITY;

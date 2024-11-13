@@ -20,6 +20,9 @@
 # include <ctype.h>
 # include <string.h>
 # include <math.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include "../lib/get_next_line/get_next_line.h"
 # include "./macros.h"
 # include "./vectors.h"
 # include "./view.h"

@@ -36,6 +36,8 @@ SRC = $(SRC_DIR)/main.c \
       $(SRC_DIR)/light/light.c \
       $(SRC_DIR)/light/ambient_light.c \
       $(SRC_DIR)/light/spotlight.c \
+      ./lib/get_next_line/get_next_line.c \
+      ./lib/get_next_line/get_next_line_utils.c \
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
@@ -53,7 +55,8 @@ $(OBJ_DIR):
 	&& mkdir -p $(OBJ_DIR)/view \
 	&& mkdir -p $(OBJ_DIR)/intersections \
       && mkdir -p $(OBJ_DIR)/light \
-	&& mkdir -p $(OBJ_DIR)/vectors
+	&& mkdir -p $(OBJ_DIR)/vectors \
+      && mkdir -p $(OBJ_DIR)/get_next_line
 
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
@@ -72,6 +75,6 @@ re: fclean all
 
 
 valgrind: $(NAME)
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) scenes/1.rt
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) scenes/intersections/intersection.rt 
 
 .PHONY: all clean fclean re valgrind

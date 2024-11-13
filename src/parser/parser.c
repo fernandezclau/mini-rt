@@ -54,22 +54,27 @@ int	parse_line(char *line, t_scene *scene)
  */
 int	parse_file(const char *filename, t_scene *scene)
 {
-	FILE	*file;
+	int		fd;
 	char	*line;
-	size_t	len;
 
-	line = NULL;
-	len = 0;
 	if (!is_rt_file(filename))
 		return (ft_error(E_EXTENSION), 0);
-	file = fopen(filename, "r");
-	if (!file)
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
 		return (perror("\033[1;31mError\033[1;37m"), 0);
-	while (getline(&line, &len, file) != -1)
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
 		if (!parse_line(line, scene))
-			return (free(line), fclose(file), 0);
-	free(line);
-	fclose(file);
+		{
+			free(line);
+			close(fd);
+			return (0);
+		}
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
 	return (1);
 }
 
@@ -92,6 +97,7 @@ int	get_scene(int argc, char *filename, t_scene *scene)
 			printf("%s%s%s", GR, LOADED_SCENE, RE);
 			return (1);
 		}
+		exit(-1);
 	}
 	else
 		ft_error(E_USAGE);
