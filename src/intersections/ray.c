@@ -24,12 +24,12 @@ t_vector3	get_foward(t_scene *scene);
  * @param scene The structure containing the scene's objects 
  * (spheres, planes, and cylinders) and the intersection results.
  */
-void	ray_intersection(t_ray r, t_scene *scene)
+void	ray_intersection(t_ray r, t_scene *scene, t_hit *hit)
 {
-	init_hit_point(&scene->hit);
-	interesection_planes(&r, &scene->planes, &scene->hit);
-	intersection_spheres(&r, &scene->spheres, &scene->hit);
-	intersection_cylinders(&r, &scene->cylinders, &scene->hit);
+	init_hit_point(hit);
+	interesection_planes(&r, &scene->planes, hit);
+	intersection_spheres(&r, &scene->spheres, hit);
+	intersection_cylinders(&r, &scene->cylinders, hit);
 }
 
 /**

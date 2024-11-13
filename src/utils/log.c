@@ -102,3 +102,32 @@ void	display_cylinders(t_cylinder *cy)
 		i++;
 	}
 }
+
+/**
+ * @brief Displays the details of a light structure.
+ *
+ * @param l The light structure to be displayed.
+ */
+void	display_light(t_light *l)
+{
+	int		i;
+	t_light	*current;
+
+	current = l;
+	i = 1;
+	printf(" %s____ LIGHT ____ %s\n\n", WH, RE);
+	while (current)
+	{
+		printf("%s %d. %s\n\n", WH, i, RE);
+		printf("%s > Position %s", WH, RE);
+		display_v3(current->position);
+		printf("\n");
+		printf("%s > Brightness %s", WH, RE);
+		printf("%s[%f]%s\n\n", CY, current->brightness, RE);
+		printf("%s > Color %s", WH, RE);
+		display_color(current->color);
+		printf("\n");
+		current = current->next;
+		i++;
+	}
+}

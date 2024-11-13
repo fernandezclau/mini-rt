@@ -58,11 +58,8 @@ typedef struct s_scene
 void		render(t_data *data, t_scene *scene);
 
 // RAY INTERSECTION
-void		ray_intersection(t_ray r, t_scene *scene);
-int			is_in_shadow(t_vector3 point, t_light *light_source, \
-		t_scene *scene);
-t_color		calculate_light(t_ray r, t_scene *scene);
-t_vector3	intersection_point(t_ray ray, double distance);
+void		ray_intersection(t_ray r, t_scene *scene, t_hit *hit);
+void		calculate_light(t_ray r, t_scene *scene, t_hit *initial_hit);
 // ray 
 t_vector3	calculate_ray_direction(t_scene *scene, unsigned x, unsigned y);
 void	set_intersection_position(t_ray *r, t_hit *hit);

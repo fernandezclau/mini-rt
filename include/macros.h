@@ -17,7 +17,7 @@
 # define W_WIDTH    800
 # define W_HEIGHT   600
 # define REFLECT_RATIO  0.0
-# define INTENSITY_RATIO   0.8
+# define INTENSITY_RATIO   2.4
 
 // PROJECT TITLE
 # define W_TITLE    "mini-rt .-."

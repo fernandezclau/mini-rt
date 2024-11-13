@@ -55,6 +55,7 @@ t_vector3	normalize_v3(t_vector3 v);
 float		cos_v3(t_vector3 a, t_vector3 b);
 float		sin_v3(t_vector3 a, t_vector3 b);
 t_vector3	reflect_v3(t_vector3 light_direction, t_vector3 normal);
+t_color clamp_color(t_color color);
 void		display_v3(t_vector3 v);
 
 /* COLOR */

@@ -23,7 +23,6 @@
 t_vector3	calculate_ambient_light(t_ambient_light light)
 {
 	t_vector3	intensity;
-	int			sum_color;
 
 	intensity.x = light.ratio * light.color.r / 255;
 	intensity.y = light.ratio * light.color.g / 255;

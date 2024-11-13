@@ -34,11 +34,12 @@ void	render(t_data *data, t_scene *scene)
 		{
 			r.direction = calculate_ray_direction(scene, x, y);
 			r.origin = scene->camera.position;
-			ray_intersection(r, scene);
-			if (scene->hit.intersect)
+			t_hit initial_hit;
+			ray_intersection(r, scene, &initial_hit);
+			if (initial_hit.intersect)
 			{
-				scene->hit.final_color = calculate_light(r, scene);
-				pixel_put(data, x, y, rgb_to_hex(&scene->hit.final_color));
+				calculate_light(r, scene, &initial_hit);
+				pixel_put(data, x, y, rgb_to_hex(&initial_hit.final_color));
 			}
 			y++;
 		}
@@ -63,6 +64,15 @@ void	pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+/**
+ * @brief Calculates the intersection position of a ray with an object and updates the hit position.
+ * 
+ * @param r Ray that intersects the object. 
+ *          Contains the origin and direction of the ray.
+ * @param hit Hit record where the intersection position 
+ *            will be stored. This structure should contain the distance
+ *            from the origin of the ray to the intersection point.
+ */
 void	set_intersection_position(t_ray *r, t_hit *hit)
 {
 	hit->position = sum_v3(r->origin, scale_v3(r->direction, hit->dist));
