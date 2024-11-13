@@ -20,10 +20,11 @@
  * @param light Vector representing the light intensity.
  * @return t_vector3 The diffuse intensity vector at the point.
  */
-t_vector3	diffuse_intensity(t_vector3 normal, t_vector3 p_to_l, t_vector3 light)
+t_vector3	diffuse_intensity(t_vector3 normal, t_vector3 p_to_l, \
+		t_vector3 light)
 {
 	t_vector3	diffuse;
-	float	ratio;
+	float		ratio;
 
 	ratio = fmax(dot_product_v3(p_to_l, normal), 0);
 	diffuse = scale_v3(light, ratio);
@@ -38,9 +39,10 @@ t_vector3	diffuse_intensity(t_vector3 normal, t_vector3 p_to_l, t_vector3 light)
  * @param light Vector representing the light intensity.
  * @return t_vector3 The specular intensity vector at the point.
  */
-t_vector3	specular_intensity(t_vector3 normal, t_vector3 p_to_l, t_vector3 light)
+t_vector3	specular_intensity(t_vector3 normal, t_vector3 p_to_l, \
+		t_vector3 light)
 {
-	float	ratio;
+	float		ratio;
 	t_vector3	specular;
 
 	ratio = fmax(dot_product_v3(p_to_l, normal), 0);

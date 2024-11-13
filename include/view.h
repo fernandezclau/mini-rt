@@ -54,10 +54,6 @@ typedef struct s_hit
 	int			reflection;
 }				t_hit;
 
-// CAMERA
-void		compute_camera_basis(t_camera *cam);
-t_vector3	compute_ray_direction(int x, int y, float fov, t_camera *cam);
-
 // LIGHT
 t_vector3	calculate_intensity(t_color colour, float ratio);
 t_vector3	calculate_ambient_light(t_ambient_light light);

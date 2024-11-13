@@ -20,8 +20,8 @@
  * @param bottom_cap Ugh structure representing the bottom cap of the cylinder.
  * @param cl Cylinder structure to initialize intersection data for.
  */
-void	init_ugh_cylinder(t_ugh *top_cap, t_ugh *cylinder_cap, t_ugh *bottom_cap, \
-		t_cylinder *cl)
+void	init_ugh_cylinder(t_ugh *top_cap, t_ugh *cylinder_cap, \
+		t_ugh *bottom_cap, t_cylinder *cl)
 {
 	cl->direction = normalize_v3(cl->direction);
 	top_cap->distance = FLT_MAX;
@@ -156,10 +156,10 @@ int	select_dist_cylinder2(t_ugh top_cap, t_ugh bottom_cap, t_hit *hit)
 int	intersect_circle(t_ray *r, t_ugh *ugh, float radius)
 {
 	t_vector3	oc;
-	float	denom;
-	float	t;
+	float		denom;
+	float		t;
 	t_vector3	intersect_point;
-	float	distance_center;
+	float		distance_center;
 
 	oc = substract_v3(ugh->center, r->origin);
 	denom = dot_product_v3(r->direction, ugh->direction);

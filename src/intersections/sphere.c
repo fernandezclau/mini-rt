@@ -55,10 +55,10 @@ void	intersection_spheres(t_ray *r, t_sphere **spheres, t_hit *l_hit)
 int	intersect_ray_sphere(t_ray *r, t_sphere *sp, t_hit *hit)
 {
 	t_vector3	oc;
-	float	a;
-	float	b;
-	float	c;
-	float	discriminant;
+	float		a;
+	float		b;
+	float		c;
+	float		discriminant;
 
 	oc = substract_v3(r->origin, sp->center);
 	a = dot_product_v3(r->direction, r->direction);

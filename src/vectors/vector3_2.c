@@ -37,30 +37,6 @@ float	sin_v3(t_vector3 a, t_vector3 b)
 }
 
 /**
- * @brief Rotates a vector around a given axis by a specified angle.
- * 
- * @param vector The vector to rotate.
- * @param axis The axis around which to rotate the vector.
- * @param cos_theta The cosine of the rotation angle.
- * @param sin_theta The sine of the rotation angle.
- * @return vector3 The rotated vector.
- */
-t_vector3	rotate_vect(t_vector3 vector, t_vector3 axis, \
-		float cos_theta, float sin_theta)
-{
-	t_vector3	axis_component;
-	t_vector3	vector_component;
-	t_vector3	cross_component;
-	float	axis_scale;
-
-	axis_scale = dot_product_v3(vector, axis) * (1 - cos_theta);
-	axis_component = scale_v3(axis, axis_scale);
-	vector_component = scale_v3(vector, cos_theta);
-	cross_component = scale_v3(cross_product_v3(axis, vector), sin_theta);
-	return (sum_v3(sum_v3(vector_component, cross_component), axis_component));
-}
-
-/**
  * @brief Computes the reflection vector of a light direction relative
  * to a normal.
  * 
@@ -71,7 +47,7 @@ t_vector3	rotate_vect(t_vector3 vector, t_vector3 axis, \
  */
 t_vector3	reflect_v3(t_vector3 light_direction, t_vector3 normal)
 {
-	float	dot_ln;
+	float		dot_ln;
 	t_vector3	reflected;
 
 	dot_ln = dot_product_v3(light_direction, normal);

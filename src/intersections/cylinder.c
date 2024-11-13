@@ -82,8 +82,8 @@ int	intersect_cylinder(t_ray *r, t_cylinder *cl, t_ugh *ugh)
 	t_vector3	w;
 	t_vector3	d_perp;
 	t_vector3	w_perp;
-	float	projection_axis;
-	float	d;
+	float		projection_axis;
+	float		d;
 
 	w = substract_v3(r->origin, cl->center);
 	d_perp = substract_v3(r->direction, scale_v3(cl->direction, \

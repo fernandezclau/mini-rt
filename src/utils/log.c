@@ -50,7 +50,7 @@ void	display_planes(t_plane *pl)
 void	display_spheres(t_sphere *sp)
 {
 	t_sphere	*current;
-	int		i;
+	int			i;
 
 	current = sp;
 	i = 1;

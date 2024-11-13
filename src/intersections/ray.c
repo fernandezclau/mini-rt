@@ -12,7 +12,9 @@
 
 #include "../../include/minirt.h"
 
-static t_vector3	get_direction(t_camera *cam, float x_nds, float y_nds);
+float		get_tan_fov(float fov);
+float		get_aspect_ratio(void);
+t_vector3	get_foward(t_scene *scene);
 
 /**
  * @brief Calculates the intersections of a ray with scene objects 
@@ -31,51 +33,47 @@ void	ray_intersection(t_ray r, t_scene *scene)
 }
 
 /**
- * @brief Computes the direction of a ray from the camera to a given pixel.
+ * @brief Calculates the ray direction for a specific pixel on the screen.
  * 
- * @param x Pixel x-coordinate on the screen.
- * @param y Pixel y-coordinate on the screen.
- * @param fov Camera's field of view in degrees.
- * @param cam Pointer to the camera structure with position and basis vectors.
- * @return vector3 Normalized direction vector of the ray.
+ * @param scene The `t_scene` structure containing the camera and 
+ * scene parameters.
+ * @param x The horizontal coordinate of the pixel on the screen (X axis).
+ * @param y The vertical coordinate of the pixel on the screen (Y axis).
+ * 
+ * @return A normalized `t_vector3` vector representing the ray direction 
+ * from the camera toward the `(x, y)` pixel in 3D space.
  */
-t_vector3	compute_ray_direction(int x, int y, float fov, t_camera *cam)
+t_vector3	calculate_ray_direction(t_scene *scene, unsigned x, unsigned y)
 {
-	float	fov_ratio;
-	float	width_aspect_ratio;
-	float	height_aspect_ratio;
-	float	x_nds;
-	float	y_nds;
+	t_vector3	ray_direction;
+	float		screen_x;
+	float		screen_y;
+	t_vector3	true_up;
+	t_vector3	right;
 
-	fov_ratio = fabs(2 * 1 * tanf(fov * (M_PI / 180.0) / 2.0));
-	width_aspect_ratio = fov_ratio / W_WIDTH;
-	height_aspect_ratio = (width_aspect_ratio * W_HEIGHT) / W_HEIGHT;
-	x_nds = (x - W_WIDTH / 2) * width_aspect_ratio;
-	y_nds = -(y - W_HEIGHT / 2) * height_aspect_ratio;
-	return (get_direction(cam, x_nds, y_nds));
+	right = normalize_v3(cross_product_v3(get_foward(scene), \
+				init_p_v3(0.0f, 1.0f, 0.0f)));
+	true_up = normalize_v3(cross_product_v3(right, get_foward(scene)));
+	screen_x = (1.0f - 2.0f * ((x + 0.5f) / W_WIDTH)) * get_aspect_ratio() \
+			* get_tan_fov(scene->camera.fov);
+	screen_y = (1.0f - 2.0f * ((y + 0.5f) / W_HEIGHT)) * \
+		get_tan_fov(scene->camera.fov);
+	ray_direction = sum_v3(sum_v3(scale_v3(right, screen_x), \
+				scale_v3(true_up, screen_y)), get_foward(scene));
+	return (normalize_v3(ray_direction));
 }
 
-/**
- * @brief Calculates the final direction vector based on the camera basis vectors
- * and normalized device coordinates.
- * 
- * @param cam The camera structure containing its basis vectors.
- * @param x_nds The x-coordinate in normalized device coordinates.
- * @param y_nds The y-coordinate in normalized device coordinates.
- * @return The computed and normalized direction vector.
- */
-static t_vector3	get_direction(t_camera *cam, float x_nds, float y_nds)
+float	get_tan_fov(float fov)
 {
-	float	z;
-	t_vector3	direction;
-	t_vector3	dir_x;
-	t_vector3	dir_y;
-	t_vector3	dir_z;
+	return (tan(fov * M_PI / 360.0f));
+}
 
-	z = 1;
-	dir_x = scale_v3(cam->identity[0], x_nds);
-	dir_y = scale_v3(cam->identity[1], y_nds);
-	dir_z = scale_v3(cam->identity[2], z);
-	direction = sum_v3(sum_v3(dir_x, dir_y), dir_z);
-	return (normalize_v3(direction));
+float	get_aspect_ratio(void)
+{
+	return ((float)(W_WIDTH) / (float)(W_HEIGHT));
+}
+
+t_vector3	get_foward(t_scene *scene)
+{
+	return (normalize_v3(scene->camera.direction));
 }

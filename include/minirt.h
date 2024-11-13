@@ -42,7 +42,7 @@ typedef struct s_data
 
 typedef struct s_scene
 {
-	t_camera			camera;
+	t_camera		camera;
 	t_ambient_light	ambient_light;
 	t_light			*lights;
 	t_sphere		*spheres;
@@ -51,7 +51,7 @@ typedef struct s_scene
 	int				num_spheres;
 	int				num_planes;
 	int				num_cylinders;
-	t_hit				hit;
+	t_hit			hit;
 }			t_scene;
 
 // RENDER (MAIN FUNCTION)
@@ -59,9 +59,12 @@ void		render(t_data *data, t_scene *scene);
 
 // RAY INTERSECTION
 void		ray_intersection(t_ray r, t_scene *scene);
-int			is_in_shadow(t_vector3 point, t_light *light_source, t_scene *scene);
+int			is_in_shadow(t_vector3 point, t_light *light_source, \
+		t_scene *scene);
 t_color		calculate_light(t_ray r, t_scene *scene);
 t_vector3	intersection_point(t_ray ray, double distance);
+// ray 
+t_vector3	calculate_ray_direction(t_scene *scene, unsigned x, unsigned y);
 
 // SCENE
 void		init_scene(t_scene *scene);

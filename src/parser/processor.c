@@ -36,7 +36,6 @@ int	process_camera(char **tokens, t_camera *camera)
 	camera->direction = normalize_v3(camera->direction);
 	if (!insert_angle(&camera->fov, tokens[3]))
 		return (0);
-	compute_camera_basis(camera);
 	return (1);
 }
 

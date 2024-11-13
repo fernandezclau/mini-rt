@@ -23,8 +23,8 @@
 int	process_sphere(char **tokens, t_sphere **sp)
 {
 	t_sphere	*new_sphere;
-	char	**position;
-	char	**colors;
+	char		**position;
+	char		**colors;
 
 	new_sphere = NULL;
 	if (array_len(tokens) != 4)

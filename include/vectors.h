@@ -54,7 +54,6 @@ float		length_v3(t_vector3 v);
 t_vector3	normalize_v3(t_vector3 v);
 float		cos_v3(t_vector3 a, t_vector3 b);
 float		sin_v3(t_vector3 a, t_vector3 b);
-t_vector3	rotate_vect(t_vector3 vector, t_vector3 axis, float cos, float sin);
 t_vector3	reflect_v3(t_vector3 light_direction, t_vector3 normal);
 void		display_v3(t_vector3 v);
 

@@ -34,6 +34,7 @@ void	interesection_planes(t_ray *r, t_plane **planes, t_hit *l_hit)
 			{
 				l_hit->min_dist = l_hit->dist;
 				l_hit->final_color = iter_planes->color;
+				l_hit->reflection = 0;
 				set_plane_normal(r, l_hit, iter_planes);
 			}
 			l_hit->intersect = 1;
@@ -54,7 +55,8 @@ void	interesection_planes(t_ray *r, t_plane **planes, t_hit *l_hit)
  */
 int	intersect_ray_plane(t_ray *r, t_plane *pl, t_hit *hit)
 {
-	float	denom;
+	float		denom;
+	float		t;
 	t_vector3	point_origin;
 	t_vector3	scaled_direction;
 
@@ -63,9 +65,12 @@ int	intersect_ray_plane(t_ray *r, t_plane *pl, t_hit *hit)
 	if (fabs(denom) < EPSILON_4)
 		return (0);
 	point_origin = substract_v3(pl->point, r->origin);
-	hit->dist = dot_product_v3(pl->normal, point_origin) / denom;
-	scaled_direction = scale_v3(r->direction, hit->dist);
+	t = dot_product_v3(point_origin, pl->normal) / denom;
+	if (t < 0)
+		return (0);
+	scaled_direction = scale_v3(r->direction, t);
 	hit->position = sum_v3(r->origin, scaled_direction);
+	hit->dist = t;
 	return (1);
 }
 
