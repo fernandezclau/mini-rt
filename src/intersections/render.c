@@ -25,6 +25,7 @@ void	render(t_data *data, t_scene *scene)
 	t_ray			r;
 	unsigned int	x;
 	unsigned int	y;
+	t_hit			initial_hit;
 
 	x = 0;
 	while (x < W_WIDTH)
@@ -34,7 +35,6 @@ void	render(t_data *data, t_scene *scene)
 		{
 			r.direction = calculate_ray_direction(scene, x, y);
 			r.origin = scene->camera.position;
-			t_hit initial_hit;
 			ray_intersection(r, scene, &initial_hit);
 			if (initial_hit.intersect)
 			{
@@ -65,7 +65,8 @@ void	pixel_put(t_data *data, int x, int y, int color)
 }
 
 /**
- * @brief Calculates the intersection position of a ray with an object and updates the hit position.
+ * @brief Calculates the intersection position of a ray with an object 
+ * and updates the hit position.
  * 
  * @param r Ray that intersects the object. 
  *          Contains the origin and direction of the ray.

@@ -12,7 +12,8 @@
 
 #include "../../include/minirt.h"
 
-t_vector3	calculate_spotlight(t_light light, t_vector3 normal, t_vector3 position)
+t_vector3	calculate_spotlight(t_light light, t_vector3 normal, \
+		t_vector3 position)
 {
 	t_vector3	light_intensity;
 	t_vector3	diffuse;
@@ -41,6 +42,7 @@ t_vector3	calculate_intensity(t_color colour, float ratio)
 	intensity.z = ratio * colour.r / 255;
 	return (intensity);
 }
+
 /**
  * @brief Calculates the diffuse intensity of light at a point.
  * 

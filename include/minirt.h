@@ -62,7 +62,7 @@ void		ray_intersection(t_ray r, t_scene *scene, t_hit *hit);
 void		calculate_light(t_ray r, t_scene *scene, t_hit *initial_hit);
 // ray 
 t_vector3	calculate_ray_direction(t_scene *scene, unsigned x, unsigned y);
-void	set_intersection_position(t_ray *r, t_hit *hit);
+void		set_intersection_position(t_ray *r, t_hit *hit);
 // SCENE
 void		init_scene(t_scene *scene);
 int			get_scene(int argc, char *filename, t_scene *scene);
