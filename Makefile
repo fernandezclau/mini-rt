@@ -1,7 +1,7 @@
 NAME = mini-rt
 
 CC = gcc
-CFLAGS = -I./include -I./lib/minilibx #-Wall -Wextra -Werror
+CFLAGS = -I./include -I./lib/minilibx -Wall -Wextra -Werror #-fsanitize=address,undefined
 
 SRC_DIR = ./src
 OBJ_DIR = ./.obj
@@ -41,7 +41,7 @@ SRC = $(SRC_DIR)/main.c \
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-MLX = -L./lib/minilibx -lmlx -lXext -lX11 -lm
+MLX = -L./lib/minilibx -lmlx -lXext -lX11 -lm #-fsanitize=address,undefined
 
 all: $(NAME)
 

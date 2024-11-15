@@ -50,7 +50,7 @@ t_vector3	init_p_v3(float x, float y, float z)
  *
  * @param v A pointer to the vector3 structure to be initialized.
  */
-t_vector3	init_r_v3(t_vector3 *v)
+void	init_r_v3(t_vector3 *v)
 {
 	v->x = 0;
 	v->y = 0;

@@ -72,12 +72,12 @@ int	three_floats(char **tokens)
 	i = 0;
 	while (tokens[i])
 	{
-		if (i > 2)
-			return (0);
 		if (!is_float(tokens[i]))
 			return (0);
 		i++;
 	}
+	if (i != 3)
+		return (0);
 	return (1);
 }
 
@@ -94,12 +94,12 @@ int	three_ints(char **tokens)
 	i = 0;
 	while (tokens[i])
 	{
-		if (i > 2)
-			return (0);
 		if (!is_int(tokens[i]))
 			return (0);
 		i++;
 	}
+	if (i != 3)
+		return (0);
 	return (1);
 }
 

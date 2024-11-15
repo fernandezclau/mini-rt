@@ -30,7 +30,7 @@ void	interesection_planes(t_ray *r, t_plane **planes, t_hit *l_hit)
 	{
 		if (intersect_ray_plane(r, iter_planes, l_hit))
 		{
-			if (l_hit->dist > 0 && l_hit->dist < l_hit->min_dist \
+			if ((l_hit->dist > 0 && l_hit->dist < l_hit->min_dist) \
 			|| l_hit->intersect == 0)
 			{
 				l_hit->min_dist = l_hit->dist;
@@ -60,7 +60,6 @@ int	intersect_ray_plane(t_ray *r, t_plane *pl, t_hit *hit)
 	float		denom;
 	float		t;
 	t_vector3	point_origin;
-	t_vector3	scaled_direction;
 
 	pl->normal = normalize_v3(pl->normal);
 	denom = dot_product_v3(r->direction, pl->normal);
@@ -70,7 +69,6 @@ int	intersect_ray_plane(t_ray *r, t_plane *pl, t_hit *hit)
 	t = dot_product_v3(point_origin, pl->normal) / denom;
 	if (t < 0)
 		return (0);
-	scaled_direction = scale_v3(r->direction, t);
 	hit->dist = t;
 	return (1);
 }

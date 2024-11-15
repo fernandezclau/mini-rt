@@ -41,7 +41,7 @@ void		display_v2(t_vector2 v);
 // VECTOR 3
 t_vector3	init_v3(void);
 t_vector3	init_p_v3(float x, float y, float z);
-t_vector3	init_r_v3(t_vector3 *v);
+void		init_r_v3(t_vector3 *v);
 
 t_vector3	sum_v3(t_vector3 a, t_vector3 b);
 t_vector3	substract_v3(t_vector3 a, t_vector3 b);
@@ -57,8 +57,8 @@ float		sin_v3(t_vector3 a, t_vector3 b);
 t_vector3	reflect_v3(t_vector3 light_direction, t_vector3 normal);
 void		display_v3(t_vector3 v);
 
-/* COLOR */
-int			init_r_color(t_color *c);
+// COLOR 
+void		init_r_color(t_color *c);
 int			rgb_to_hex(t_color *c);
 t_color		multiply_color(t_color c, t_vector3 v);
 t_color		scale_c(t_color c, float factor);

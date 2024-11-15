@@ -62,8 +62,8 @@ int		intersect_ray_sphere(t_ray *r, t_sphere *sphere, t_hit *hit);
 int		intersect_ray_cylinder(t_ray *r, t_hit *hit, t_cylinder *cl);
 
 // NORMAL
-void	set_cylinder_normal(t_ray *r, t_cylinder *cy, t_hit *l_hit);
-void	set_sphere_normal(t_ray *r, t_hit *l_hit, t_sphere *sp);
+void	set_cylinder_normal(t_cylinder *cy, t_hit *l_hit);
+void	set_sphere_normal(t_hit *l_hit, t_sphere *sp);
 void	set_plane_normal(t_ray *r, t_hit *l_hit, t_plane *pl);
 
 // INSERTION

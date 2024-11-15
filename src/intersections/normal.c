@@ -31,11 +31,10 @@ void	set_plane_normal(t_ray *r, t_hit *l_hit, t_plane *pl)
  * @brief Adjusts the normal of a sphere at the intersection point to ensure
  * it faces against the ray direction for correct shading.
  * 
- * @param r The ray intersecting with the sphere.
  * @param l_hit The hit record.
  * @param pl The sphere structure.
  */
-void	set_sphere_normal(t_ray *r, t_hit *l_hit, t_sphere *sp)
+void	set_sphere_normal(t_hit *l_hit, t_sphere *sp)
 {
 	l_hit->normal = normalize_v3(substract_v3(l_hit->position, sp->center));
 }
@@ -43,12 +42,11 @@ void	set_sphere_normal(t_ray *r, t_hit *l_hit, t_sphere *sp)
 /**
  * @brief Sets the normal vector at the hit point on a cylinder.
  * 
- * @param r The ray that intersects with the cylinder.
  * @param cy The cylinder with which the ray intersects.
  * @param l_hit The hit structure storing the intersection details,
  * including the position of the hit and the normal to be calculated.
  */
-void	set_cylinder_normal(t_ray *r, t_cylinder *cy, t_hit *l_hit)
+void	set_cylinder_normal(t_cylinder *cy, t_hit *l_hit)
 {
 	t_vector3	base_to_point;
 	float		distance;

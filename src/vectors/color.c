@@ -18,7 +18,7 @@
  * @param c A pointer to the color structure to be initialized.
  * @return An integer value indicating success (1) or failure (0).
  */
-int	init_r_color(t_color *c)
+void	init_r_color(t_color *c)
 {
 	c->r = 0;
 	c->g = 0;

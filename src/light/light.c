@@ -20,13 +20,12 @@ int			apply_shadow(t_light *light, t_scene *scene, t_hit *hit);
  * @brief Calculates the combined light at a given hit point, including 
  * ambient and spotlight contributions.
  * 
- * @param r The ray that intersects the object.
  * @param scene The scene containing lights, ambient light, and other objects.
  * @param hit Pointer to the hit structure which holds the intersection details.
  * 
  * @return The combined light color at the hit point.
  */
-void	calculate_light(t_ray r, t_scene *scene, t_hit *hit)
+void	calculate_light(t_scene *scene, t_hit *hit)
 {
 	t_vector3	final_light;
 	t_light		*i_light;
@@ -69,8 +68,9 @@ int	apply_shadow(t_light *light, t_scene *scene, t_hit *hit)
 	shadow_r.direction = normalize_v3(substract_v3(hit->position, \
 				light->position));
 	ray_intersection(shadow_r, scene, &new_hit);
-	if (scene->hit.intersect && \
-			length_v3(substract_v3(new_hit.position, hit->position)) <= 0.01f)
+	if (hit->intersect && \
+			length_v3(substract_v3(new_hit.position, hit->position)) \
+			<= EPSILON_2)
 		return (1);
 	return (0);
 }

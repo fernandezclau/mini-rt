@@ -18,7 +18,6 @@ t_vector3	calculate_spotlight(t_light light, t_vector3 normal, \
 	t_vector3	light_intensity;
 	t_vector3	diffuse;
 	t_vector3	specular;
-	t_vector3	intensity;
 
 	light_intensity = calculate_intensity(light.color, light.brightness);
 	specular = calculate_specular(normal, position, light_intensity);

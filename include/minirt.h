@@ -29,17 +29,6 @@
 # include "./shapes.h"
 
 // ......... STRUCTS .......
-typedef struct s_data
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*image_ptr;
-	char	*image_data;
-	int		bpp;
-	int		size_line;
-	int		endian;
-}	t_data;
-
 typedef struct s_scene
 {
 	t_camera		camera;
@@ -51,18 +40,31 @@ typedef struct s_scene
 	int				num_spheres;
 	int				num_planes;
 	int				num_cylinders;
-	t_hit			hit;
 }			t_scene;
+
+typedef struct s_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*image_ptr;
+	char	*image_data;
+	int		bpp;
+	int		size_line;
+	int		endian;
+	t_scene	*scene;
+}	t_data;
 
 // RENDER (MAIN FUNCTION)
 void		render(t_data *data, t_scene *scene);
 
-// RAY INTERSECTION
+// RAY
 void		ray_intersection(t_ray r, t_scene *scene, t_hit *hit);
-void		calculate_light(t_ray r, t_scene *scene, t_hit *initial_hit);
-// ray 
 t_vector3	calculate_ray_direction(t_scene *scene, unsigned x, unsigned y);
 void		set_intersection_position(t_ray *r, t_hit *hit);
+
+// LIGHT
+void		calculate_light(t_scene *scene, t_hit *initial_hit);
+
 // SCENE
 void		init_scene(t_scene *scene);
 int			get_scene(int argc, char *filename, t_scene *scene);
@@ -78,7 +80,7 @@ int			close_window(t_data *data);
 int			mouse_hook(int button);
 
 // WINDOWS MEMORY RELEASE
-void		free_mlx_resources(t_data *data);
+void		free_resources(t_data *data);
 
 // PARSING
 int			process_camera(char **tokens, t_camera *camera);

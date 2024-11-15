@@ -20,6 +20,7 @@ int	main(int argc, char **argv)
 	(void)argc, (void) argv;
 	if (get_scene(argc, argv[1], &scene))
 	{
+		data.scene = &scene;
 		data.mlx_ptr = mlx_init();
 		data.win_ptr = mlx_new_window(data.mlx_ptr, W_WIDTH, W_HEIGHT, W_TITLE);
 		data.image_ptr = mlx_new_image(data.mlx_ptr, W_WIDTH, W_HEIGHT);

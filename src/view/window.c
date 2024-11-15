@@ -17,12 +17,17 @@
  * 
  * @param data Pointer to the data structure containing MLX pointers.
  */
-void	free_mlx_resources(t_data *data)
+void	free_resources(t_data *data)
 {
 	if (data->image_ptr)
 		mlx_destroy_image(data->mlx_ptr, data->image_ptr);
 	if (data->win_ptr)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	if (data->mlx_ptr)
+	{
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
+	}
 }
 
 /**
@@ -33,7 +38,8 @@ void	free_mlx_resources(t_data *data)
  */
 int	close_window(t_data *data)
 {
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	free_resources(data);
+	free_scene(data->scene);
 	exit(0);
 	return (0);
 }
@@ -72,6 +78,5 @@ int	mouse_hook(int button)
 		printf("Scroll: Ampliar zoom\n");
 	else if (button == 5)
 		printf("Scroll down: Alejar zoom\n");
-	printf("Actualizar la ventana con la nueva posición si es necesario");
 	return (0);
 }

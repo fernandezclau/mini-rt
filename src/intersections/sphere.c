@@ -30,13 +30,13 @@ void	intersection_spheres(t_ray *r, t_sphere **spheres, t_hit *l_hit)
 	{
 		if (intersect_ray_sphere(r, iter_spheres, l_hit))
 		{
-			if (l_hit->dist > 0 && l_hit->dist < l_hit->min_dist \
+			if ((l_hit->dist > 0 && l_hit->dist < l_hit->min_dist) \
 			|| l_hit->intersect == 0)
 			{
 				l_hit->min_dist = l_hit->dist;
 				l_hit->final_color = iter_spheres->color;
 				set_intersection_position(r, l_hit);
-				set_sphere_normal(r, l_hit, iter_spheres);
+				set_sphere_normal(l_hit, iter_spheres);
 			}
 			l_hit->intersect = 1;
 		}
@@ -66,8 +66,7 @@ int	intersect_ray_sphere(t_ray *r, t_sphere *sp, t_hit *hit)
 	a = dot_product_v3(r->direction, r->direction);
 	b = 2.0f * dot_product_v3(oc, r->direction);
 	c = dot_product_v3(oc, oc) - (sp->radius * sp->radius);
-	discriminant = b * b - 4 * a * \
-			(dot_product_v3(oc, oc) - (sp->radius * sp->radius));
+	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)
 		return (0);
 	if (!calculate_intersection_times(a, b, discriminant, &hit->dist))
