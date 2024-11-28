@@ -34,11 +34,13 @@ typedef struct s_color
 }		t_color;
 
 // VECTOR 2
+
 t_vector2	init_v2(void);
 t_vector2	init_p_v2(float x, float y);
 void		display_v2(t_vector2 v);
 
 // VECTOR 3
+
 t_vector3	init_v3(void);
 t_vector3	init_p_v3(float x, float y, float z);
 void		init_r_v3(t_vector3 *v);
@@ -58,6 +60,7 @@ t_vector3	reflect_v3(t_vector3 light_direction, t_vector3 normal);
 void		display_v3(t_vector3 v);
 
 // COLOR 
+
 void		init_r_color(t_color *c);
 int			rgb_to_hex(t_color *c);
 t_color		multiply_color(t_color c, t_vector3 v);

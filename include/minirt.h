@@ -29,6 +29,7 @@
 # include "./shapes.h"
 
 // ......... STRUCTS .......
+
 typedef struct s_scene
 {
 	t_camera		camera;
@@ -55,34 +56,42 @@ typedef struct s_data
 }	t_data;
 
 // RENDER (MAIN FUNCTION)
+
 void		render(t_data *data, t_scene *scene);
 
 // RAY
+
 void		ray_intersection(t_ray r, t_scene *scene, t_hit *hit);
 t_vector3	calculate_ray_direction(t_scene *scene, unsigned x, unsigned y);
 void		set_intersection_position(t_ray *r, t_hit *hit);
 
 // LIGHT
+
 void		calculate_light(t_scene *scene, t_hit *initial_hit);
 
 // SCENE
+
 void		init_scene(t_scene *scene);
 int			get_scene(int argc, char *filename, t_scene *scene);
 void		free_scene(t_scene *scene);
 void		print_scene(t_scene scene);
 
 // PIXEL MANAGEMENT
+
 void		pixel_put(t_data *data, int x, int y, int color);
 
 // WINDOWS MANAGEMENT
+
 int			key_hook(int keycode, t_data *data);
 int			close_window(t_data *data);
 int			mouse_hook(int button);
 
 // WINDOWS MEMORY RELEASE
+
 void		free_resources(t_data *data);
 
 // PARSING
+
 int			process_camera(char **tokens, t_camera *camera);
 int			process_ambient(char **tokens, t_ambient_light *ambient_light);
 int			process_light(char **tokens, t_light **l);
@@ -91,6 +100,7 @@ int			process_plane(char **tokens, t_plane **pl);
 int			process_cylinder(char **tokens, t_cylinder **cy);
 
 // PARSING VALIDATIONS
+
 int			is_float(const char *str);
 int			is_int(const char *str);
 int			three_floats(char **tokens);
@@ -102,6 +112,7 @@ int			is_valid_angle(int angle);
 int			is_rt_file(const char *filename);
 
 // UTILS
+
 char		**ft_split(char const *s, char c);
 char		**split_spaces(char const *s);
 int			array_len(char **array);

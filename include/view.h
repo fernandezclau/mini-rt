@@ -55,6 +55,7 @@ typedef struct s_hit
 }				t_hit;
 
 // LIGHT
+
 t_vector3	calculate_intensity(t_color colour, float ratio);
 t_vector3	calculate_ambient_light(t_ambient_light light);
 t_vector3	calculate_spotlight(t_light light, t_vector3 normal, \
@@ -65,18 +66,22 @@ t_vector3	calculate_specular(t_vector3 normal, t_vector3 p_to_l, \
 	t_vector3 light);
 
 // INITIALIZATION
+
 void		init_camera(t_camera *c);
 void		init_light(t_light *l);
 void		init_ambient_light(t_ambient_light *al);
 void		init_hit_point(t_hit *hit);
 
 // LIST
+
 void		add_light(t_light **head, t_light *new_plain);
 
 // MEMORY RELEASING
+
 void		free_lights(t_light **head);
 
 // DISPLAY
+
 void		display_camera(t_camera c);
 void		display_ambient_light(t_ambient_light al);
 void		display_light(t_light *l);

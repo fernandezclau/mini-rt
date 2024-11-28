@@ -1,6 +1,6 @@
 NAME = mini-rt
 
-CC = gcc
+CC = cc
 CFLAGS = -I./include -I./lib/minilibx -Wall -Wextra -Werror #-fsanitize=address,undefined
 
 SRC_DIR = ./src
