@@ -1,4 +1,5 @@
 NAME			= mini-rt
+LIBNAME			= libft.a
 
 CC				= cc
 CFLAGS			= -Wall -Wextra -Werror
@@ -7,6 +8,7 @@ CFLAGS			+= -I./include -I./lib/minilibx
 
 SRC_DIR			= ./src
 OBJ_DIR			= ./.obj
+LIBDIR			= ./lib/libft/
 
 SRC				= $(SRC_DIR)/main.c \
 				$(SRC_DIR)/parser/parser.c \
@@ -38,8 +40,8 @@ SRC				= $(SRC_DIR)/main.c \
 				$(SRC_DIR)/light/light.c \
 				$(SRC_DIR)/light/ambient_light.c \
 				$(SRC_DIR)/light/spotlight.c \
-				./lib/get_next_line/get_next_line.c \
-				./lib/get_next_line/get_next_line_utils.c \
+				# ./lib/get_next_line/get_next_line.c \
+				# ./lib/get_next_line/get_next_line_utils.c \
 
 OBJ				= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
@@ -48,8 +50,15 @@ MLX				+= -fsanitize=address,undefined
 
 all:			$(NAME)
 
-$(NAME): 		$(OBJ)
-				$(CC) $(OBJ) -o $(NAME) $(MLX)
+$(NAME): 		$(OBJ) $(LIBNAME)
+				$(CC) $(OBJ) $(LIBNAME) -o $(NAME) $(MLX)
+				@echo "\033[0;32m--- $(NAME) compiled successfully! ---\033[0m"
+
+
+$(LIBNAME):
+				$(MAKE) $(LIBFLAG) -C $(LIBDIR)
+				cp $(LIBDIR)$(LIBNAME) .
+				$(MAKE) -C $(LIBDIR) clean
 
 
 $(OBJ_DIR):
@@ -71,7 +80,7 @@ clean:
 
 
 fclean:			clean
-				rm -f $(NAME)
+				rm -f $(NAME) $(LIBNAME)
 
 
 re:				fclean all

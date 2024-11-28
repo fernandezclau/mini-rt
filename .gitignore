@@ -3,6 +3,10 @@
 
 # .o files
 .obj/
+*.o
+
+# .a files
+*.a
 
 # executable
 mini-rt
