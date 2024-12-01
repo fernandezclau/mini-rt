@@ -46,7 +46,7 @@ SRC				= $(SRC_DIR)/main.c \
 OBJ				= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 MLX				= -L./lib/minilibx -lmlx -lXext -lX11 -lm
-MLX				+= -fsanitize=address,undefined
+# MLX				+= -fsanitize=address,undefined
 
 all:			$(NAME)
 
