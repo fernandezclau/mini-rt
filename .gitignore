@@ -9,7 +9,7 @@
 *.a
 
 # executable
-mini-rt
+miniRT
 
 # own testing
 ./testing

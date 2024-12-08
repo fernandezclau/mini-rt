@@ -1,4 +1,4 @@
-NAME			= mini-rt
+NAME			= miniRT
 LIBNAME			= libft.a
 
 CC				= cc
