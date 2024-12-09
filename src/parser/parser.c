@@ -28,18 +28,20 @@ int	parse_line(char *line, t_scene *scene)
 		return (free_array(tokens), 1);
 	if (tokens[0][0] == CAMERA && !process_camera(tokens, &scene->camera))
 		return (free_array(tokens), ft_error(E_CAMERA), 0);
+	// else if (tokens[0][0] == CAMERA && scene->camera.fov && !process_camera(tokens, &scene->camera2))
+	// 	return (free_array(tokens), ft_error(E_CAMERA), 0);
 	else if (tokens[0][0] == AMBIENT_LIGHT && \
 			!process_ambient(tokens, &scene->ambient_light))
 		return (free_array(tokens), ft_error(E_AMBIENT_LIGHT), 0);
 	else if (tokens[0][0] == LIGHT && !process_light(tokens, &scene->lights))
 		return (free_array(tokens), ft_error(E_LIGHT), 0);
-	else if (!strcmp(tokens[0], SPHERE) && \
+	else if (!ft_strncmp(tokens[0], SPHERE, ft_strlen(tokens[0])) && \
 			!process_sphere(tokens, &scene->spheres))
 		return (free_array(tokens), ft_error(E_SPHERE), 0);
-	else if (!strcmp(tokens[0], PLANE) && \
+	else if (!ft_strncmp(tokens[0], PLANE, ft_strlen(tokens[0])) && \
 			!process_plane(tokens, &scene->planes))
 		return (free_array(tokens), ft_error(E_PLANE), 0);
-	else if (!strcmp(tokens[0], CYLINDER) && \
+	else if (!ft_strncmp(tokens[0], CYLINDER, ft_strlen(tokens[0])) && \
 			!process_cylinder(tokens, &scene->cylinders))
 		return (free_array(tokens), ft_error(E_CYLINDER), 0);
 	return (free_array(tokens), 1);

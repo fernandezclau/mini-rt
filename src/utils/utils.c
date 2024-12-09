@@ -37,7 +37,7 @@ int	array_len(char **array)
  * @return char** An array of substrings, NULL-terminated. 
  *                NULL is returned in case of an allocation error.
  */
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c) //TODO get rid of strndup or function
 {
 	char	**array;
 	int		i;
@@ -47,7 +47,7 @@ char	**ft_split(char const *s, char c)
 
 	i = 0;
 	j = 0;
-	array = malloc(sizeof(char *) * (strlen(s) + 1));
+	array = malloc(sizeof(char *) * (ft_strlen(s) + 1));
 	if (!s || !(array))
 		return (NULL);
 	while (s[i])
@@ -73,7 +73,7 @@ char	**ft_split(char const *s, char c)
  * @return char** An array of substrings, NULL-terminated.
  *                NULL is returned in case of an allocation error.
  */
-char	**split_spaces(char const *s)
+char	**split_spaces(char const *s) //TODO get rid of strndup
 {
 	char	**array;
 	int		i;
@@ -83,15 +83,15 @@ char	**split_spaces(char const *s)
 
 	i = 0;
 	j = 0;
-	array = malloc(sizeof(char *) * (strlen(s) + 1));
+	array = malloc(sizeof(char *) * (ft_strlen(s) + 1));
 	if (!s || !(array))
 		return (NULL);
 	while (s[i])
 	{
-		while (isspace(s[i]))
+		while (((s[i] >= 9 && s[i] <= 13) || s[i] == 32))
 			i++;
 		start = i;
-		while (s[i] && !isspace(s[i]))
+		while (s[i] && !((s[i] >= 9 && s[i] <= 13) || s[i] == 32))
 			i++;
 		end = i;
 		if (end > start)
@@ -127,8 +127,8 @@ int	is_rt_file(const char *filename)
 {
 	const char	*dot;
 
-	dot = strrchr(filename, '.');
+	dot = ft_strrchr(filename, '.');
 	if (!dot || dot == filename)
 		return (0);
-	return (strcmp(dot, ".rt") == 0);
+	return (ft_strncmp(dot, ".rt", 4) == 0);
 }

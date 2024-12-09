@@ -2,7 +2,7 @@ NAME			= miniRT
 LIBNAME			= libft.a
 
 CC				= cc
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror -O3
 CFLAGS			+= -I./include -I./lib/minilibx
 # CFLAGS			+= -fsanitize=address,undefined
 

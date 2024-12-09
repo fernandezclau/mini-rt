@@ -20,7 +20,7 @@
  * @param is_normalized Check if the vector is normalized.
  * @return 1 if successful, 0 if an error occurred (e.g., invalid tokens).
  */
-int	insert_vector3(t_vector3 *v, char **tokens, int is_normalized)
+int	insert_vector3(t_vector3 *v, char **tokens, int is_normalized) //TODO get rid of atof (wip)
 {
 	if (!three_floats(tokens))
 		return (free_array(tokens), 0);
@@ -44,9 +44,9 @@ int	insert_color(t_color *c, char **tokens)
 {
 	if (!three_ints(tokens))
 		return (free_array(tokens), 0);
-	c->r = atoi(tokens[0]);
-	c->g = atoi(tokens[1]);
-	c->b = atoi(tokens[2]);
+	c->r = ft_atoi(tokens[0]);
+	c->g = ft_atoi(tokens[1]);
+	c->b = ft_atoi(tokens[2]);
 	free_array(tokens);
 	if (!is_valid_color(*c))
 		return (0);
@@ -64,7 +64,7 @@ int	insert_angle(float *fov, char *value)
 {
 	if (!is_int(value))
 		return (0);
-	*fov = atoi(value);
+	*fov = ft_atoi(value);
 	if (!is_valid_angle(*fov))
 		return (0);
 	return (1);
@@ -77,7 +77,7 @@ int	insert_angle(float *fov, char *value)
  * @param value String representing the ratio value.
  * @return 1 if successful, 0 if an error occurred (e.g., invalid value).
  */
-int	insert_ratio(float *ratio, char *value)
+int	insert_ratio(float *ratio, char *value) //TODO get rid of atof (wip)
 {
 	if (!is_float(value))
 		return (0);
@@ -94,7 +94,7 @@ int	insert_ratio(float *ratio, char *value)
  * @param value String representing the magnitude value.
  * @return 1 if successful, 0 if an error occurred (e.g., invalid value).
  */
-int	insert_magnitude(float *magnitude, char *value)
+int	insert_magnitude(float *magnitude, char *value) //TODO get rid of atof (wip)
 {
 	if (!is_float(value))
 		return (0);

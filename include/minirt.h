@@ -33,6 +33,7 @@
 typedef struct s_scene
 {
 	t_camera		camera;
+	// t_camera		camera2;
 	t_ambient_light	ambient_light;
 	t_light			*lights;
 	t_sphere		*spheres;
@@ -113,7 +114,7 @@ int			is_rt_file(const char *filename);
 
 // UTILS
 
-char		**ft_split(char const *s, char c);
+// char		**ft_split(char const *s, char c);
 char		**split_spaces(char const *s);
 int			array_len(char **array);
 void		free_array(char **array);
