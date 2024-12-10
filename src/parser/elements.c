@@ -24,9 +24,9 @@ int	insert_vector3(t_vector3 *v, char **tokens, int is_normalized) //TODO get ri
 {
 	if (!three_floats(tokens))
 		return (free_array(tokens), 0);
-	v->x = atof(tokens[0]);
-	v->y = atof(tokens[1]);
-	v->z = atof(tokens[2]);
+	v->x = ft_atof(tokens[0]);
+	v->y = ft_atof(tokens[1]);
+	v->z = ft_atof(tokens[2]);
 	free_array(tokens);
 	if (is_normalized && !is_normalized_f_v3(*v))
 		return (0);
@@ -81,7 +81,7 @@ int	insert_ratio(float *ratio, char *value) //TODO get rid of atof (wip)
 {
 	if (!is_float(value))
 		return (0);
-	*ratio = atof(value);
+	*ratio = ft_atof(value);
 	if (!is_valid_ratio(*ratio))
 		return (0);
 	return (1);
@@ -98,6 +98,6 @@ int	insert_magnitude(float *magnitude, char *value) //TODO get rid of atof (wip)
 {
 	if (!is_float(value))
 		return (0);
-	*magnitude = atof(value);
+	*magnitude = ft_atof(value);
 	return (1);
 }
