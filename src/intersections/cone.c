@@ -32,3 +32,24 @@ void	add_cone(t_cone **head, t_cone *new_cone)
 		last->next = new_cone;
 	}
 }
+
+/**
+ * @brief Frees the memory allocated for the cone linked list.
+ *
+ * @param head A pointer to a pointer to the head of the cone linked list.
+ */
+void	free_cone(t_cone **head)
+{
+	t_cone	*current;
+	t_cone	*next;
+
+	current = *head;
+	next = NULL;
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+	*head = NULL;
+}

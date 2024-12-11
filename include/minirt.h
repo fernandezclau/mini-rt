@@ -119,7 +119,7 @@ char		**split_spaces(char const *s);
 int			array_len(char **array);
 void		free_array(char **array);
 void		ft_error(char *error);
-void		init_ugh_cylinder(t_ugh *top_cap, t_ugh *cylinder_cap, \
+void		init_ugh_cylinder(t_ugh *top_cap, t_ugh *cylinder_body, \
 			t_ugh *bottom_cap, t_cylinder *cl);
 
 #endif

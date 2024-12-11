@@ -55,6 +55,7 @@ void	free_scene(t_scene *scene)
 	free_spheres(&scene->spheres);
 	free_plane(&scene->planes);
 	free_cylinder(&scene->cylinders);
+	free_cone(&scene->cones);
 }
 
 /**

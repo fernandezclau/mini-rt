@@ -20,12 +20,12 @@
  * @param bottom_cap Ugh structure representing the bottom cap of the cylinder.
  * @param cl Cylinder structure to initialize intersection data for.
  */
-void	init_ugh_cylinder(t_ugh *top_cap, t_ugh *cylinder_cap, \
+void	init_ugh_cylinder(t_ugh *top_cap, t_ugh *cylinder_body, \
 		t_ugh *bottom_cap, t_cylinder *cl)
 {
 	cl->direction = normalize_v3(cl->direction);
 	top_cap->distance = FLT_MAX;
-	cylinder_cap->distance = FLT_MAX;
+	cylinder_body->distance = FLT_MAX;
 	bottom_cap->distance = FLT_MAX;
 	top_cap->center = sum_v3(cl->center, scale_v3(cl->direction, cl->height));
 	bottom_cap->center = cl->center;

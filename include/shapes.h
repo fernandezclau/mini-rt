@@ -99,6 +99,7 @@ void	add_cone(t_cone **head, t_cone *new_cone);
 void	free_spheres(t_sphere **head);
 void	free_plane(t_plane **head);
 void	free_cylinder(t_cylinder **head);
+void	free_cone(t_cone **head);
 
 // DISPLAY
 
