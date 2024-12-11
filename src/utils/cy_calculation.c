@@ -27,8 +27,8 @@ void	init_ugh_cylinder(t_ugh *top_cap, t_ugh *cylinder_body, \
 	top_cap->distance = FLT_MAX;
 	cylinder_body->distance = FLT_MAX;
 	bottom_cap->distance = FLT_MAX;
-	top_cap->center = sum_v3(cl->center, scale_v3(cl->direction, cl->height));
-	bottom_cap->center = cl->center;
+	top_cap->position = sum_v3(cl->center, scale_v3(cl->direction, cl->height));
+	bottom_cap->position = cl->center;
 	top_cap->direction = cl->direction;
 	bottom_cap->direction = scale_v3(cl->direction, -1);
 }
@@ -157,7 +157,7 @@ int	intersect_circle(t_ray *r, t_ugh *ugh, float radius)
 	t_vector3	intersect_point;
 	float		distance_center;
 
-	oc = substract_v3(ugh->center, r->origin);
+	oc = substract_v3(ugh->position, r->origin);
 	denom = dot_product_v3(r->direction, ugh->direction);
 	if (fabs(denom) < EPSILON_6)
 		return (0);
@@ -165,7 +165,7 @@ int	intersect_circle(t_ray *r, t_ugh *ugh, float radius)
 	if (t < 0)
 		return (0);
 	intersect_point = sum_v3(r->origin, scale_v3(r->direction, t));
-	distance_center = length_v3(substract_v3(intersect_point, ugh->center));
+	distance_center = length_v3(substract_v3(intersect_point, ugh->position));
 	if (distance_center > radius)
 		return (0);
 	ugh->position = intersect_point;

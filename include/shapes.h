@@ -57,7 +57,6 @@ typedef struct s_ugh
 {
 	float		distance;
 	t_vector3	position;
-	t_vector3	center;
 	t_vector3	direction;
 }				t_ugh;
 
