@@ -110,7 +110,7 @@ void	display_cylinders(t_cylinder *cy)
  */
 void	display_cones(t_cone *cn)
 {
-	t_cone	*current;
+	t_cone		*current;
 	int			i;
 
 	current = cn;

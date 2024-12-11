@@ -54,8 +54,8 @@ t_vector3	calculate_ray_direction(t_scene *scene, unsigned x, unsigned y)
 	right = normalize_v3(cross_product_v3(get_foward(scene), \
 				init_p_v3(0.0f, 1.0f, 0.0f)));
 	true_up = normalize_v3(cross_product_v3(right, get_foward(scene)));
-	screen_x = (1.0f - 2.0f * ((x + 0.5f) / W_WIDTH)) * get_aspect_ratio() \
-			* get_tan_fov(scene->camera.fov);
+	screen_x = (1.0f - 2.0f * ((x + 0.5f) / W_WIDTH)) * get_aspect_ratio() * \
+			get_tan_fov(scene->camera.fov);
 	screen_y = (1.0f - 2.0f * ((y + 0.5f) / W_HEIGHT)) * \
 		get_tan_fov(scene->camera.fov);
 	ray_direction = sum_v3(sum_v3(scale_v3(right, screen_x), \

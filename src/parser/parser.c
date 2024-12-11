@@ -28,8 +28,6 @@ int	parse_line(char *line, t_scene *scene)
 		return (free_array(tokens), 1);
 	if (tokens[0][0] == CAMERA && !process_camera(tokens, &scene->camera))
 		return (free_array(tokens), ft_error(E_CAMERA), 0);
-	// else if (tokens[0][0] == CAMERA && scene->camera.fov && !process_camera(tokens, &scene->camera2))
-	// 	return (free_array(tokens), ft_error(E_CAMERA), 0);
 	else if (tokens[0][0] == AMBIENT_LIGHT && \
 			!process_ambient(tokens, &scene->ambient_light))
 		return (free_array(tokens), ft_error(E_AMBIENT_LIGHT), 0);

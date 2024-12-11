@@ -20,7 +20,7 @@
  * @param is_normalized Check if the vector is normalized.
  * @return 1 if successful, 0 if an error occurred (e.g., invalid tokens).
  */
-int	insert_vector3(t_vector3 *v, char **tokens, int is_normalized) //TODO get rid of atof (wip)
+int	insert_vector3(t_vector3 *v, char **tokens, int is_normalized)
 {
 	if (!three_floats(tokens))
 		return (free_array(tokens), 0);
