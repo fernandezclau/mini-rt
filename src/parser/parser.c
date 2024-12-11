@@ -44,6 +44,9 @@ int	parse_line(char *line, t_scene *scene)
 	else if (!ft_strncmp(tokens[0], CYLINDER, ft_strlen(tokens[0])) && \
 			!process_cylinder(tokens, &scene->cylinders))
 		return (free_array(tokens), ft_error(E_CYLINDER), 0);
+	else if (!ft_strncmp(tokens[0], CONE, ft_strlen(tokens[0])) && \
+			!process_cone(tokens, &scene->cones))
+		return (free_array(tokens), ft_error(E_CONE), 0);
 	return (free_array(tokens), 1);
 }
 

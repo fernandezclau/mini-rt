@@ -77,20 +77,20 @@ int	intersect_ray_plane(t_ray *r, t_plane *pl, t_hit *hit)
  * @brief Adds a plane to the end of the plane linked list.
  *
  * @param head A pointer to a pointer to the head of the plane linked list.
- * @param new_plain A pointer to the new plane to be added.
+ * @param new_plane A pointer to the new plane to be added.
  */
-void	add_plane(t_plane **head, t_plane *new_plain)
+void	add_plane(t_plane **head, t_plane *new_plane)
 {
 	t_plane	*last;
 
 	if (*head == NULL)
-		*head = new_plain;
+		*head = new_plane;
 	else
 	{
 		last = *head;
 		while (last->next != NULL)
 			last = last->next;
-		last->next = new_plain;
+		last->next = new_plane;
 	}
 }
 

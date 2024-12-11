@@ -77,7 +77,7 @@ int	insert_angle(float *fov, char *value)
  * @param value String representing the ratio value.
  * @return 1 if successful, 0 if an error occurred (e.g., invalid value).
  */
-int	insert_ratio(float *ratio, char *value) //TODO get rid of atof (wip)
+int	insert_ratio(float *ratio, char *value)
 {
 	if (!is_float(value))
 		return (0);
@@ -94,7 +94,7 @@ int	insert_ratio(float *ratio, char *value) //TODO get rid of atof (wip)
  * @param value String representing the magnitude value.
  * @return 1 if successful, 0 if an error occurred (e.g., invalid value).
  */
-int	insert_magnitude(float *magnitude, char *value) //TODO get rid of atof (wip)
+int	insert_magnitude(float *magnitude, char *value)
 {
 	if (!is_float(value))
 		return (0);

@@ -24,6 +24,7 @@ SRC				= $(SRC_DIR)/main.c \
 				$(SRC_DIR)/intersections/ray.c \
 				$(SRC_DIR)/intersections/sphere.c \
 				$(SRC_DIR)/intersections/plane.c \
+				$(SRC_DIR)/intersections/cone.c \
 				$(SRC_DIR)/intersections/cylinder.c \
 				$(SRC_DIR)/intersections/normal.c \
 				$(SRC_DIR)/utils/utils.c \

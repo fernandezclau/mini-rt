@@ -40,6 +40,7 @@
 # define SPHERE				"sp"
 # define PLANE				"pl"
 # define CYLINDER			"cy"
+# define CONE				"cn"
 
 // VECTOR 3
 
@@ -81,6 +82,7 @@
 # define E_SPHERE			"[SPHERES]"
 # define E_PLANE			"[PLANE]"
 # define E_CYLINDER			"[CYLINDER]"
+# define E_CONE				"[CONE]"
 # define E_EXTENSION		"The extension file is incorrect. It must be '.rt'"
 
 #endif

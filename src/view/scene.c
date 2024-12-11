@@ -25,6 +25,7 @@ void	init_scene(t_scene *scene)
 	scene->spheres = NULL;
 	scene->planes = NULL;
 	scene->cylinders = NULL;
+	scene->cones = NULL;
 }
 
 /**
@@ -69,5 +70,6 @@ void	print_scene(t_scene scene)
 	display_light(scene.lights);
 	display_spheres(scene.spheres);
 	display_cylinders(scene.cylinders);
+	display_cones(scene.cones);
 	display_planes(scene.planes);
 }

@@ -43,6 +43,16 @@ typedef struct s_cylinder
 	struct s_cylinder	*next;
 }						t_cylinder;
 
+typedef struct s_cone
+{
+	t_vector3			center;
+	t_vector3			direction;
+	float				diameter;
+	float				height;
+	t_color				color;
+	struct s_cone		*next;
+}						t_cone;
+
 typedef struct s_ugh
 {
 	float		distance;
@@ -80,8 +90,9 @@ int		insert_magnitude(float *magnitude, char *value);
 // LIST HANDLING
 
 void	add_sphere(t_sphere **head, t_sphere *new_sphere);
-void	add_plane(t_plane **head, t_plane *new_plain);
+void	add_plane(t_plane **head, t_plane *new_plane);
 void	add_cylinder(t_cylinder **head, t_cylinder *new_cylinder);
+void	add_cone(t_cone **head, t_cone *new_cone);
 
 // MEMORY RELEASING
 
@@ -94,6 +105,7 @@ void	free_cylinder(t_cylinder **head);
 void	display_spheres(t_sphere *sp);
 void	display_planes(t_plane *pl);
 void	display_cylinders(t_cylinder *cl);
+void	display_cones(t_cone *cn);
 
 // CYLINDER CALCS
 

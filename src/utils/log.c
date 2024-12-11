@@ -104,6 +104,38 @@ void	display_cylinders(t_cylinder *cy)
 }
 
 /**
+ * @brief Prints the information of all cones in the linked list.
+ *
+ * @param cn A pointer to the head of the cone linked list.
+ */
+void	display_cones(t_cone *cn)
+{
+	t_cone	*current;
+	int			i;
+
+	current = cn;
+	i = 1;
+	printf(" %s____ CONES ____ %s\n\n", WH, RE);
+	while (current)
+	{
+		printf("%s %d. %s\n\n", WH, i, RE);
+		printf("%s > Center %s", WH, RE);
+		display_v3(current->center);
+		printf("\n%s > Direction %s", WH, RE);
+		display_v3(current->direction);
+		printf("\n%s > Diameter %s", WH, RE);
+		printf("%s[%f]%s\n\n", CY, current->diameter, RE);
+		printf("%s > Height %s", WH, RE);
+		printf("%s[%f]%s\n\n", CY, current->height, RE);
+		printf("%s > Color %s", WH, RE);
+		display_color(current->color);
+		printf("\n");
+		current = current->next;
+		i++;
+	}
+}
+
+/**
  * @brief Displays the details of a light structure.
  *
  * @param l The light structure to be displayed.

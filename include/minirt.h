@@ -15,7 +15,6 @@
 
 // ......... LIBS ........
 # include "mlx.h"
-# include <stdlib.h>
 # include <stdio.h>
 # include <ctype.h>
 # include <string.h>
@@ -39,6 +38,7 @@ typedef struct s_scene
 	t_sphere		*spheres;
 	t_plane			*planes;
 	t_cylinder		*cylinders;
+	t_cone			*cones;
 	int				num_spheres;
 	int				num_planes;
 	int				num_cylinders;
@@ -99,6 +99,7 @@ int			process_light(char **tokens, t_light **l);
 int			process_sphere(char **tokens, t_sphere **sp);
 int			process_plane(char **tokens, t_plane **pl);
 int			process_cylinder(char **tokens, t_cylinder **cy);
+int			process_cone(char **tokens, t_cone **cn);
 
 // PARSING VALIDATIONS
 

@@ -74,7 +74,7 @@ void		init_hit_point(t_hit *hit);
 
 // LIST
 
-void		add_light(t_light **head, t_light *new_plain);
+void		add_light(t_light **head, t_light *new_plane);
 
 // MEMORY RELEASING
 

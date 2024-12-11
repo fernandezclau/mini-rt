@@ -40,8 +40,7 @@ void	calculate_light(t_scene *scene, t_hit *hit)
 		{
 			l_point = normalize_v3(substract_v3(i_light->position, \
 						hit->position));
-			spotlight = calculate_spotlight(*i_light, \
-					hit->normal, l_point);
+			spotlight = calculate_spotlight(*i_light, hit->normal, l_point);
 			final_light = sum_v3(final_light, spotlight);
 		}
 		i_light = i_light->next;
