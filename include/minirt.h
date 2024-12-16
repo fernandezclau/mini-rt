@@ -121,5 +121,6 @@ void		free_array(char **array);
 void		ft_error(char *error);
 void		init_ugh_cylinder(t_ugh *top_cap, t_ugh *cylinder_body, \
 			t_ugh *bottom_cap, t_cylinder *cl);
+void		init_ugh_cone(t_ugh *base, t_ugh *body, t_cone *cn);
 
 #endif

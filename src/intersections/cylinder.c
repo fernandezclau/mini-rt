@@ -12,6 +12,8 @@
 
 #include "../../include/minirt.h"
 
+int	intersect_ray_cylinder(t_ray *r, t_hit *hit, t_cylinder *cl);
+
 /**
  * @brief Calculates intersections between a ray and a list of cylinders.
  * 
@@ -64,9 +66,7 @@ int	intersect_ray_cylinder(t_ray *r, t_hit *hit, t_cylinder *cl)
 	intersect_circle(r, &bottom_cap, cl->diameter / 2);
 	if (select_dist_cylinder(cylinder_body, top_cap, bottom_cap, hit))
 		return (1);
-	else if (select_dist_cylinder2(top_cap, bottom_cap, hit))
-		return (1);
-	return (0);
+	return (select_dist_cylinder2(top_cap, bottom_cap, hit));
 }
 
 /**

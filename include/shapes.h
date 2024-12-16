@@ -45,13 +45,13 @@ typedef struct s_cylinder
 
 typedef struct s_cone
 {
-	t_vector3			center;
-	t_vector3			direction;
-	float				diameter;
-	float				height;
-	t_color				color;
-	struct s_cone		*next;
-}						t_cone;
+	t_vector3		center;
+	t_vector3		direction;
+	float			diameter;
+	float			height;
+	t_color			color;
+	struct s_cone	*next;
+}					t_cone;
 
 typedef struct s_ugh
 {
@@ -65,18 +65,14 @@ typedef struct s_ugh
 void	intersection_planes(t_ray *r, t_plane **planes, t_hit *l_hit);
 void	intersection_spheres(t_ray *r, t_sphere **spheres, t_hit *l_hit);
 void	intersection_cylinders(t_ray *r, t_cylinder **cylinders, t_hit *l_hit);
-
-// SINGLE INTERSECTIONS
-
-int		intersect_ray_plane(t_ray *r, t_plane *pl, t_hit *hit);
-int		intersect_ray_sphere(t_ray *r, t_sphere *sphere, t_hit *hit);
-int		intersect_ray_cylinder(t_ray *r, t_hit *hit, t_cylinder *cl);
+void	intersection_cones(t_ray *r, t_cone **cones, t_hit *l_hit);
 
 // NORMAL
 
 void	set_cylinder_normal(t_cylinder *cy, t_hit *l_hit);
 void	set_sphere_normal(t_hit *l_hit, t_sphere *sp);
 void	set_plane_normal(t_ray *r, t_hit *l_hit, t_plane *pl);
+void	set_cone_normal(t_cone *cn, t_hit *l_hit);
 
 // INSERTION
 

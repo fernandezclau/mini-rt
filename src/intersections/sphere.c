@@ -12,6 +12,8 @@
 
 #include "../../include/minirt.h"
 
+int	intersect_ray_sphere(t_ray *r, t_sphere *sp, t_hit *hit);
+
 /**
  * @brief Checks for intersections between a ray and a list of spheres.
  * If an intersection is found, updates the hit record with the distance to the 
@@ -48,8 +50,7 @@ void	intersection_spheres(t_ray *r, t_sphere **spheres, t_hit *l_hit)
  * @brief Intersects a ray with a sphere.
  *
  * @param r Ray structure containing the origin and direction of the ray.
- * @param center Vector3 structure representing the center of the sphere.
- * @param radius The radius of the sphere.
+ * @param sp Sphere structure containing the center and radius.
  * @param hit Hit structure that contains the intersection information.
  * @return Returns 1 if the ray intersects.
  *         Returns 0 if there is no intersection.
@@ -69,9 +70,7 @@ int	intersect_ray_sphere(t_ray *r, t_sphere *sp, t_hit *hit)
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)
 		return (0);
-	if (!calculate_intersection_times(a, b, discriminant, &hit->dist))
-		return (0);
-	return (1);
+	return (calculate_intersection_times(a, b, discriminant, &hit->dist));
 }
 
 /**
@@ -80,8 +79,7 @@ int	intersect_ray_sphere(t_ray *r, t_sphere *sp, t_hit *hit)
  * @param a The quadratic coefficient of the intersection equation.
  * @param b The linear coefficient of the intersection equation.
  * @param discriminant The discriminant of the quadratic equation.
- * @param r Ray that is being intersected.
- * @param d Float that wilñ store the intersection distance.
+ * @param d Float that will store the intersection distance.
  * 
  * @return int Returns 1 if a valid intersection exists, or 0 if not.
  */

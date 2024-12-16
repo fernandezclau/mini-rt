@@ -12,6 +12,8 @@
 
 #include "../../include/minirt.h"
 
+int	intersect_ray_plane(t_ray *r, t_plane *pl, t_hit *hit);
+
 /**
  * @brief Checks for intersections between a ray and a list of planes.
  * If an intersection is found, updates the hit record with the distance to the 
@@ -49,8 +51,7 @@ void	intersection_planes(t_ray *r, t_plane **planes, t_hit *l_hit)
  * @brief Intersects a ray with a plane.
  *
  * @param r Ray structure containing the origin and direction of the ray.
- * @param point_on_plane Vector3 structure representing a point on the plane.
- * @param normal Vector3 structure representing the normal of the plane.
+ * @param pl Plane structure containing the center point and normal.
  * @param hit Hit structure with intersection information.
  * @return Returns 1 if the ray intersects.
  *         Returns 0 if there is no intersection.

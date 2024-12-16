@@ -30,6 +30,7 @@ void	ray_intersection(t_ray r, t_scene *scene, t_hit *hit)
 	intersection_planes(&r, &scene->planes, hit);
 	intersection_spheres(&r, &scene->spheres, hit);
 	intersection_cylinders(&r, &scene->cylinders, hit);
+	intersection_cones(&r, &scene->cones, hit);
 }
 
 /**

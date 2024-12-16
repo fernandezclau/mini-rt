@@ -65,3 +65,16 @@ void	set_cylinder_normal(t_cylinder *cy, t_hit *l_hit)
 	else if (distance >= cy->height - EPSILON_4)
 		l_hit->normal = normalize_v3(cy->direction);
 }
+
+/**
+ * @brief Sets the normal vector at the hit point on a cone.
+ * 
+ * @param cn The cone with which the ray intersects.
+ * @param l_hit The hit structure storing the intersection details,
+ * including the position of the hit and the normal to be calculated.
+ */
+void	set_cone_normal(t_cone *cn, t_hit *l_hit)
+{
+	(void)cn;
+	(void)l_hit;
+}
