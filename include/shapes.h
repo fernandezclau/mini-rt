@@ -62,7 +62,7 @@ typedef struct s_ugh
 
 // LIST INTERSECTIONS
 
-void	interesection_planes(t_ray *r, t_plane **planes, t_hit *l_hit);
+void	intersection_planes(t_ray *r, t_plane **planes, t_hit *l_hit);
 void	intersection_spheres(t_ray *r, t_sphere **spheres, t_hit *l_hit);
 void	intersection_cylinders(t_ray *r, t_cylinder **cylinders, t_hit *l_hit);
 

@@ -20,7 +20,6 @@ typedef struct s_camera
 	t_vector3	position;
 	t_vector3	direction;
 	float		fov;
-	t_vector3	identity[3];
 }				t_camera;
 
 typedef struct s_ray

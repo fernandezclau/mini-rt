@@ -21,7 +21,7 @@
  * @param planes A pointer to a linked list of planes to test against.
  * @param l_hit A pointer to the hit record to update with intersection details.
  */
-void	interesection_planes(t_ray *r, t_plane **planes, t_hit *l_hit)
+void	intersection_planes(t_ray *r, t_plane **planes, t_hit *l_hit)
 {
 	t_plane	*iter_planes;
 
