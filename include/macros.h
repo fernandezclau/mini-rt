@@ -13,7 +13,7 @@
 #ifndef MACROS_H
 # define MACROS_H
 
-// windows sizing
+// WINDOW SIZING
 
 # define W_WIDTH			800
 # define W_HEIGHT			600

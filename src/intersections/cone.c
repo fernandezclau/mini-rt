@@ -61,8 +61,8 @@ int	intersect_ray_cone(t_ray *r, t_hit *hit, t_cone *cn)
 
 	(void)r;(void)hit;(void)cn;
 	init_ugh_cone(&base, &body, cn);
-	intersect_circle(r, &base, cn->diameter / 2);
 	return (intersect_cone(r, cn, sum_v3(cn->center, scale_v3(cn->direction, cn->height))));
+	// return (intersect_circle(r, &base, cn->diameter / 2));
 	// return (0);
 	// return (select_dist_cone(body, base, hit));
 }
@@ -78,6 +78,20 @@ int	intersect_cone(t_ray *r, t_cone *cn, t_vector3 apex)
 	float		c = dot_product_v3(oc, oc) - (1.0f + tantheta2) * (ocaxis * ocaxis);
 	float		discriminant = b * b - 4.0f * a * c;
 	if (discriminant <= 0.0f)
+		return (0);
+	float		t1 = (-b - sqrt(discriminant)) / (2.0f * a);
+	float		t2 = (-b + sqrt(discriminant)) / (2.0f * a);
+
+	if (
+		!(
+			dot_product_v3(substract_v3(sum_v3(r->origin, scale_v3(r->direction, t1)), apex), cn->direction) >= 0 && \
+			dot_product_v3(substract_v3(sum_v3(r->origin, scale_v3(r->direction, t1)), apex), cn->direction) <= cn->height \
+		) && \
+		!(
+			dot_product_v3(substract_v3(sum_v3(r->origin, scale_v3(r->direction, t2)), apex), cn->direction) >= 0 && \
+			dot_product_v3(substract_v3(sum_v3(r->origin, scale_v3(r->direction, t2)), apex), cn->direction) <= cn->height \
+		)
+	)
 		return (0);
 	return (1);
 }
