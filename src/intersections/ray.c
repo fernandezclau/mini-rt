@@ -15,6 +15,7 @@
 float		get_tan_fov(float fov);
 float		get_aspect_ratio(void);
 t_vector3	get_foward(t_scene *scene);
+t_vector3	get_up(t_vector3 direction);
 
 /**
  * @brief Calculates the intersections of a ray with scene objects 
@@ -53,7 +54,7 @@ t_vector3	calculate_ray_direction(t_scene *scene, unsigned x, unsigned y)
 	t_vector3	right;
 
 	right = normalize_v3(cross_product_v3(get_foward(scene), \
-				init_p_v3(0.0f, 1.0f, 0.0f)));
+				get_up(scene->camera.direction)));
 	true_up = normalize_v3(cross_product_v3(right, get_foward(scene)));
 	screen_x = (1.0f - 2.0f * ((x + 0.5f) / W_WIDTH)) * \
 			get_aspect_ratio() * \

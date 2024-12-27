@@ -61,7 +61,8 @@ int	cylinder_calculations(t_vector3 d_perp, t_vector3 w_perp, \
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)
 		return (0);
-	calculate_intersection_times(a, b, discriminant, d);
+	if (!calculate_intersection_times(a, b, discriminant, d))
+		return (0);
 	return (1);
 }
 
