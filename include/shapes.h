@@ -49,6 +49,7 @@ typedef struct s_cone
 	t_vector3		direction;
 	float			diameter;
 	float			height;
+	t_vector3		apex;
 	t_color			color;
 	struct s_cone	*next;
 }					t_cone;
