@@ -107,7 +107,6 @@ void	display_cones(t_cone *cn);
 // CYLINDER CALCS
 
 int		intersect_circle(t_ray *r, t_ugh *ugh, float radius);
-int		intersect_cylinder(t_ray *r, t_cylinder *cl, t_ugh *ugh);
 int		calculate_intersection_times(float a, float b, float discriminant, \
 		float *d);
 int		select_dist_cylinder(t_ugh cylinder_body, t_ugh top_cap, \
@@ -115,4 +114,10 @@ int		select_dist_cylinder(t_ugh cylinder_body, t_ugh top_cap, \
 int		select_dist_cylinder2(t_ugh top_cap, t_ugh bottom_cap, t_hit *hit);
 int		cylinder_calculations(t_vector3 d_perp, t_vector3 w_perp, \
 		t_cylinder *cl, float *d);
+
+// CONE CALCS
+
+int		select_dist_cone(t_ugh base, t_ugh body, t_hit *hit);
+int		cone_calculations(t_ray *r, float tantheta2, t_cone *cn, float *d);
+
 #endif  // SHAPES_H

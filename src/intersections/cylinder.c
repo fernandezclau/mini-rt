@@ -13,6 +13,7 @@
 #include "../../include/minirt.h"
 
 int	intersect_ray_cylinder(t_ray *r, t_hit *hit, t_cylinder *cl);
+int	intersect_cylinder(t_ray *r, t_cylinder *cl, t_ugh *ugh);
 
 /**
  * @brief Calculates intersections between a ray and a list of cylinders.
