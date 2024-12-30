@@ -66,6 +66,16 @@ int	intersect_ray_cone(t_ray *r, t_hit *hit, t_cone *cn)
 	return (select_dist_cone(body, base, hit));
 }
 
+/**
+ * @brief Calculates the intersection between a ray and a cone.
+ * 
+ * @param r Ray structure containing the origin and direction of the ray.
+ * @param cn cone structure containing info of the cone.
+ * @param ugh Structure where the intersection info will be stored.
+ * 
+ * @return Returns 1 if there is an intersection between ray and cone. 
+ * Or 0 if no intersection is found or if it's outside the cone’s bounds.
+ */
 int	intersect_cone(t_ray *r, t_cone *cn, t_ugh *ugh)
 {
 	float		tantheta2;

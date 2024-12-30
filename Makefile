@@ -7,8 +7,15 @@ CFLAGS			+= -I./include -I./lib/minilibx
 # CFLAGS			+= -fsanitize=address,undefined
 
 SRC_DIR			= ./src/
+INC_DIR			= ./include/
 OBJ_DIR			= ./.obj/
 LIBDIR			= ./lib/libft/
+
+INCLUDES		= $(INC_DIR)minirt.h \
+				$(INC_DIR)macros.h \
+				$(INC_DIR)vectors.h \
+				$(INC_DIR)view.h \
+				$(INC_DIR)shapes.h \
 
 SRC				= $(SRC_DIR)main.c \
 				$(SRC_DIR)parser/parser.c \
@@ -53,7 +60,7 @@ MLX				= -L./lib/minilibx -lmlx -lXext -lX11 -lm
 
 all:			$(NAME)
 
-$(NAME): 		$(OBJ) $(LIBNAME)
+$(NAME): 		$(OBJ) $(LIBNAME) $(INCLUDES)
 				$(CC) $(OBJ) $(LIBNAME) -o $(NAME) $(MLX)
 				@echo "\033[0;32m--- $(NAME) compiled successfully! ---\033[0m"
 
