@@ -73,8 +73,15 @@ void	set_cylinder_normal(t_cylinder *cy, t_hit *l_hit)
  * @param l_hit The hit structure storing the intersection details,
  * including the position of the hit and the normal to be calculated.
  */
-void	set_cone_normal(t_cone *cn, t_hit *l_hit)
+void	set_cone_normal(t_cone *cn, t_hit *l_hit) //TODO wip on normal formula, don't forget base normal
 {
 	(void)cn;
 	(void)l_hit;
+
+	t_vector3	ap = substract_v3(l_hit->position, cn->apex);
+	t_vector3	ap_paral = scale_v3(cn->direction, dot_product_v3(cn->direction, ap));
+	t_vector3	ap_perp = substract_v3(ap, ap_paral);
+	float		m = (cn->diameter / 2) / cn->height;
+	t_vector3	ap_perp_scaled = scale_v3(ap_perp, m);
+	l_hit->normal = normalize_v3(sum_v3(ap_paral, ap_perp_scaled));
 }

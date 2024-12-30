@@ -19,7 +19,7 @@ typedef struct s_camera
 {
 	t_vector3	position;
 	t_vector3	direction;
-	t_vector3	right; //TODO calculate this in process_camera instead of calculate_ray_direction
+	t_vector3	right;
 	t_vector3	true_up;
 	float		fov;
 }				t_camera;
