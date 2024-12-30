@@ -114,7 +114,6 @@ int			is_rt_file(const char *filename);
 
 // UTILS
 
-// char		**ft_split(char const *s, char c);
 char		**split_spaces(char const *s);
 int			array_len(char **array);
 void		free_array(char **array);
@@ -122,5 +121,7 @@ void		ft_error(char *error);
 void		init_ugh_cylinder(t_ugh *top_cap, t_ugh *cylinder_body, \
 			t_ugh *bottom_cap, t_cylinder *cl);
 void		init_ugh_cone(t_ugh *base, t_ugh *body, t_cone *cn);
+t_vector3	get_foward(t_camera camera);
+t_vector3	get_up(t_vector3 direction);
 
 #endif
