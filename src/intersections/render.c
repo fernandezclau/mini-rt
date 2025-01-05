@@ -41,9 +41,9 @@ void	render(t_data *data, t_scene *scene)
 				calculate_light(scene, &initial_hit);
 				pixel_put(data, x, y, rgb_to_hex(&initial_hit.final_color));
 			}
-			y++;
+			y += PPP;
 		}
-		x++;
+		x += PPP;
 	}
 }
 
@@ -59,9 +59,22 @@ void	render(t_data *data, t_scene *scene)
 void	pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
+	int		i;
+	int		j;
 
-	dst = data->image_data + (y * data->size_line + x * (data->bpp / 8));
-	*(unsigned int *)dst = color;
+	i = 0;
+	while (i < PPP)
+	{
+		j = 0;
+		while (j < PPP)
+		{
+			dst = data->image_data + ((y + j) * \
+					data->size_line + (x + i) * (data->bpp / 8));
+			*(unsigned int *)dst = color;
+			j++;
+		}
+		i++;
+	}
 }
 
 /**

@@ -15,8 +15,9 @@
 
 // WINDOW SIZING
 
-# define W_WIDTH			800
-# define W_HEIGHT			600
+# define W_WIDTH			1599
+# define W_HEIGHT			1399
+# define PPP				4
 # define REFLECT_RATIO		0.0
 # define INTENSITY_RATIO	2.4
 
