@@ -78,8 +78,7 @@ void	set_cone_normal(t_cone *cn, t_hit *l_hit)
 	t_vector3	bp;
 	t_vector3	ap;
 	t_vector3	ab;
-	t_vector3	ap_proj;
-	t_vector3	ab_proj;
+	t_vector3	apab_perp;
 
 	bp = substract_v3(l_hit->position, cn->center);
 	if (dot_product_v3(bp, cn->direction) <= EPSILON_4)
@@ -88,8 +87,8 @@ void	set_cone_normal(t_cone *cn, t_hit *l_hit)
 	{
 		ap = normalize_v3(substract_v3(l_hit->position, cn->apex));
 		ab = normalize_v3(substract_v3(cn->center, cn->apex));
-		ap_proj = scale_v3(ab, dot_product_v3(ap, ab));
-		ab_proj = scale_v3(ap, dot_product_v3(ap_proj, ap));
-		l_hit->normal = scale_v3(sum_v3(ap_proj, ab_proj), -1);
+		apab_perp = cross_product_v3(ap, ab);
+		l_hit->normal = scale_v3(normalize_v3(cross_product_v3(apab_perp, \
+						ap)), -1);
 	}
 }

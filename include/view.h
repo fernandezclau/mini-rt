@@ -60,10 +60,10 @@ typedef struct s_hit
 t_vector3	calculate_intensity(t_color colour, float ratio);
 t_vector3	calculate_ambient_light(t_ambient_light light);
 t_vector3	calculate_spotlight(t_light light, t_vector3 normal, \
-		t_vector3 p_to_l);
-t_vector3	calculate_diffuse(t_vector3 normal, t_vector3 p_to_l, \
+		t_vector3 position);
+t_vector3	calculate_diffuse(t_vector3 normal, t_vector3 position, \
 		t_vector3 light);
-t_vector3	calculate_specular(t_vector3 normal, t_vector3 p_to_l, \
+t_vector3	calculate_specular(t_vector3 normal, t_vector3 position, \
 		t_vector3 light);
 
 // INITIALIZATION

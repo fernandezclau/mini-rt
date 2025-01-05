@@ -31,6 +31,8 @@
 # define W_KEY				119
 # define S_KEY				115
 # define D_KEY				100
+# define SCROLLUP_MOUSE		4
+# define SCROLLDOWN_MOUSE	5
 
 // FILE FIELDS
 

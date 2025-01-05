@@ -37,7 +37,7 @@ void	intersection_cones(t_ray *r, t_cone **cones, t_hit *l_hit)
 				l_hit->min_dist = l_hit->dist;
 				l_hit->final_color = iter_cones->color;
 				set_intersection_position(r, l_hit);
-				set_cone_normal(iter_cones, l_hit); //TODO implement this
+				set_cone_normal(iter_cones, l_hit);
 			}
 			l_hit->intersect = 1;
 		}
