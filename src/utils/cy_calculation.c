@@ -18,19 +18,19 @@
  * @param top_cap Ugh structure representing the top cap of the cylinder.
  * @param cylinder_cap Ugh structure representing the cylinder body.
  * @param bottom_cap Ugh structure representing the bottom cap of the cylinder.
- * @param cl Cylinder structure to initialize intersection data for.
+ * @param cy Cylinder structure to initialize intersection data for.
  */
 void	init_ugh_cylinder(t_ugh *top_cap, t_ugh *cylinder_body, \
-		t_ugh *bottom_cap, t_cylinder *cl)
+		t_ugh *bottom_cap, t_cylinder *cy)
 {
-	cl->direction = normalize_v3(cl->direction);
+	cy->direction = normalize_v3(cy->direction);
 	top_cap->distance = FLT_MAX;
 	cylinder_body->distance = FLT_MAX;
 	bottom_cap->distance = FLT_MAX;
-	top_cap->position = sum_v3(cl->center, scale_v3(cl->direction, cl->height));
-	bottom_cap->position = cl->center;
-	top_cap->direction = cl->direction;
-	bottom_cap->direction = scale_v3(cl->direction, -1);
+	top_cap->position = sum_v3(cy->center, scale_v3(cy->direction, cy->height));
+	bottom_cap->position = cy->center;
+	top_cap->direction = cy->direction;
+	bottom_cap->direction = scale_v3(cy->direction, -1);
 }
 
 /**
@@ -40,13 +40,13 @@ void	init_ugh_cylinder(t_ugh *top_cap, t_ugh *cylinder_body, \
  *  relative to the cylinder.
  * @param w_perp The perpendicular component of the vector from the ray origin
  *  to the cylinder’s center.
- * @param cl Pointer to the cylinder structure to perform calculations for.
+ * @param cy Pointer to the cylinder structure to perform calculations for.
  * @param d Pointer to store the resulting intersection distance.
  * 
  * @return Returns 1 if an intersection occurs; otherwise, returns 0.
  */
 int	cylinder_calculations(t_vector3 d_perp, t_vector3 w_perp, \
-		t_cylinder *cl, float *d)
+		t_cylinder *cy, float *d)
 {
 	float	a;
 	float	b;
@@ -54,7 +54,7 @@ int	cylinder_calculations(t_vector3 d_perp, t_vector3 w_perp, \
 	float	discriminant;
 	float	radius;
 
-	radius = cl->diameter / 2;
+	radius = cy->diameter / 2;
 	a = dot_product_v3(d_perp, d_perp);
 	b = 2 * dot_product_v3(w_perp, d_perp);
 	c = dot_product_v3(w_perp, w_perp) - radius * radius;

@@ -12,8 +12,8 @@
 
 #include "../../include/minirt.h"
 
-int	intersect_ray_cylinder(t_ray *r, t_hit *hit, t_cylinder *cl);
-int	intersect_cylinder(t_ray *r, t_cylinder *cl, t_ugh *ugh);
+int	intersect_ray_cylinder(t_ray *r, t_hit *hit, t_cylinder *cy);
+int	intersect_cylinder(t_ray *r, t_cylinder *cy, t_ugh *ugh);
 
 /**
  * @brief Calculates intersections between a ray and a list of cylinders.
@@ -51,20 +51,20 @@ void	intersection_cylinders(t_ray *r, t_cylinder **cylinders, t_hit *l_hit)
  * 
  * @param r Ray structure containing the origin and direction of the ray.
  * @param hit Hit structure where the intersection details are stored if found.
- * @param cl Pointer to the cylinder structure to test for intersection.
+ * @param cy Pointer to the cylinder structure to test for intersection.
  * 
  * @return Returns 1 if the ray intersects any part; otherwise, returns 0.
  */
-int	intersect_ray_cylinder(t_ray *r, t_hit *hit, t_cylinder *cl)
+int	intersect_ray_cylinder(t_ray *r, t_hit *hit, t_cylinder *cy)
 {
 	t_ugh	top_cap;
 	t_ugh	cylinder_body;
 	t_ugh	bottom_cap;
 
-	init_ugh_cylinder(&top_cap, &cylinder_body, &bottom_cap, cl);
-	intersect_circle(r, &top_cap, cl->diameter / 2);
-	intersect_cylinder(r, cl, &cylinder_body);
-	intersect_circle(r, &bottom_cap, cl->diameter / 2);
+	init_ugh_cylinder(&top_cap, &cylinder_body, &bottom_cap, cy);
+	intersect_circle(r, &top_cap, cy->diameter / 2);
+	intersect_cylinder(r, cy, &cylinder_body);
+	intersect_circle(r, &bottom_cap, cy->diameter / 2);
 	if (select_dist_cylinder(cylinder_body, top_cap, bottom_cap, hit))
 		return (1);
 	return (select_dist_cylinder2(top_cap, bottom_cap, hit));
@@ -74,13 +74,13 @@ int	intersect_ray_cylinder(t_ray *r, t_hit *hit, t_cylinder *cl)
  * @brief Calculates the intersection between a ray and a cylinder.
  * 
  * @param r Ray structure containing the origin and direction of the ray.
- * @param cl Cylinder structure containing info of the cylinder.
+ * @param cy Cylinder structure containing info of the cylinder.
  * @param ugh Structure where the intersection info will be stored.
  * 
  * @return Returns 1 if there is an intersection between ray and cylinder. 
  * Or 0 if no intersection is found or if it's outside the cylinder’s bounds.
  */
-int	intersect_cylinder(t_ray *r, t_cylinder *cl, t_ugh *ugh)
+int	intersect_cylinder(t_ray *r, t_cylinder *cy, t_ugh *ugh)
 {
 	t_vector3	w;
 	t_vector3	d_perp;
@@ -88,17 +88,17 @@ int	intersect_cylinder(t_ray *r, t_cylinder *cl, t_ugh *ugh)
 	float		projection_axis;
 	float		d;
 
-	w = substract_v3(r->origin, cl->center);
-	d_perp = substract_v3(r->direction, scale_v3(cl->direction, \
-				dot_product_v3(r->direction, cl->direction)));
-	w_perp = substract_v3(w, scale_v3(cl->direction, \
-				dot_product_v3(w, cl->direction)));
-	if (!cylinder_calculations(d_perp, w_perp, cl, &d))
+	w = substract_v3(r->origin, cy->center);
+	d_perp = substract_v3(r->direction, scale_v3(cy->direction, \
+				dot_product_v3(r->direction, cy->direction)));
+	w_perp = substract_v3(w, scale_v3(cy->direction, \
+				dot_product_v3(w, cy->direction)));
+	if (!cylinder_calculations(d_perp, w_perp, cy, &d))
 		return (0);
 	ugh->position = sum_v3(r->origin, scale_v3(r->direction, d));
 	projection_axis = dot_product_v3(substract_v3(ugh->position, \
-				cl->center), cl->direction);
-	if (projection_axis < 0 || projection_axis > cl->height)
+				cy->center), cy->direction);
+	if (projection_axis < 0 || projection_axis > cy->height)
 		return (0);
 	ugh->distance = d;
 	return (1);

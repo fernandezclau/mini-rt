@@ -101,7 +101,7 @@ void	free_cone(t_cone **head);
 
 void	display_spheres(t_sphere *sp);
 void	display_planes(t_plane *pl);
-void	display_cylinders(t_cylinder *cl);
+void	display_cylinders(t_cylinder *cy);
 void	display_cones(t_cone *cn);
 
 // CYLINDER CALCS
@@ -113,7 +113,7 @@ int		select_dist_cylinder(t_ugh cylinder_body, t_ugh top_cap, \
 		t_ugh bottom_cap, t_hit *hit);
 int		select_dist_cylinder2(t_ugh top_cap, t_ugh bottom_cap, t_hit *hit);
 int		cylinder_calculations(t_vector3 d_perp, t_vector3 w_perp, \
-		t_cylinder *cl, float *d);
+		t_cylinder *cy, float *d);
 
 // CONE CALCS
 

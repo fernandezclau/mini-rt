@@ -71,7 +71,7 @@ int	process_ambient(char **tokens, t_ambient_light *ambient_light)
  * @param light A pointer to the light structure to be updated.
  * @return int Returns 1 on success, 0 on failure (e.g., incorrect token count).
  */
-int	process_light(char **tokens, t_light **l)
+int	process_light(char **tokens, t_light **light)
 {
 	t_light	*new_light;
 	char	**position;
@@ -92,6 +92,6 @@ int	process_light(char **tokens, t_light **l)
 	if (!insert_color(&new_light->color, colors))
 		return (free(new_light), (0));
 	new_light->next = NULL;
-	add_light(l, new_light);
+	add_light(light, new_light);
 	return (1);
 }

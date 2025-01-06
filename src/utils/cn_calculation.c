@@ -17,7 +17,7 @@
  * 
  * @param base Ugh structure representing the base of the cone.
  * @param body Ugh structure representing the cone body.
- * @param cl cone structure to initialize intersection data for.
+ * @param cn cone structure to initialize intersection data for.
  */
 void	init_ugh_cone(t_ugh *base, t_ugh *body, t_cone *cn)
 {
@@ -28,6 +28,17 @@ void	init_ugh_cone(t_ugh *base, t_ugh *body, t_cone *cn)
 	base->direction = scale_v3(cn->direction, -1);
 }
 
+/**
+ * @brief Performs calculations for ray-cone intersection.
+ * 
+ * @param r Pointer to the ray structure containing the origin and direction 
+ * of the ray.
+ * @param tantheta2 The cone slope factor
+ * @param cn Pointer to the cone structure to perform calculations for.
+ * @param d Pointer to store the resulting intersection distance.
+ * 
+ * @return Returns 1 if an intersection occurs; otherwise, returns 0.
+ */
 int	cone_calculations(t_ray *r, float tantheta2, t_cone *cn, float *d)
 {
 	float	a;
@@ -49,6 +60,19 @@ int	cone_calculations(t_ray *r, float tantheta2, t_cone *cn, float *d)
 	return (1);
 }
 
+/**
+ * @brief Selects the closest valid intersection distance among 
+ * cone body and caps.
+ *  
+ * @param base The ugh structure representing the intersection data 
+ * for the base.
+ * @param body The ugh structure representing the intersection data 
+ * for the cone body.
+ * @param hit Pointer to the hit structure to update with 
+ * the closest intersection details.
+ * 
+ * @return Returns 1 if a valid intersection is found; otherwise, returns 0.
+ */
 int	select_dist_cone(t_ugh base, t_ugh body, t_hit *hit)
 {
 	if (base.distance <= body.distance)
