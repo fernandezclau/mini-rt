@@ -30,50 +30,13 @@ int	array_len(char **array)
 
 /**
  * @brief Splits a string into an array of substrings based 
- * on a specified delimiter.
- * 
- * @param s The string to split.
- * @param c The delimiter character to split the string by.
- * @return char** An array of substrings, NULL-terminated. 
- *                NULL is returned in case of an allocation error.
- */
-char	**ft_split(char const *s, char c) //TODO get rid of strndup or function
-{
-	char	**array;
-	int		i;
-	int		j;
-	int		start;
-	int		end;
-
-	i = 0;
-	j = 0;
-	array = malloc(sizeof(char *) * (ft_strlen(s) + 1));
-	if (!s || !(array))
-		return (NULL);
-	while (s[i])
-	{
-		while (s[i] == c)
-			i++;
-		start = i;
-		while (s[i] && s[i] != c)
-			i++;
-		end = i;
-		if (end > start)
-			array[j++] = strndup(&s[start], end - start);
-	}
-	array[j] = NULL;
-	return (array);
-}
-
-/**
- * @brief Splits a string into an array of substrings based 
  * on whitespace characters.
  * 
  * @param s The string to split.
  * @return char** An array of substrings, NULL-terminated.
  *                NULL is returned in case of an allocation error.
  */
-char	**split_spaces(char const *s) //TODO get rid of strndup
+char	**split_spaces(char const *s)
 {
 	char	**array;
 	int		i;
@@ -95,7 +58,7 @@ char	**split_spaces(char const *s) //TODO get rid of strndup
 			i++;
 		end = i;
 		if (end > start)
-			array[j++] = strndup(&s[start], end - start);
+			array[j++] = ft_substr(s, start, end - start);
 	}
 	array[j] = NULL;
 	return (array);
