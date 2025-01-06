@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claferna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: claferna <claferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:49:34 by claferna          #+#    #+#             */
 /*   Updated: 2024/04/01 08:55:41 by claferna         ###   ########.fr       */

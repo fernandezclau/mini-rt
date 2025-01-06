@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   vectors.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claferna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: claferna <claferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:56:44 by claferna          #+#    #+#             */
 /*   Updated: 2024/11/11 18:01:33 by claferna         ###   ########.fr       */

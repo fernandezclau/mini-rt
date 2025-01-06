@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claferna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: claferna <claferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 17:04:34 by claferna          #+#    #+#             */
 /*   Updated: 2024/11/11 17:04:36 by claferna         ###   ########.fr       */

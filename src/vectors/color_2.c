@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   color_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claferna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: claferna <claferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 17:06:44 by claferna          #+#    #+#             */
 /*   Updated: 2024/11/11 17:06:46 by claferna         ###   ########.fr       */

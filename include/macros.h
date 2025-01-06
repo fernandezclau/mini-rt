@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claferna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: claferna <claferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:55:45 by claferna          #+#    #+#             */
 /*   Updated: 2024/11/11 16:59:25 by claferna         ###   ########.fr       */
@@ -17,7 +17,7 @@
 
 # define W_WIDTH			800
 # define W_HEIGHT			600
-# define PPP				4
+# define PPP				1
 # define REFLECT_RATIO		0.0
 # define INTENSITY_RATIO	2.4
 

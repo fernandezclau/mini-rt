@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   conditions_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claferna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: claferna <claferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 17:07:37 by claferna          #+#    #+#             */
 /*   Updated: 2024/11/11 17:07:38 by claferna         ###   ########.fr       */

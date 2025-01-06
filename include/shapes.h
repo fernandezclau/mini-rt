@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claferna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: claferna <claferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:56:38 by claferna          #+#    #+#             */
 /*   Updated: 2024/11/11 18:05:03 by claferna         ###   ########.fr       */
